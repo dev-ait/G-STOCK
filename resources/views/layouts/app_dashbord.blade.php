@@ -29,7 +29,6 @@
         <link rel="stylesheet" type="text/css" href={{ asset('assets/vendor/daterangepicker/daterangepicker.css') }}>
     <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/sb-admin-2.css') }}>
-        <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/sb-admin-2.min.css') }}>
         <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/style.css') }}>
         <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/style_icon.css') }}>
         <link rel="stylesheet" type="text/css" href={{ asset('assets/css/main.css') }}>
@@ -40,7 +39,7 @@
 </head>
 
 
-<body id="page-top" class="sidebar-toggled">
+<body id="page-top" class="sidebar-toggled" data-app>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -208,46 +207,35 @@
     
           <!-- Nav Item - Dashboard -->
           <li class="nav-item active pt-3">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{ route('home') }}">
               <i class="zmdi zmdi-view-dashboard"></i>
-              <span class="text-effet">Dashboard</span></a>
+              <span class="text-effet">Tableau de bord</span></a>
           </li>
     
           <!-- Divider -->
           <hr class="sidebar-divider">
     
           <!-- Heading -->
-          <div class="sidebar-heading text-effet ">
+          <div class="sidebar-heading text-effet " style="font-family: Poppins-Regular, sans-serif;">
             GESTION DES PROUITS
           </div>
     
           <!-- Nav Item - Produits Collapse Menu -->
           <li class="nav-item sub-gate">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseProduits" aria-expanded="true" aria-controls="collapseProduits">
+            <a class="nav-link"  href=" {{ route('product.index') }} ">
               <i class="zmdi zmdi-archive"></i>
-              <span> Produits</span>
+              <span  > Produits</span>
             </a>
-            <div id="collapseProduits" class="collapse" aria-labelledby="headingProduits" data-parent="#accordionSidebar" style="">
-              <div class="bg-secondary  py-2 collapse-inner rounded">
-                
-                <a class="pl-4 collapse-item text-white ft-12" href=" {{ route('product.index') }} ">Les produits</a>
-                <a class="pl-4 collapse-item text-white ft-12" href="cards.html">Nouveau produit</a>
-              </div>
-            </div>
+   
           </li>
     
           <!-- Nav Item - Gategorie Collapse Menu -->
           <li class="nav-item sub-gate">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGategorie" aria-expanded="true" aria-controls="collapseGategorie">
+            <a class="nav-link collapsed"  href=" {{ route('gategorie.index') }} ">
               <i class="zmdi zmdi-layers"></i>
               <span>Gategorie</span>
             </a>
-            <div id="collapseGategorie" class="collapse" aria-labelledby="headingGategorie" data-parent="#accordionSidebar">
-              <div class="bg-secondary py-2 collapse-inner rounded">
-                <a class="pl-4 collapse-item  text-white ft-12 " href="utilities-color.html">Les gategories</a>
-                <a class="pl-4 collapse-item text-white ft-12" href="utilities-border.html">Nouveau gategorie</a>
-              </div>
-            </div>
+          
           </li>
 
            <!-- Nav Item - Marque Collapse Menu -->
@@ -256,13 +244,7 @@
               <i class="zmdi zmdi-label"></i>
               <span> Marque</span>
             </a>
-            <div id="collapseMarque" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar" style="">
-              <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
-              </div>
-            </div>
+          
           </li>
     
     
@@ -270,7 +252,7 @@
           <hr class="sidebar-divider">
     
           <!-- Heading -->
-          <div class="sidebar-heading ">
+          <div class="sidebar-heading " style="font-family: Poppins-Regular, sans-serif;">
             GESTION DES COMMANDES
           </div>
     
@@ -328,17 +310,17 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Prêt à Quitter</h5>
             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-body">Sélectionnez «Déconnexion» ci-dessous si vous êtes prêt à mettre fin à votre session en cours.</div>
           <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-secondary text-white" type="button" data-dismiss="modal">Annuler</button>
             <a class="btn btn-primary" href="{{ route('logout') }}"
             onclick="event.preventDefault();
-                          document.getElementById('logout-form').submit();">Logout</a>
+                          document.getElementById('logout-form').submit();">Se déconnecter</a>
 
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                            @csrf

@@ -19,7 +19,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('product', 'ProductController');
 
-Route::get('initTable', 'InitTable')->name('initTable');
-Route::get('tableData', 'TableData')->name('tableData');
-Route::get('exportExcel', 'ExportExcel')->name('exportExcel');
+Route::resource('gategorie', 'GategorieController');
+
+Route::post('/postgategorie','GategorieController@store');
+
+/*** Model gategorie   * */
+
+Route::get('/getgategorie','GategorieController@get_gategorie');
+
+Route::put('/updategategorie','GategorieController@update');
+
+Route::delete('/deletegategorie/{id}','GategorieController@destroy');
+
+
         
