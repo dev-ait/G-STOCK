@@ -4,11 +4,11 @@
 <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/css_vue/vuetify.min.css') }}>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Gérer les gategorie</h1>
+   <h1 class="h3 mb-0 text-gray-800">Gérer les Marques</h1>
 </div>
 <div class="row">
    <div class="col-md-12">
-      <div id="app_gategorie">
+      <div id="app_marque">
          <template>
             <v-row>
                <v-col cols="4" sm="5">
@@ -19,14 +19,14 @@
                         dense
                         flat
                         >
-                        <v-toolbar-title class="body-2">Ajouter un gategorie</v-toolbar-title>
+                        <v-toolbar-title class="body-2">Ajouter un marque</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
                         <v-form @submit.prevent="add">
                            <v-row>
                               <v-container>
-                                 <v-text-field label="Nom" single-line solo v-model="gategorie_a.nom" required></v-text-field>
-                                 <v-text-field label="" single-line solo-inverted v-model="gategorie_a.date_create" disabled></v-text-field>
+                                 <v-text-field label="Nom" single-line solo v-model="marque_a.nom" required></v-text-field>
+                                 <v-text-field label="" single-line solo-inverted v-model="marque_a.date_create" disabled></v-text-field>
                                  <v-btn color="success" class="mr-4" type="submit">
                                     Ajouter
                                  </v-btn>
@@ -42,7 +42,7 @@
                <v-col cols="8" sm="7">
                   <v-card>
                      <v-card-title>
-                        La liste des gategories
+                        La liste des marques
                         <v-spacer></v-spacer>
                         <v-text-field  v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
                      </v-card-title>
@@ -51,8 +51,8 @@
                            <v-icon class="color-icon-remove  ">mdi-delete</v-icon>
                         </v-btn>
                      </v-col>
-                     <v-data-table  @input="item($event)" :headers="headers" :items="gategorie" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
-                        :sort-desc.sync="sortDesc" show-select   item-key="id"
+                     <v-data-table  @input="item($event)" :headers="headers" :items="marque" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
+                        :sort-desc.sync="sortDesc" show-select  item-key="id"
                         :expanded.sync="expanded" @click:row="clicked">
                         <template v-slot:item.action="{ item }">
                            <v-btn color="purple" fab small dark  @click="editItem(item)">
@@ -61,7 +61,7 @@
                            <v-dialog v-model="dialog" max-width="500px">
                               <v-card>
                                  <v-card-title>
-                                    <span class="headline">Modifier la gategorie</span>
+                                    <span class="headline">Modifier la marque</span>
                                  </v-card-title>
                                  <v-container>
                                     <v-row class="pl-3 pr-3" >
@@ -84,6 +84,11 @@
                               </v-card>
                            </v-dialog>
                         </template>
+                        <div class="pt-2 pb-2 pl-2">
+                           <v-btn class="ma-2" color="purple" dark @click="editItem(item)">
+                              <v-icon dark>mdi-wrench</v-icon>
+                           </v-btn>
+                        </div>
          </template>
          </v-data-table>
          </v-card>
@@ -107,5 +112,5 @@
    
    ]) !!}
 </script>
-<script src="{{ asset('js/gategories_vue.js') }}"></script>
+<script src="{{ asset('js/marques_vue.js') }}"></script>
 @endsection

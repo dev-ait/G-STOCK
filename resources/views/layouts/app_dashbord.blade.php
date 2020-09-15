@@ -201,7 +201,7 @@
           <!-- End of Topbar -->
   
     <div class="d-flex">         <!-- Sidebar -->
-      <ul class="navbar-nav sidebar sidebar-dark accordion border-right text-menu" id="accordionSidebar">
+      <ul class="navbar-nav sidebar sidebar-dark accordion border-right text-menu toglle-side-bare" id="accordionSidebar">
 
       
     
@@ -239,8 +239,8 @@
           </li>
 
            <!-- Nav Item - Marque Collapse Menu -->
-           <li class="nav-item sub-gate">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseMarque" aria-expanded="true" aria-controls="collapseMarque">
+           <li class="nav-item sub-gate"   >
+            <a class="nav-link"  href=" {{ route('marque.index') }} ">
               <i class="zmdi zmdi-label"></i>
               <span> Marque</span>
             </a>
@@ -260,14 +260,14 @@
     
           <!-- Nav Item - Charts -->
           <li class="nav-item sub-gate">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link"  href=" {{ route('order.index') }} ">
               <i class="zmdi zmdi-shopping-cart-plus"></i>
-              <span>Nouvelle commandes</span></a>
+              <span>Nouvelle commande</span></a>
           </li>
 
           <!-- Nav Item - Charts -->
           <li class="nav-item">
-            <a class="nav-link" href="charts.html">
+            <a class="nav-link" href="#">
               <i class="zmdi zmdi-shopping-cart"></i>
               <span> Gérer les commandes </span></a>
           </li>
@@ -282,11 +282,13 @@
   
           
           <!-- Begin Page Content -->
-          <div id="block-panel" class="container-fluid mt-4 pl-5 pr-5">
+      <div id="block-panel" class="bg-panel container-fluid open-side-bare">
+          <div  class=" mt-4 pl-5 pr-5">
   
             @yield('content')
   
         </div>
+      </div>
   
   
         </div>

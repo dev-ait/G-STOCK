@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app_gategorie',
+    el: '#app_product',
     vuetify: new Vuetify(),
 
     data() {
@@ -12,11 +12,6 @@ new Vue({
                 rowsPerPage: 5,
 
             },
-            gategorie_a: {
-                id: 0,
-                nom: '',
-                date_create: new Date().toISOString().slice(0, 10),
-            },
             btn_control: false,
             singleSelect: false,
             selectedRows: [],
@@ -28,30 +23,47 @@ new Vue({
             headers: [
 
                 {
-                    text: 'Id',
-                    align: 'start',
+                    text: "Images",
+                    align: "left",
                     sortable: false,
-                    value: 'id',
+                    value: "img"
                 },
 
                 {
-                    text: 'Nom',
-                    value: 'nom'
+                    text: 'Titre',
+                    value: 'titre'
                 },
                 {
-                    text: 'Date de creation',
-                    value: 'date_create',
-                    dataType: "Date"
-                }, ,
+                    text: 'Quantite',
+                    value: 'quantite'
+                },
+                {
+                    text: 'Taux',
+                    value: 'taux'
+                },
+                {
+                    text: 'Statut',
+                    value: 'statut'
+                },
+                {
+                    text: 'Gategorie',
+                    value: 'gategorie_id'
+                },
+                {
+                    text: 'Marque',
+                    value: 'marque_id'
+                },
                 {
                     text: "Action",
                     value: "action",
                     sortable: false
                 }
 
+
+
             ],
 
-            gategorie: [
+            products: [
 
             ],
             editedIndex: -1,
@@ -72,9 +84,9 @@ new Vue({
 
     methods: {
 
-        reset() {
+        editItem(item) {
 
-            this.gategorie_a.nom = ""
+            window.location.href = "product/" + item.id + "/edit"
         },
 
         clicked(value) {
@@ -91,12 +103,7 @@ new Vue({
 
         },
 
-        editItem(item) {
-            this.editedIndex = this.gategorie.indexOf(item)
-            this.editedItem = Object.assign({}, item)
-            this.dialog = true
 
-        },
 
         save() {
 
@@ -154,7 +161,7 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deletegategorie/' + this.selected[i].id)
+                        axios.delete(window.laravel.url + '/deleteproduct/' + this.selected[i].id)
                             .then(response => {
 
                             })
@@ -162,10 +169,10 @@ new Vue({
                                 console.log(error);
                             })
 
-                        const index = this.gategorie.indexOf(this.selected[i]);
+                        const index = this.products.indexOf(this.selected[i]);
 
 
-                        this.gategorie.splice(index, 1);
+                        this.products.splice(index, 1);
                     }
                     this.selected = [];
 
@@ -209,72 +216,12 @@ new Vue({
 
 
         },
-        update_gategorie: function(item_object) {
-
-
-
-            axios.put(window.laravel.url + '/updategategorie', item_object)
-                .then(response => {
-                    console.log(response.data);
-
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-
-        },
-
-        add: function() {
-            let jsonData = new FormData()
-            jsonData.append('nom', this.gategorie_a.nom)
-            jsonData.append('date_create', this.gategorie_a.date_create)
-
-
-
-            axios.post(window.laravel.url + '/postgategorie', jsonData)
-                .then(response => {
-                    console.log(response.data);
-
-                    if (response.data.etat) {
-
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: 'top-end',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true,
-                            onOpen: (toast) => {
-                                toast.addEventListener('mouseenter', Swal.stopTimer)
-                                toast.addEventListener('mouseleave', Swal.resumeTimer)
-                            }
-                        })
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Votre Gategorie a été ajouté avec succes'
-                        })
-                        this.gategorie_a.id = response.data.id_cate;
-                        this.gategorie.unshift(this.gategorie_a);
-
-                        this.gategorie_a = {
-                            id: 0,
-                            nom: '',
-                            date_create: new Date().toISOString().slice(0, 10),
-
-
-                        };
-
-                    }
-
-
-                })
-        },
 
         get_data: function() {
-            axios.get(window.laravel.url + '/getgategorie/')
+            axios.get(window.laravel.url + '/getproduct/')
                 .then(response => {
 
-                    this.gategorie = response.data.gategories;
+                    this.products = response.data.products;
 
 
                 })

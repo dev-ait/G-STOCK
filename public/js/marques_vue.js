@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app_gategorie',
+    el: '#app_marque',
     vuetify: new Vuetify(),
 
     data() {
@@ -12,7 +12,7 @@ new Vue({
                 rowsPerPage: 5,
 
             },
-            gategorie_a: {
+            marque_a: {
                 id: 0,
                 nom: '',
                 date_create: new Date().toISOString().slice(0, 10),
@@ -40,9 +40,8 @@ new Vue({
                 },
                 {
                     text: 'Date de creation',
-                    value: 'date_create',
-                    dataType: "Date"
-                }, ,
+                    value: 'date_create'
+                },
                 {
                     text: "Action",
                     value: "action",
@@ -51,7 +50,7 @@ new Vue({
 
             ],
 
-            gategorie: [
+            marque: [
 
             ],
             editedIndex: -1,
@@ -74,7 +73,7 @@ new Vue({
 
         reset() {
 
-            this.gategorie_a.nom = ""
+            this.marque_a.nom = ""
         },
 
         clicked(value) {
@@ -92,7 +91,7 @@ new Vue({
         },
 
         editItem(item) {
-            this.editedIndex = this.gategorie.indexOf(item)
+            this.editedIndex = this.marque.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
 
@@ -101,11 +100,11 @@ new Vue({
         save() {
 
             if (this.editedIndex > -1) {
-                Object.assign(this.gategorie[this.editedIndex], this.editedItem)
-                this.update_gategorie(this.editedItem)
+                Object.assign(this.marque[this.editedIndex], this.editedItem)
+                this.update_marque(this.editedItem)
 
             } else {
-                this.gategorie.push(this.editedItem)
+                this.marque.push(this.editedItem)
             }
 
             this.close()
@@ -154,7 +153,7 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deletegategorie/' + this.selected[i].id)
+                        axios.delete(window.laravel.url + '/deletemarque/' + this.selected[i].id)
                             .then(response => {
 
                             })
@@ -162,10 +161,10 @@ new Vue({
                                 console.log(error);
                             })
 
-                        const index = this.gategorie.indexOf(this.selected[i]);
+                        const index = this.marque.indexOf(this.selected[i]);
 
 
-                        this.gategorie.splice(index, 1);
+                        this.marque.splice(index, 1);
                     }
                     this.selected = [];
 
@@ -209,11 +208,11 @@ new Vue({
 
 
         },
-        update_gategorie: function(item_object) {
+        update_marque: function(item_object) {
 
 
 
-            axios.put(window.laravel.url + '/updategategorie', item_object)
+            axios.put(window.laravel.url + '/updatemarque', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -226,12 +225,10 @@ new Vue({
 
         add: function() {
             let jsonData = new FormData()
-            jsonData.append('nom', this.gategorie_a.nom)
-            jsonData.append('date_create', this.gategorie_a.date_create)
+            jsonData.append('nom', this.marque_a.nom)
+            jsonData.append('date_create', this.marque_a.date_create)
 
-
-
-            axios.post(window.laravel.url + '/postgategorie', jsonData)
+            axios.post(window.laravel.url + '/postmarque', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -251,12 +248,12 @@ new Vue({
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Votre Gategorie a été ajouté avec succes'
+                            title: 'Votre Marque a été ajouté avec succes'
                         })
-                        this.gategorie_a.id = response.data.id_cate;
-                        this.gategorie.unshift(this.gategorie_a);
+                        this.marque_a.id = response.data.id_marq;
+                        this.marque.unshift(this.marque_a);
 
-                        this.gategorie_a = {
+                        this.marque_a = {
                             id: 0,
                             nom: '',
                             date_create: new Date().toISOString().slice(0, 10),
@@ -271,10 +268,10 @@ new Vue({
         },
 
         get_data: function() {
-            axios.get(window.laravel.url + '/getgategorie/')
+            axios.get(window.laravel.url + '/getmarque/')
                 .then(response => {
 
-                    this.gategorie = response.data.gategories;
+                    this.marque = response.data.marques;
 
 
                 })

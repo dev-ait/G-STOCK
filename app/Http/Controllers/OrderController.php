@@ -3,34 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Gategorie;
 
-class GategorieController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        return view('gategorie.indexGategorie');
+        return view('order.indexOrder');
     }
-
-
-    public function get_gategorie()
-    {
-        $gategories= Gategorie::all(); 
-        $data = array( 'gategories'=> $gategories);
-       return  $data ;
-    }
-
 
     /**
      * Show the form for creating a new resource.
@@ -50,16 +34,7 @@ class GategorieController extends Controller
      */
     public function store(Request $request)
     {
-               
-                if($request->isMethod('post')){
-                   $gategorie = new Gategorie; 
-                   $gategorie->nom = $request->nom;
-                   $gategorie->date_create = $request->date_create;
-                   $gategorie->save();
-               
-                   return Response()->json(['etat' => true  , 'id_cate' => $gategorie->id ]);
-                }      
-
+        //
     }
 
     /**
@@ -91,12 +66,9 @@ class GategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-            $gategorie = Gategorie::find($request->id);
-            $gategorie->nom = $request->nom;
-           
-            $gategorie->save();
+        //
     }
 
     /**
@@ -105,11 +77,8 @@ class GategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
-
-        $delete_gategorie= Gategorie::find($id);  
-        $delete_gategorie->delete();
-  
+        //
     }
 }

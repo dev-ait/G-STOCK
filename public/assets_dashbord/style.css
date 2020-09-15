@@ -15,14 +15,26 @@
     color: #663399 !important;
 }
 
+#form1 {
+    width: 35%;
+
+  }
+
 .btn_theme {
     color: aliceblue !important;
     padding-top: 5px !important;
     padding-bottom: 5px;
 }
 
+.titre-panel {
+   
+    font-size: 1.1rem;
+    font-weight: 500;
+
+}
+
 .theme--light .purple {
-    background-color: #9c27b0!important;
+    background-color: #1867c0 !important;
     border-color: #9c27b0!important;
 }
 
@@ -149,9 +161,71 @@ ul#accordionSidebar {
   
 }
 
+label.product-label {
+    color: #333 !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.label-p {
+    margin-bottom: .1rem !important;
+    font-size: 14px;
+}
+.half-form{
+    width: 50%;
+    float: left;
+
+    
+}
+
 .theme--light .blue--text.text--darken-1 {
     color: #1e88e5!important;
     caret-color: #1e88e5!important;
+}
+.bg-panel {
+    background-color: #f0f2f3;
+}
+.input-product {
+  
+    height: calc(1.5em + 0.75rem + 5px) !important;
+    border-radius: 4px;
+}
+
+
+div#my-strictly-unique-vue-upload-multiple-image {
+    display: block !important;
+}
+
+.image-container {
+    width: 250px !important;
+    height: 210px !important;
+
+}
+
+.preview-image[data-v-1d0a16ec] {
+    height: 171px !important;
+
+}
+
+
+.centered {
+    top: 50% !important;
+}
+
+img.show-img.img-responsive {
+    max-width: 11rem;
+    max-height: 200px;
+}
+
+.btn-product {
+    border-radius: inherit;
+    background-color: #8a8c8e;
+    border-color: #9fa2a4;
+    padding: 5px 20px 5px 20px;
+    font-size: 1.1rem;
+}
+
+.col-md-12.card.mb-4.py-3 {
+    box-shadow: 0px 0px 15px -1px rgb(0 0 0 / 10%);
 }
 
 .pl-remove{

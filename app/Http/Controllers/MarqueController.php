@@ -3,34 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Gategorie;
+use Illuminate\Http\UploadedFile;
+use App\Marque;
+use App\Test;
 
-class GategorieController extends Controller
+class MarqueController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+    
     public function index()
-    {
-        return view('gategorie.indexGategorie');
+    {  
+
+        return view('marque.indexMarque');
+
     }
 
-
-    public function get_gategorie()
+    public function get_marque()
     {
-        $gategories= Gategorie::all(); 
-        $data = array( 'gategories'=> $gategories);
+        $marques = Marque::all(); 
+        $data = array( 'marques'=> $marques);
        return  $data ;
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -50,16 +51,14 @@ class GategorieController extends Controller
      */
     public function store(Request $request)
     {
-               
-                if($request->isMethod('post')){
-                   $gategorie = new Gategorie; 
-                   $gategorie->nom = $request->nom;
-                   $gategorie->date_create = $request->date_create;
-                   $gategorie->save();
-               
-                   return Response()->json(['etat' => true  , 'id_cate' => $gategorie->id ]);
-                }      
-
+        if($request->isMethod('post')){
+            $marque = new Marque; 
+            $marque->nom = $request->nom;
+            $marque->date_create = $request->date_create;
+            $marque->save();
+        
+            return Response()->json(['etat' => true  , 'id_marq' => $marque->id ]);
+         }   
     }
 
     /**
@@ -93,10 +92,10 @@ class GategorieController extends Controller
      */
     public function update(Request $request)
     {
-            $gategorie = Gategorie::find($request->id);
-            $gategorie->nom = $request->nom;
+            $marque = Marque::find($request->id);
+            $marque->nom = $request->nom;
            
-            $gategorie->save();
+            $marque->save();
     }
 
     /**
@@ -105,11 +104,11 @@ class GategorieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
+        $delete_marque= Marque::find($id);  
 
-        $delete_gategorie= Gategorie::find($id);  
-        $delete_gategorie->delete();
-  
+        $delete_marque ->delete();
     }
+
 }
