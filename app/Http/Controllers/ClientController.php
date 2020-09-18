@@ -3,37 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use App\Marque;
-use App\Test;
+use App\Client;
 
-class MarqueController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     public function index()
-    {  
-
-        return view('marque.indexMarque');
-
-    }
-    
-
-    public function get_marque()
     {
-        $marques = Marque::all(); 
-        $data = array( 'marques'=> $marques);
-       return  $data ;
+        return view('client.indexclient');
     }
 
+
+    public function get_client(Request $request)
+    {
+        $clients = Client::all(); 
+        $data = array( 'clients'=> $clients);
+       return  $data ;
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -53,13 +44,14 @@ class MarqueController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('post')){
-            $marque = new Marque; 
-            $marque->nom = $request->nom;
-            $marque->date_create = $request->date_create;
-            $marque->save();
+            $client = new Client; 
+            $client->nom = $request->nom;
+            $client->telephone = $request->telephone;
+            $client->adresse = $request->adresse;
+            $client->save();
         
-            return Response()->json(['etat' => true  , 'id_marq' => $marque->id ]);
-         }   
+            return Response()->json(['etat' => true  , 'id_client' => $client->id ]);
+         } 
     }
 
     /**
@@ -93,10 +85,12 @@ class MarqueController extends Controller
      */
     public function update(Request $request)
     {
-            $marque = Marque::find($request->id);
-            $marque->nom = $request->nom;
-           
-            $marque->save();
+        $client = Client::find($request->id);
+        $client->nom = $request->nom;
+        $client->telephone = $request->telephone;
+        $client->adresse = $request->adresse;
+       
+        $client->save();
     }
 
     /**
@@ -107,9 +101,8 @@ class MarqueController extends Controller
      */
     public function destroy($id)
     {
-        $delete_marque= Marque::find($id);  
+        $client_client= Client::find($id);  
 
-        $delete_marque ->delete();
+        $client_client->delete();
     }
-
 }

@@ -39,7 +39,7 @@
 </head>
 
 
-<body id="page-top" class="sidebar-toggled" data-app>
+<body id="page-top" class="sidebar-toggled bg-panel" data-app>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -206,11 +206,23 @@
       
     
           <!-- Nav Item - Dashboard -->
-          <li class="nav-item active pt-3">
+          <li class="nav-item   @if (Route::current()->getName() == 'home') active @endif pt-3">
             <a class="nav-link" href="{{ route('home') }}">
               <i class="zmdi zmdi-view-dashboard"></i>
               <span class="text-effet">Tableau de bord</span></a>
           </li>
+
+          <li class="nav-item @if (Route::current()->getName() == 'client.index') active @endif  pt-3">
+            <a class="nav-link" href="{{ route('client.index') }}">
+              <i class="zmdi zmdi-accounts-list-alt"></i>
+              <span class="text-effet">Clients</span></a>
+          </li>
+
+       
+
+        
+     
+         
     
           <!-- Divider -->
           <hr class="sidebar-divider">
@@ -221,7 +233,7 @@
           </div>
     
           <!-- Nav Item - Produits Collapse Menu -->
-          <li class="nav-item sub-gate">
+          <li class="nav-item sub-gate @if (Route::current()->getName() == 'product.index') active @endif">
             <a class="nav-link"  href=" {{ route('product.index') }} ">
               <i class="zmdi zmdi-archive"></i>
               <span  > Produits</span>
@@ -230,7 +242,7 @@
           </li>
     
           <!-- Nav Item - Gategorie Collapse Menu -->
-          <li class="nav-item sub-gate">
+          <li class="nav-item sub-gate @if (Route::current()->getName() == 'gategorie.index') active @endif">
             <a class="nav-link collapsed"  href=" {{ route('gategorie.index') }} ">
               <i class="zmdi zmdi-layers"></i>
               <span>Gategorie</span>
@@ -239,7 +251,7 @@
           </li>
 
            <!-- Nav Item - Marque Collapse Menu -->
-           <li class="nav-item sub-gate"   >
+           <li class="nav-item sub-gate @if (Route::current()->getName() == 'marque.index') active @endif"   >
             <a class="nav-link"  href=" {{ route('marque.index') }} ">
               <i class="zmdi zmdi-label"></i>
               <span> Marque</span>
@@ -259,15 +271,15 @@
         
     
           <!-- Nav Item - Charts -->
-          <li class="nav-item sub-gate">
-            <a class="nav-link"  href=" {{ route('order.index') }} ">
+          <li class="nav-item sub-gate  @if (Route::current()->getName() == 'order.create') active @endif">
+            <a class="nav-link"  href=" {{ route('order.create') }} ">
               <i class="zmdi zmdi-shopping-cart-plus"></i>
               <span>Nouvelle commande</span></a>
           </li>
 
           <!-- Nav Item - Charts -->
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+          <li class="nav-item @if (Route::current()->getName() == 'order.index') active @endif">
+            <a class="nav-link" href=" {{ route('order.index') }} ">
               <i class="zmdi zmdi-shopping-cart"></i>
               <span> Gérer les commandes </span></a>
           </li>
@@ -303,7 +315,7 @@
     <!-- End of Page Wrapper -->
   
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
+    <a class="scroll-to-top rounded" href="#">
       <i class="fa fa-angle-up"></i>
     </a>
   

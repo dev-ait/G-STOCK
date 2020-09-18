@@ -38,6 +38,10 @@
                   </div>
                </div>
                <div class="col-md-12 pt-3">
+                  <label for="prix" class="label-p">Prix* </label>
+                  <input type="number" value="{{  $product->prix }}" name="prix" class="form-control input-product" >
+               </div>
+               <div class="col-md-12 pt-3">
                   <label for="statut" class="label-p">Statut* </label>
                   <select name="statut" class="form-control input-product">
                   <option value="Disponible" {{ $product->statut == 'Disponible' ? 'selected' : '' }} >Disponible</option>

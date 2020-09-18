@@ -1,47 +1,77 @@
-@extends('layouts.app_dashbord') @section('content')
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
+@extends('layouts.app_dashbord')
+@section('content')
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+   <h1 class="h3 mb-0 text-gray-800">Gérer les commandes</h1>
+</div>
 <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/css_vue/materialdesignicons.min.css') }}>
 <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/css_vue/vuetify.min.css') }}>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Commande</h1>
-</div>
 <div class="row">
    <div class="col-md-12">
+      <div id="app_product">
+         <template>
+            <v-row>
+               <v-col cols="12" sm="12">
+                  <v-card>
+                     <v-card-title>
+                        La liste des commandes
+                        <v-spacer></v-spacer>
+                        <v-text-field  v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
+                     </v-card-title>
+                     <v-col cols="12" class="pl-remove" sm="3" pb="2"  v-if="btn_control">
+                        <v-btn class="btn_remove" depressed @click="deleteItem()">
+                           <v-icon class="color-icon-remove  ">mdi-delete</v-icon>
+                        </v-btn>
+                     </v-col>
+                     <v-data-table  @input="item($event)" :headers="headers" :items="orders" :search="search" :value="selectedRows" v-model="selected" :items-per-page="10"  :sort-by.sync="sortBy"
+                        :sort-desc.sync="sortDesc" show-select   item-key="id"
+                        :expanded.sync="expanded" @click:row="clicked">
+                        <template v-slot:item.action="{ item }">
+                   
+                           <div class="p-2 ml-5">
+                           <v-btn  class="mx-1"  small  fab dark color="teal" @click="editItem(item)">
+                              <v-icon dark>mdi-format-list-bulleted-square</v-icon>
+                            </v-btn>
+                           </div>
 
-         <!-- Panel order -->
-         <div class="card shadow mb-4 p-0">
-           <div class="card-header py-3">
-             <h6 class="m-0 titre-panel">Ajouter un commande</h6>
-           </div>
-           <div class="card-body">
-              <div class="row">
-               <div class="col-md-12">
-                  <label for="titre" class="label-p">Date de commande  </label>
-                  <input type="date" name="titre" class="form-control input-product">
-               </div>
-               <div class="col-md-12 pt-3">
-                  <div class="half-form pr-3">
-                     <label for="quantite" class="label-p">Nom de client </label>
-                     <input type="text" name="quantite" class="form-control input-product">
-                  </div>
-                  <div class="half-form pl-3">
-                     <label for="taux" class="label-p">Numero Telephone de client </label>
-                     <input type="text" name="taux" class="form-control input-product">
-                  </div>
-               </div>
+                           <v-dialog v-model="dialog" max-width="500px">
+                              <v-card>
+                                 <v-card-title>
+                                    <span class="headline">Les produits commandes</span>
+                                 </v-card-title>
+                      
+                                 <v-data-table :headers="subHeaders"
+                                 :items="product_order"
+                                 item-key="color"
+                                 hide-actions
+                                 class="elevation-10">
+                   
+                                      </v-data-table>
 
-              </div>
-       
-            </div>
-             
-         </div>
-
-
-       
+                                 </v-card-title>
+                                 <v-card-actions>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
+                               
+                                 </v-card-actions>
+                              </v-card>
+                           </v-dialog>
+                        </template>
+                    
+                     
+         </template>
+         </v-data-table>
+         </v-card>
+         </v-col>
+         </v-row>
+         </template>
+      </div>
    </div>
 </div>
-
+<script src="{{ asset('js/plugins/vue.js') }}"></script>
+<script src="{{ asset('js/plugins/vee-validate.js') }}"></script>
+<script src="{{ asset('js/plugins/axios.min.js') }}"></script>
+<script src="{{ asset('js/plugins/sweetalert2@9.js') }}"></script>
+<script src="{{ asset('js/plugins/vuetify.js') }}"></script>
 <script>
    window.laravel ={!! json_encode([
      'token' => csrf_token(),
@@ -51,5 +81,5 @@
    
    ]) !!}
 </script>
-
+<script src="{{ asset('js/app_order.js') }}"></script>
 @endsection

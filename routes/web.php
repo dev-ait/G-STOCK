@@ -28,6 +28,8 @@ Route::delete('/deleteproduct/{id}','ProductController@destroy');
 
 Route::get('/getproduct','ProductController@get_product');
 
+Route::post('/getproduct_data','ProductController@get_data_product');
+
 
 /*** Model gategorie   * */
 
@@ -54,9 +56,29 @@ Route::put('/updatemarque','MarqueController@update');
 Route::delete('/deletemarque/{id}','MarqueController@destroy');
 
 
+
+
+
 /*** Model order   * */
 
 Route::resource('order', 'OrderController');
+Route::post('/getphone','OrderController@get_phone_client');
+Route::get('/getorder','OrderController@getorder');
+Route::delete('/deleteproduct/{id}','OrderController@destroy');
+
+
+
+/*** client client   * */
+
+Route::resource('client', 'ClientController');
+
+Route::post('/postclient','ClientController@store');
+
+Route::get('/getclient','ClientController@get_client');
+
+Route::put('/updateclient','ClientController@update');
+
+Route::delete('/deleteclient/{id}','ClientController@destroy');
 
 
         

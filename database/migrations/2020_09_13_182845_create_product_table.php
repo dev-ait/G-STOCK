@@ -24,7 +24,8 @@ class CreateProductTable extends Migration
             $table->foreign('gategorie_id')->references('id')->on('gategories');
             $table->integer('marque_id');
             $table->foreign('marque_id')->references('id')->on('marques');
-            $table->string('photo');	
+            $table->string('photo');
+            $table->float('prix');	
             $table->timestamps();
         });
     }

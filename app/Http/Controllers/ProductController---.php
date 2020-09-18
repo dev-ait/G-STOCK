@@ -49,7 +49,7 @@ class ProductController extends Controller
     {
         $products= Product::all(); 
    
-
+        $att=[];
     
 
         for($i=0;$i<count($products);$i++)
@@ -71,7 +71,12 @@ class ProductController extends Controller
 
         $data = array( 'products'=> $att);
         return $data;
+
+        echo json_encode($data);
+        exit;
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -90,6 +95,7 @@ class ProductController extends Controller
             $add_Product->description = $request->input('description');
             $add_Product->quantite = $request->input('quantite');
             $add_Product->taux = $request->input('taux');
+            $add_Product->prix = $request->input('prix');
             $add_Product->statut = $request->input('statut');
             $add_Product->gategorie_id = $request->input('gategorie');
             $add_Product->marque_id = $request->input('marque');
@@ -113,9 +119,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function get_data_product(Request $request)
     {
-        //
+        $product   = Product::find($request->productId);
+
+        $data = array( 'product'=> $product);
+
+        echo json_encode($data);
+        exit;
+
     }
 
     /**
@@ -152,6 +164,7 @@ class ProductController extends Controller
         $update_Product->description = $request->input('description');
         $update_Product->quantite = $request->input('quantite');
         $update_Product->taux = $request->input('taux');
+        $update_Product->prix = $request->input('prix');
         $update_Product->statut = $request->input('statut');
         $update_Product->gategorie_id = $request->input('gategorie');
         $update_Product->marque_id = $request->input('marque');
