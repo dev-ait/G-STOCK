@@ -38,8 +38,8 @@ new Vue({
                     value: 'quantite'
                 },
                 {
-                    text: 'Taux',
-                    value: 'taux'
+                    text: 'Prix',
+                    value: 'prix'
                 },
                 {
                     text: 'Statut',

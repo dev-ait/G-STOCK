@@ -16,6 +16,7 @@ new Vue({
                 id: 0,
                 nom: '',
                 date_create: new Date().toISOString().slice(0, 10),
+                total : 0
             },
             btn_control: false,
             singleSelect: false,
@@ -42,6 +43,11 @@ new Vue({
                     text: 'Date de creation',
                     value: 'date_create'
                 },
+                {
+                    text: "Total",
+                    value: "total",
+                }
+                ,
                 {
                     text: "Action",
                     value: "action",

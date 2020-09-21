@@ -29,9 +29,32 @@ class MarqueController extends Controller
 
     public function get_marque()
     {
-        $marques = Marque::all(); 
-        $data = array( 'marques'=> $marques);
-       return  $data ;
+        $marques= Marque::all();
+
+   
+        $att=[];
+    
+
+        for($i=0;$i<count($marques);$i++)
+        {
+            $att[] =  [ 'id'=> $marques[$i]->id , 
+            'nom'=> $marques[$i]->nom , 
+             'date_create'=> $marques[$i]->date_create , 
+             'total'=> $marques[$i]->product()->count() ,
+            
+            ];
+        
+         
+
+    
+        }
+        
+    
+       $data = array( 'marques'=> $att);
+       return $data;
+
+       echo json_encode($data);
+       exit;
     }
 
     /**

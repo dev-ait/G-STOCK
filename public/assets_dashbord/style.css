@@ -336,6 +336,11 @@ a.btn-add {
     height: calc(1.5em + 0.75rem + 1px) !important;
 }
 
+.active {
+    background-color: antiquewhite;
+    background-clip: content-box;
+}
+
 .theme--light .teal {
     background-color: #009688!important;
     border-color: #009688!important;

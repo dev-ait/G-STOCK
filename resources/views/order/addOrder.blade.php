@@ -16,10 +16,11 @@
          </div>
       
          <div class="card-body">
-           <form action="{{ url('order')}}" method="POST" id="FormOrder">
+           <form action="{{ url('order')}}" method="POST" id="FormOrder" onsubmit="return validateForm();">
                {{ csrf_field() }}
             <div class="row">
                <div class="col-md-12">
+             
                   <label for="titre" class="label-p">Date de commande  </label>
                   <input type="date" name="date_commande" class="form-control input-product">
                </div>
@@ -61,10 +62,10 @@
                                  @endforeach
                               </select>
                            </td>
-                           <td id="col2"><input type="number" id="rate1" class="form-control input_or" disabled required>
+                           <td id="col2"><input type="number"  id="rate1" class="form-control input_or"  disabled required >
                             <input type="hidden" id="rateValue1" name="rate[]" class="form-control input_or" required>
                            </td>
-                           <td id="col3"><input type="number" id="quantite1" name="quantite[]" class="form-control input_or" required>
+                           <td id="col3"><input type="number" onclick="calcul_total(1)" id="quantite1" name="quantite[]" class="form-control input_or" required>
                            
                            </td>
                            <td id="col4"><input type="number" id="total1" name="total[]" class="form-control input_or" disabled required>

@@ -15,6 +15,7 @@ new Vue({
             gategorie_a: {
                 id: 0,
                 nom: '',
+                total: 0,
                 date_create: new Date().toISOString().slice(0, 10),
             },
             btn_control: false,
@@ -42,7 +43,12 @@ new Vue({
                     text: 'Date de creation',
                     value: 'date_create',
                     dataType: "Date"
-                }, ,
+                }, 
+                {
+                    text: "Total",
+                    value: "total"
+                }
+                , 
                 {
                     text: "Action",
                     value: "action",

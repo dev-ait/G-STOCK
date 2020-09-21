@@ -233,7 +233,7 @@
           </div>
     
           <!-- Nav Item - Produits Collapse Menu -->
-          <li class="nav-item sub-gate @if (Route::current()->getName() == 'product.index') active @endif">
+          <li class="nav-item sub-gate @if (Route::current()->getName() == 'product.edit'  || Route::current()->getName() == 'product.index'  || Route::current()->getName() == 'product.create' ) active @endif">
             <a class="nav-link"  href=" {{ route('product.index') }} ">
               <i class="zmdi zmdi-archive"></i>
               <span  > Produits</span>

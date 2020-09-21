@@ -58,10 +58,10 @@ class ProductController extends Controller
             'id'=> $products[$i]->id ,
              'gategorie_id'=> $products[$i]->gategorie->nom,
              'quantite'=> $products[$i]->quantite ,
-             'taux'=> $products[$i]->taux ,
              'statut'=> $products[$i]->statut ,
-             'marque_id'=> $products[$i]->marque_id ,
+             'marque_id'=> $products[$i]->marque->nom ,
              'photo'=> $products[$i]->photo ,   
+             'prix'=> $products[$i]->prix , 
             ];
         
          
@@ -94,7 +94,6 @@ class ProductController extends Controller
             $add_Product->titre = $request->input('titre');
             $add_Product->description = $request->input('description');
             $add_Product->quantite = $request->input('quantite');
-            $add_Product->taux = $request->input('taux');
             $add_Product->prix = $request->input('prix');
             $add_Product->statut = $request->input('statut');
             $add_Product->gategorie_id = $request->input('gategorie');
@@ -163,7 +162,6 @@ class ProductController extends Controller
         $update_Product->titre = $request->input('titre');
         $update_Product->description = $request->input('description');
         $update_Product->quantite = $request->input('quantite');
-        $update_Product->taux = $request->input('taux');
         $update_Product->prix = $request->input('prix');
         $update_Product->statut = $request->input('statut');
         $update_Product->gategorie_id = $request->input('gategorie');

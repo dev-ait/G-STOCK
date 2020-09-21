@@ -26,9 +26,32 @@ class GategorieController extends Controller
 
     public function get_gategorie()
     {
-        $gategories= Gategorie::all(); 
-        $data = array( 'gategories'=> $gategories);
-       return  $data ;
+        $gategories= Gategorie::all();
+
+   
+        $att=[];
+    
+
+        for($i=0;$i<count($gategories);$i++)
+        {
+            $att[] =  [ 'id'=> $gategories[$i]->id , 
+            'nom'=> $gategories[$i]->nom , 
+             'date_create'=> $gategories[$i]->date_create , 
+             'total'=> $gategories[$i]->product()->count() ,
+            
+            ];
+        
+         
+
+    
+        }
+        
+    
+       $data = array( 'gategories'=> $att);
+       return $data;
+
+       echo json_encode($data);
+       exit;
     }
 
 

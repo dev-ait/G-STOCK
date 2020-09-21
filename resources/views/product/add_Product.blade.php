@@ -36,13 +36,9 @@
                      <input  type="number" name="quantite" class="form-control input-product">
                   </div>
                   <div class="half-form pl-3">
-                     <label for="taux" class="label-p">Taux* </label>
-                     <input type="number" name="taux" class="form-control input-product" >
+                     <label for="taux" class="label-p">Prix* </label>
+                     <input type="number" step="0.01" name="prix" class="form-control input-product" >
                   </div>
-               </div>
-               <div class="col-md-12 pt-3">
-                  <label for="prix" class="label-p">Prix* </label>
-                  <input type="number" step="0.01" name="prix" class="form-control input-product" >
                </div>
                <div class="col-md-12 pt-3">
                   <label for="statut" class="label-p">Statut* </label>

@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/css_vue/vuetify.min.css') }}>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Gérer les Marques</h1>
+   <h1 class="h3 mb-0 text-gray-800"> les clients</h1>
 </div>
 <div class="row">
    <div class="col-md-12">
@@ -19,7 +19,7 @@
                         dense
                         flat
                         >
-                        <v-toolbar-title class="body-2">Ajouter un marque</v-toolbar-title>
+                        <v-toolbar-title class="body-2">Ajouter un client</v-toolbar-title>
                      </v-toolbar>
                      <v-card-text>
                         <v-form @submit.prevent="add">
@@ -43,7 +43,7 @@
                <v-col cols="8" sm="7">
                   <v-card>
                      <v-card-title>
-                        La liste des marques
+                        La liste des clients
                         <v-spacer></v-spacer>
                         <v-text-field  v-model="search" append-icon="mdi-magnify" label="Search" single-line hide-details></v-text-field>
                      </v-card-title>

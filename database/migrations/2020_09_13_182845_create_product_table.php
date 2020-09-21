@@ -18,7 +18,6 @@ class CreateProductTable extends Migration
             $table->string('titre');
             $table->text('description')->nullable();
             $table->integer('quantite');
-            $table->float('taux');	
             $table->string('statut');
             $table->integer('gategorie_id');
             $table->foreign('gategorie_id')->references('id')->on('gategories');
