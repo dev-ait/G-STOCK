@@ -201,8 +201,16 @@ function resetOrderForm() {
 
 $(document).ready(function() {
 
+    
 
-
+ 
+    $(document).on("change", "select.js-example-basic-single" , function() {
+        $("select.js-example-basic-single option[value='" + $(this).data('index') + "']").prop('disabled', false);
+        $(this).data('index', this.value);
+        $("select.js-example-basic-single option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
+        $(this).find("option[value='" + this.value + "']:not([value=''])").prop('disabled', false);
+     });
+ 
 
     $(".btn-add").click(function() {
 
@@ -268,6 +276,16 @@ $(document).ready(function() {
                     theme: "classic"
                 });
 
+                $(".js-example-basic-single").map(function() {
+                     if(this.value != null){
+                        $("select.js-example-basic-single option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
+                     }
+                   
+                }).get();
+
+               
+                
+
             },
             error: function(data) {
 
@@ -281,10 +299,16 @@ $(document).ready(function() {
 
 
     $(window).on("load", function() {
+        $('#valueclient').select2({
+            theme: "classic"
+        });
         $('.js-example-basic-single').select2({
             theme: "classic"
         });
+        
+     
     });
+    
 
 
 

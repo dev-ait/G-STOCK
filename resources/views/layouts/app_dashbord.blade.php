@@ -33,6 +33,7 @@
         <link rel="stylesheet" type="text/css" href={{ asset('assets_dashbord/style_icon.css') }}>
         <link rel="stylesheet" type="text/css" href={{ asset('assets/css/main.css') }}>
         <link rel="stylesheet" type="text/css" href={{ asset('assets/css/util.css') }}>
+       
       
 
  
@@ -200,7 +201,7 @@
           </nav>
           <!-- End of Topbar -->
   
-    <div class="d-flex">         <!-- Sidebar -->
+    <div class="d-flex bg-panel">         <!-- Sidebar -->
       <ul class="navbar-nav sidebar sidebar-dark accordion border-right text-menu toglle-side-bare" id="accordionSidebar">
 
       
@@ -351,14 +352,14 @@
             <!-- Script JS -->
 
             <!--===============================================================================================-->
-	<script src={{ asset('assets/vendor/jquery/jquery-3.2.1.min.js') }}></script>
+
     <!--===============================================================================================-->
         <script src={{ asset('assets/vendor/animsition/js/animsition.min.js') }}></script>
     <!--===============================================================================================-->
         <script src={{ asset('assets/vendor/bootstrap/js/popper.js') }}></script>
         <script src={{ asset('assets/vendor/bootstrap/js/bootstrap.min.js') }}></script>
     <!--===============================================================================================-->
-        <script src={{ asset('assets/vendor/select2/select2.min.js') }}></script>
+      
     <!--===============================================================================================-->
         <script src={{ asset('assets/vendor/daterangepicker/moment.min.js') }}></script>
         <script src={{ asset('assets/vendor/daterangepicker/daterangepicker.js') }}></script>
@@ -366,8 +367,8 @@
         <script src={{ asset('assets/vendor/countdowntime/countdowntime.js') }}></script>
     <!--===============================================================================================-->
         <script src={{ asset('assets/js/main.js') }}></script>
-    
-
+     
+      
         <script src={{ asset('assets_dashbord/js/sb-admin-2.js') }}></script>
         <script src={{ asset('assets_dashbord/js/sb-admin-2.min.js') }}></script>
 

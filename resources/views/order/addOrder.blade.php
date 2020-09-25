@@ -1,8 +1,10 @@
 @extends('layouts.app_dashbord') @section('content')
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" />
 
+
+
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src={{ asset('assets/vendor/jquery/jquery-3.2.1.min.js') }}></script>
    <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
    <h1 class="h3 mb-0 text-gray-800">Commande</h1>
 </div>
@@ -27,7 +29,7 @@
                <div class="col-md-12 pt-2">
                   <div class="half-form pr-3">
                      <label for="quantite" class="label-p">Nom de client </label>
-                     <select id="valueclient" onchange="getphone()" class="js-example-basic-single form-control input-product" style="width: 100%" name="idclient" required>
+                     <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
                       <option class="select2-results__group"  value="">Selectionner le Client</option>
                       @foreach ($clients as $client)
                       <option  value="{{$client->id}}">{{$client->nom}}</option>
@@ -35,8 +37,8 @@
                    </select>
                   </div>
                   <div class="half-form pl-3">
-                     <label for="taux" class="label-p">Numero Telephone de client </label>
-                     <input type="text" id="phone_client" name="taux" class="form-control input-product" disabled required>
+                     <label  class="label-p">Numero Telephone de client </label>
+                     <input type="text" id="phone_client"  class="form-control input-product" disabled required>
                   </div>
                </div>
                <div class="col-md-12 pt-2">
@@ -44,9 +46,10 @@
                   <div class="col-md-12 pt-2">
                      <table class="table table-bordered" id="table">
                         <thead>
+                           
                            <tr >
                               <th style="width:30%" scope="col">Produit</th>
-                              <th scope="col">Taux</th>
+                              <th scope="col">Prix</th>
                               <th scope="col">Quantite</th>
                               <th scope="col">Total</th>
                               <th>
@@ -77,6 +80,7 @@
                               </a>
                            </td>
                         </tr>
+                
                      </table>
                      <div class="d-block text-right">
                       <a href="#" class="btn-add btn-add" >
@@ -90,15 +94,15 @@
                         <label for="quantite" class="label-p">Sous Total </label>
                         <input type="text" id="subTotal" name="subTotal" class="form-control input-product" disabled required>
                         <input type="hidden" id="subTotalvalue" name="subTotalvalue" class="form-control input-product" required>
-                        <label for="taux" class="label-p">Tva </label>
+                        <label for="tva" class="label-p">Tva </label>
                         <input type="text" id="tva" name="tva" class="form-control input-product" disabled required>
                         <input type="hidden" id="tvavalue" name="tvavalue"  >
-                        <label for="taux" class="label-p">Total </label>
+                        <label for="total" class="label-p">Total </label>
                         <input type="text" id="total" name="total" class="form-control input-product" disabled required>
                         <input type="hidden" id="totalvalue" name="total" >
                      </div>
                      <div class="half-form pl-3">
-                        <label for="taux" class="label-p">Type de paiement </label>
+                        <label for="typepaiement" class="label-p">Type de paiement </label>
                         <select  class="form-control input-product" style="width: 100%" name="typepaiement" required>
                            <option  value="">Selectionner </option>
                            <option value="Cheque">Cheque</option>
@@ -106,7 +110,7 @@
                            <option value="Credit Card">Credit Card</option>
                            <option  value="Cash">Cash</option>
                         </select>
-                        <label for="taux" class="label-p ">Statut de paiement </label>
+                        <label for="statutpaiement" class="label-p ">Statut de paiement </label>
                         <select  class="form-control input-product" style="width: 100%" name="statutpaiement" required>
                            <option  value="">Selectionner</option>
                            <option value="Règlement de la totalité">Règlement de la totalité</option>
@@ -150,5 +154,6 @@
    
    ]) !!}
 </script>
+
 <script src="{{ asset('js/order_script.js') }}"></script>
 @endsection

@@ -1,7 +1,9 @@
 @extends('layouts.app_dashbord')
 @section('content')
 <script src="{{ asset('js/plugins/jquery.min.js') }}"></script>
-<script src="{{ asset('css/style_uploud.css') }}"></script>
+<script src="{{ asset('js/plugins/select2.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href={{ asset('assets/vendor/select2/select2.min.css') }}>
+<link rel="stylesheet" type="text/css" href={{ asset('css/style_uploud.css') }}>
 
 <div class="d-sm-flex align-items-center justify-content-between mb-2">
    <div class="row">
@@ -58,7 +60,7 @@
             <div class="col-md-8 row ">
                <div class="col-md-12">
                   <label for="title" class="label-p">Gategorie* </label>
-                  <select name="gategorie" class="form-control input-product">
+                  <select name="gategorie" class="js-single form-control input-product">
                      @foreach($gategories as $gategorie)   
                      <option value="{{$gategorie->id}} ">{{$gategorie->nom}} </option>
                      @endforeach 
@@ -75,7 +77,7 @@
             <div class="col-md-8 row ">
                <div class="col-md-12">
                   <label for="title" class="label-p">Marque* </label>
-                  <select name="marque" class="form-control input-product">
+                  <select name="marque" class="js-single form-control input-product">
                      @foreach($marques as $marque)   
                      <option value="{{$marque->id}} ">{{$marque->nom}} </option>
                      @endforeach 
@@ -113,5 +115,17 @@
       <script src="{{ asset('js/uploud.js') }}"></script>
    </div>
 </form>
+
+<script>
+ $(window).on("load", function() {
+    
+        $('.js-single').select2({
+            theme: "classic"
+        });
+        
+     
+    });
+</script>
+
 </div>
 @endsection
