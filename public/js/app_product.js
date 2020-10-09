@@ -216,12 +216,29 @@ new Vue({
 
 
         },
+        remove_item() {
+
+            if(this.btn_control){
+                this.deleteItem();
+            }
+            else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Au moins un élément doit être sélectionné!',
+                  })
+
+            }
+
+        },
 
         get_data: function() {
             axios.get(window.laravel.url + '/getproduct/')
                 .then(response => {
 
                     this.products = response.data.products;
+                    
 
 
                 })

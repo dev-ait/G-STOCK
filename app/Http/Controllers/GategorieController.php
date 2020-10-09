@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Gategorie;
+use App\Models\Gategorie;
 
 class GategorieController extends Controller
 {

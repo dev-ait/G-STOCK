@@ -1,94 +1,106 @@
-@extends('layouts.app_login')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Gestion de stock</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
+    </head>
 
-<div class="limiter">
-    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form class="login100-form validate-form" method="POST" action="{{ route('login') }}" >
-                
-                @csrf
+    <body>
+        <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/photo-wide-4.jpg')}})">
+            <div class="auth-content">
+                <div class="card o-hidden">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="p-4">
+                                <div class="auth-logo text-center mb-4">
+                                    <img src="{{asset('assets/images/logo.png')}}" alt="">
+                                </div>
+                                <h1 class="mb-3 text-18">Sign In</h1>
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input id="email"
+                                            class="form-control form-control-rounded @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            autofocus>
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input id="password"
+                                            class="form-control form-control-rounded @error('password') is-invalid @enderror"
+                                            name="password" required autocomplete="current-password">
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="remember"
+                                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                <span class="login100-form-title p-b-49">
-                    <img src="images/logo-v1.png" alt="" class="w-50">
-                </span>
+                                                <label class="form-check-label" for="remember">
+                                                    {{ __('Remember Me') }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username est obligatoire">
-                    <span class="label-input100">Username</span>
+                                    <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button>
 
-                    <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Typez email" required autocomplete="email" >
-                         
-                            
+                                </form>
+                                @if (Route::has('password.request'))
 
-                  
-                    <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
+                                <div class="mt-3 text-center">
 
-               
+                                    <a href="{{ route('password.request') }}" class="text-muted"><u>Forgot
+                                            Password?</u></a>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-center "
+                            style="background-size: cover;background-image: url({{asset('assets/images/photo-long-3.jpg')}}">
+                            <div class="pr-3 auth-right">
+                                @if (Route::has('register'))
 
-                <div class="wrap-input100 validate-input" data-validate="Password est obligatoire">
-                    <span class="label-input100">Password</span>
-                    <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Typez password">
 
-                   
-
-                    <span class="focus-input100" data-symbol="&#xf190;"></span>
-                </div>
-
-               
-                
-                <div class="text-right p-t-10 p-b-20 mt-2">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="remember">
-                                Souviens moi
-                            </label>
+                                <a href="{{ route('register') }}"
+                                    class="btn btn-rounded btn-outline-primary btn-outline-email btn-block btn-icon-text">
+                                    <i class="i-Mail-with-At-Sign"></i> Sign up with Email
+                                </a>
+                                @endif
+                                <a
+                                    class="btn btn-rounded btn-outline-primary btn-outline-google btn-block btn-icon-text">
+                                    <i class="i-Google-Plus"></i> Sign up with Google
+                                </a>
+                                <a
+                                    class="btn btn-rounded btn-outline-primary btn-block btn-icon-text btn-outline-facebook">
+                                    <i class="i-Facebook-2"></i> Sign up with Facebook
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button type="submit" class="login100-form-btn">
-                            Se connecter
-                        </button>
-
-                       
-
-                    </div>
-                </div>
-
-        
-
-                <div class="flex-col-c pt-3">
-
-                    @error('email')
-                    <span class="invalid-feedback  mb-3" role="alert">
-                         <strong>Mauvais nom d’utilisateur ou mauvais mot de passe…</strong>
-                     </span>
-                        @enderror   
-
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                           <strong> Mauvais nom d’utilisateur ou mauvais mot de passe… </strong>
-                         </span>
-                        @enderror
-        
-                 
-
-                    <a href="{{ route('register') }}" class="txt2 pt-5">
-                        S'INSCRIRE
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
+        <script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
 
-<div id="dropDownSelect1"></div>
+        <script src="{{asset('assets/js/script.js')}}"></script>
+    </body>
 
-@endsection
+</html>

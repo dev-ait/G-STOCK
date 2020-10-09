@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use App\Marque;
-use App\Test;
+use App\Models\Marque;
+use App\Models\Test;
 
 class MarqueController extends Controller
 {

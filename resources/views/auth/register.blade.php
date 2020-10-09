@@ -1,106 +1,107 @@
-@extends('layouts.app_login')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Gestion de stock</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('assets/styles/css/themes/lite-purple.min.css')}}">
+    </head>
 
-<div class="limiter">
-    <div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form class="login100-form validate-form" method="POST" action="{{ route('register') }}" >
-                
-                @csrf
+    <body>
+        <div class="auth-layout-wrap" style="background-image: url({{asset('assets/images/photo-wide-4.jpg')}})">
+            <div class="auth-content">
+                <div class="card o-hidden">
+                    <div class="row">
+                        <div class="col-md-6 text-center "
+                            style="background-size: cover;background-image: url({{asset('assets/images/photo-long-3.jpg')}})">
+                            <div class="pl-3 auth-right">
+                                <div class="auth-logo text-center mt-4">
+                                    <img src="{{asset('assets/images/logo.png')}}" alt="">
+                                </div>
+                                <div class="flex-grow-1"></div>
+                                <div class="w-100 mb-4">
+                                    <a class="btn btn-outline-primary btn-outline-email btn-block btn-icon-text btn-rounded"
+                                        href="{{ route('login') }}">
+                                        <i class=" i-Mail-with-At-Sign"></i> Sign in with Email
+                                    </a>
+                                    <a
+                                        class="btn btn-outline-primary btn-outline-google btn-block btn-icon-text btn-rounded">
+                                        <i class="i-Google-Plus"></i> Sign in with Google
+                                    </a>
+                                    <a
+                                        class="btn btn-outline-primary btn-outline-facebook btn-block btn-icon-text btn-rounded">
+                                        <i class="i-Facebook-2"></i> Sign in with Facebook
+                                    </a>
+                                </div>
+                                <div class="flex-grow-1"></div>
+                            </div>
+                        </div>
 
-                <span class="login100-form-title p-b-30">
-                    <img src="images/logo-v1.png" alt="" class="w-50">
-                </span>
+                        <div class="col-md-6">
+                            <div class="p-4">
 
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username est obligatoire">
-                    <span class="label-input100">Nom</span>
-                    <input id="name" type="text" class="input100 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" > 
+                                <h1 class="mb-3 text-18">Sign Up</h1>
+                                <form method="POST" action="{{ route('register') }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="username">Your name</label>
+                                        <input id="name" type="text"
+                                            class="form-control-rounded form-control @error('name') is-invalid @enderror"
+                                            name="name" value="{{ old('name') }}" required autocomplete="name"
+                                            autofocus>
 
-                    <span class="focus-input100" data-symbol="&#xf203;"></span>
-                </div>
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input id="email" type="email"
+                                            class="form-control-rounded form-control @error('email') is-invalid @enderror"
+                                            name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input id="password" type="password"
+                                            class="form-control-rounded form-control @error('password') is-invalid @enderror"
+                                            name="password" required autocomplete="new-password">
 
-               
-
-                <div class="wrap-input100 validate-input m-b-23" data-validate="Password est obligatoire">
-                    <span class="label-input100">E-Mail Address</span>
-                    <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                   
-
-                    <span class="focus-input100" data-symbol="&#xf159;"></span>
-                   
-                </div>
-
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-
-
-                
-                <div class="wrap-input100 validate-input m-b-23" data-validate="Password est obligatoire">
-                    <span class="label-input100">Password</span>
-                    <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                  
-                    <span class="focus-input100" data-symbol="&#xf190;"></span>
-                </div>
-
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-
-
-                <div class="wrap-input100 validate-input m-b-23" data-validate="Password est obligatoire">
-                    <span class="label-input100">Confirm Password</span>
-                    <input id="password-confirm" type="password" class="input100" name="password_confirmation" required autocomplete="new-password">
-                    <span class="focus-input100" data-symbol="&#xf190;"></span>
-                </div>
-
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-               
-                
-             
-                
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button type="submit" class="login100-form-btn">
-                            enregister
-                        </button>
-
-                       
-
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="repassword">Retype password</label>
+                                        <input id="password-confirm" type="password"
+                                            class="form-control-rounded form-control" name="password_confirmation"
+                                            required autocomplete="new-password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block btn-rounded mt-3">Sign
+                                        Up</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-        
-                <div class="flex-col-c ">
-
-
-                    <a href="{{ route('login') }}" class="txt2 pt-3  btn-send">
-                        <i class="fa fa-arrow-left icon-effet"></i>  Retour
-                    </a>
-                </div>
-            
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
+        <script src="{{asset('assets/js/common-bundle-script.js')}}"></script>
 
-<div id="dropDownSelect1"></div>
+        <script src="{{asset('assets/js/script.js')}}"></script>
+    </body>
 
-@endsection
+</html>

@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app_product',
+    el: '#app_order',
     vuetify: new Vuetify(),
 
     data() {
@@ -137,6 +137,23 @@ new Vue({
             }
 
         },
+        remove_item() {
+
+            if(this.btn_control){
+                this.deleteItem();
+            }
+            else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Au moins un élément doit être sélectionné!',
+                  })
+
+            }
+
+        }
+        ,
 
         close() {
 

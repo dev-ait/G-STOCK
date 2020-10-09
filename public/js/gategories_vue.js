@@ -7,6 +7,7 @@ new Vue({
         return {
             dialog: false,
             expanded: [],
+            dialog_add: false,
             singleExpand: true,
             pagination: {
                 rowsPerPage: 5,
@@ -101,6 +102,22 @@ new Vue({
             this.editedIndex = this.gategorie.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
+
+        },
+        remove_item() {
+
+            if(this.btn_control){
+                this.deleteItem();
+            }
+            else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Au moins un élément doit être sélectionné!',
+                  })
+
+            }
 
         },
 
@@ -257,10 +274,11 @@ new Vue({
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Votre Gategorie a été ajouté avec succes'
+                            title: 'Ajouté avec succes'
                         })
                         this.gategorie_a.id = response.data.id_cate;
                         this.gategorie.unshift(this.gategorie_a);
+                        this.dialog_add =false;
 
                         this.gategorie_a = {
                             id: 0,

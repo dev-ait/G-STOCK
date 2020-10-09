@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,74 +14,86 @@
 |
 */
 
-Route::get('/','HomeController@index');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
 
-Auth::routes();
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/ttt', [App\Http\Controllers\HomeController::class, 'x'])->name('home');
+/*** client client   * */
+
+Route::apiResource('client', App\Http\Controllers\ClientController::class);
+
+Route::post('/postclient',[App\Http\Controllers\ClientController::class, 'store']);
+
+Route::get('/getclient',[App\Http\Controllers\ClientController::class, 'get_client']);
+
+Route::put('/updateclient',[App\Http\Controllers\ClientController::class, 'update']);
+
+Route::delete('/deleteclient/{id}',[App\Http\Controllers\ClientController::class, 'destroy']);
 
 
 /*** Model product  * */
 
 
-Route::resource('product', 'ProductController');
-Route::get('/getproduct','ProductController@get_product');
-Route::delete('/deleteproduct/{id}','ProductController@destroy');
+Route::resource('product', App\Http\Controllers\ProductController::class);
+Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_product']);
+Route::post('/product/store',[App\Http\Controllers\ProductController::class, 'store']);
+Route::post('/product/store_img',[App\Http\Controllers\ProductController::class, 'stote_img']);
+Route::delete('/product/remove_img/{id}',[App\Http\Controllers\ProductController::class, 'dropzoneRemove']);
+Route::delete('/deleteproduct/{id}',[App\Http\Controllers\ProductController::class, 'destroy']);
+Route::post('/updateproduct',[App\Http\Controllers\ProductController::class, 'update']);
 
-Route::get('/getproduct','ProductController@get_product');
+Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_product']);
 
-Route::post('/getproduct_data','ProductController@get_data_product');
+Route::post('/getproduct_data',[App\Http\Controllers\ProductController::class, 'get_data_product']);
 
+Route::get('/search_product',[App\Http\Controllers\ProductController::class, 'search_product']);
 
 /*** Model gategorie   * */
 
-Route::resource('gategorie', 'GategorieController');
+Route::resource('gategorie', App\Http\Controllers\GategorieController::class);
 
-Route::post('/postgategorie','GategorieController@store');
+Route::post('/postgategorie',[App\Http\Controllers\GategorieController::class, 'store']);
 
-Route::get('/getgategorie','GategorieController@get_gategorie');
+Route::get('/getgategorie',[App\Http\Controllers\GategorieController::class, 'get_gategorie']);
 
-Route::put('/updategategorie','GategorieController@update');
+Route::put('/updategategorie',[App\Http\Controllers\GategorieController::class, 'update']);
 
-Route::delete('/deletegategorie/{id}','GategorieController@destroy');
+Route::delete('/deletegategorie/{id}',[App\Http\Controllers\GategorieController::class, 'destroy']);
+
 
 /*** Model marque   * */
 
-Route::resource('marque', 'MarqueController');
+Route::resource('marque', App\Http\Controllers\MarqueController::class);
 
-Route::post('/postmarque','MarqueController@store');
+Route::post('/postmarque',[App\Http\Controllers\MarqueController::class, 'store']);
 
-Route::get('/getmarque','MarqueController@get_marque');
+Route::get('/getmarque',[App\Http\Controllers\MarqueController::class, 'get_marque']);
 
-Route::put('/updatemarque','MarqueController@update');
+Route::put('/updatemarque',[App\Http\Controllers\MarqueController::class, 'update']);
 
-Route::delete('/deletemarque/{id}','MarqueController@destroy');
-
-
-
-
+Route::delete('/deletemarque/{id}',[App\Http\Controllers\MarqueController::class, 'destroy']);
 
 /*** Model order   * */
 
-Route::resource('order', 'OrderController');
-Route::post('/getphone','OrderController@get_phone_client');
-Route::get('/getorder','OrderController@getorder');
-Route::delete('/deleteproduct/{id}','OrderController@destroy');
+Route::resource('order', App\Http\Controllers\OrderController::class);
+Route::post('/getphone',[App\Http\Controllers\OrderController::class, 'get_phone_client']);
+Route::get('/getorder',[App\Http\Controllers\OrderController::class, 'getorder']);
+Route::delete('/deleteproduct/{id}',[App\Http\Controllers\OrderController::class, 'destroy']);
 
 
 
-/*** client client   * */
-
-Route::resource('client', 'ClientController');
-
-Route::post('/postclient','ClientController@store');
-
-Route::get('/getclient','ClientController@get_client');
-
-Route::put('/updateclient','ClientController@update');
-
-Route::delete('/deleteclient/{id}','ClientController@destroy');
+Auth::routes();
 
 
-        

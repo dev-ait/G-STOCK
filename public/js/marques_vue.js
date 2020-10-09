@@ -7,6 +7,7 @@ new Vue({
         return {
             dialog: false,
             expanded: [],
+            dialog_add: false,
             singleExpand: true,
             pagination: {
                 rowsPerPage: 5,
@@ -254,7 +255,7 @@ new Vue({
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Votre Marque a été ajouté avec succes'
+                            title: 'Ajouté avec succes'
                         })
                         this.marque_a.id = response.data.id_marq;
                         this.marque.unshift(this.marque_a);
@@ -266,18 +267,38 @@ new Vue({
 
 
                         };
+                        this.dialog_add =false;
 
                     }
 
 
                 })
         },
+        remove_item() {
+
+            if(this.btn_control){
+                this.deleteItem();
+            }
+            else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Au moins un élément doit être sélectionné!',
+                  })
+
+            }
+
+        },
 
         get_data: function() {
+           
             axios.get(window.laravel.url + '/getmarque/')
                 .then(response => {
-
+                
                     this.marque = response.data.marques;
+
+             
 
 
                 })

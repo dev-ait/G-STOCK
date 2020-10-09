@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\Client;
-use App\Order;
-use App\Product_order;
+use App\Models\Product;
+use App\Models\Client;
+use App\Models\Order;
+use App\Models\Product_order;
 
 class OrderController extends Controller
 {

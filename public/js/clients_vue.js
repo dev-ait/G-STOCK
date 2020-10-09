@@ -6,6 +6,7 @@ new Vue({
 
         return {
             dialog: false,
+            dialog_add: false,
             expanded: [],
             singleExpand: true,
             pagination: {
@@ -103,6 +104,7 @@ new Vue({
         },
 
         editItem(item) {
+            
             this.editedIndex = this.clients.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
@@ -140,12 +142,29 @@ new Vue({
             if (values.length > 0) {
 
                 this.btn_control = true;
+              
 
             } else {
                 this.btn_control = false;
 
             }
 
+
+        },
+        remove_item() {
+
+            if(this.btn_control){
+                this.deleteItem();
+            }
+            else{
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Au moins un élément doit être sélectionné!',
+                  })
+
+            }
 
         },
 
@@ -223,7 +242,7 @@ new Vue({
         update_client: function(item_object) {
 
 
-
+                console.log(item_object);
             axios.put(window.laravel.url + '/updateclient', item_object)
                 .then(response => {
                     
@@ -241,6 +260,8 @@ new Vue({
             jsonData.append('nom', this.client_a.nom)
             jsonData.append('telephone', this.client_a.telephone)
             jsonData.append('adresse', this.client_a.adresse)
+
+            
 
             axios.post(window.laravel.url + '/postclient', jsonData)
                 .then(response => {
@@ -262,10 +283,11 @@ new Vue({
 
                         Toast.fire({
                             icon: 'success',
-                            title: 'Votre Marque a été ajouté avec succes'
+                            title: 'Ajouté avec succes'
                         })
                         this.client_a.id = response.data.id_client;
                         this.clients.unshift(this.client_a);
+                        this.dialog_add= false;
 
                         this.client_a = {
                             id: 0,
@@ -286,7 +308,7 @@ new Vue({
             
             axios.get(window.laravel.url + '/getclient/')
                 .then(response => {
-                    
+             
                     this.clients = response.data.clients;
 
 
@@ -297,7 +319,7 @@ new Vue({
         }
     },
     mounted: function() {
-
+  
         this.get_data();
 
 

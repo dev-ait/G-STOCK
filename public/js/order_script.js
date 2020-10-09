@@ -19,16 +19,19 @@ function validateForm() {
 
 function calcul_total(row) {
 
-   var new_price =  $("#rateValue" + row).val();
+   var new_price =  $("#price" + row).html();
    var new_quantite =  $("#quantite" + row).val();
     
     var total = Number(new_price) * Number(new_quantite);
+
+     total= total.toFixed(2);
              
-              
+
                     
 
-    $("#total" + row).val(total);
-    $("#totalValue" + row).val(total);
+    $("#total_product" + row).html(total);
+    $("#total_productValue" + row).val(total);
+
 
     subAmount();
 
@@ -42,34 +45,40 @@ var count = 1;
 
 
 function subAmount() {
-    var tableProductLength = $("#table tbody tr").length;
+    var tableProductLength = $("#table_product tbody tr").length;
     var totalSubAmount = 0;
     for (x = 0; x < tableProductLength; x++) {
-        var tr = $("#table tbody tr")[x];
+        var tr = $("#table_product tbody tr")[x];
         var count = $(tr).attr('id');
+    
         count = count.substring(3);
 
-        totalSubAmount = Number(totalSubAmount) + Number($("#total" + count).val());
+        totalSubAmount = Number(totalSubAmount) + Number($("#total_product" + count).html());
     } // /for
 
     totalSubAmount = totalSubAmount.toFixed(2);
 
+   
+
     // sub total
-    $("#subTotal").val(totalSubAmount);
-    $("#subTotalvalue").val(totalSubAmount);
+    $("#subTotal").html(totalSubAmount);
+    $("#subTotalValue").val(totalSubAmount);
+
 
     // vat
-    var vat = (Number($("#subTotal").val()) / 100) * 20;
+    var vat = (Number($("#subTotal").html()) / 100) * 20;
     vat = vat.toFixed(2);
-    $("#tva").val(vat);
-    $("#tvavalue").val(vat);
+    $("#tva").html(vat);
+    $("#tvaValue").val(vat);
 
 
     // total amount
-    var totalAmount = (Number($("#subTotal").val()) + Number($("#tva").val()));
+    var totalAmount = (Number($("#subTotal").html()) + Number($("#tva").html()));
     totalAmount = totalAmount.toFixed(2);
-    $("#total").val(totalAmount);
-    $("#totalvalue").val(totalAmount);
+    $("#total").html(totalAmount);
+
+    $("#totalValue").val(totalAmount);
+
 
 
 
@@ -113,9 +122,19 @@ function getProductData(row = null) {
             dataType: 'json',
             success: function(data) {
 
-                $("#rate" + row).val(data.product.prix);
-                $("#rateValue" + row).val(data.product.prix);
-                $("#quantite" + row).val(data.product.quantite);
+                
+                var price = data.product.prix;
+                var quantite = data.product.quantite;
+
+              
+              
+
+                $("#price" + row).html(price);
+                $("#priceValue" + row).val(price);
+                $("#quantite" + row).val(quantite);
+
+                
+                $("#quantite" + row).val();
                 $("#quantite" + row).attr({
                     "max" : data.product.quantite,        
                     "min" : 0         
@@ -124,10 +143,11 @@ function getProductData(row = null) {
                 var total = Number(data.product.prix) * Number(data.product.quantite);
              
               
-                    
+                total= total.toFixed(2);
 
-                $("#total" + row).val(total);
-                $("#totalValue" + row).val(total);
+                $("#total_product" + row).html(total);
+                $("#total_productValue" + row).val(total);
+               
 
                 subAmount();
 
@@ -178,7 +198,10 @@ function getphone() {
 
 }
 
-function removeRow(row) {
+function removeRow(e,row) {
+
+    e.preventDefault();
+
     $('html,body').animate({
         scrollTop: 9999
     }, 'slow');
@@ -201,6 +224,22 @@ function resetOrderForm() {
 
 $(document).ready(function() {
 
+
+    
+
+    
+
+     $(document).on("click", ".prevent-default" , function() {
+      e.preventDefault();
+     });
+
+
+    $("#arrow-down").click(function(e) { 
+        
+        e.preventDefault();
+ 
+        $(".table-product").toggleClass("active");
+     });
     
 
  
@@ -212,7 +251,9 @@ $(document).ready(function() {
      });
  
 
-    $(".btn-add").click(function() {
+    $(".btn-add").click(function(e) {
+
+        e.preventDefault();
 
 
         $('html,body').animate({
@@ -252,23 +293,23 @@ $(document).ready(function() {
                     }
                 }
                 add_row += '</select></td>';
-                add_row += '<td><input type="number" name="rate[]" id="rate'+count+'" name="" class="form-control input_or" disabled required></td>';
-                add_row += ' <input type="hidden" id="rateValue'+count+'" name="rate[]" class="form-control input_or" required>';
+                add_row += '<td>  <div class="d-flex "> <div id="price'+count+'"> 0 </div>  <span class="text-muted pl-1">DH</span>  </div> </td>';
+                add_row += ' <input type="hidden" id="priceValue'+count+'" name="rate[]" class="form-control input_or" required>';
                 add_row += '<td><input type="number" onclick="calcul_total('+count+')" name="quantite[]" id="quantite' + count + '" name="" class="form-control input_or" required></td>';
-                add_row += '<td><input type="number" name="total[]" id="total' + count + '" name="" class="form-control input_or" disabled required></td>';
-                add_row += ' <input type="hidden" id="totalValue'+count+'" name="totalp[]" class="form-control input_or" required>';
-                add_row += ' <td><a href="#" class="btn btn-danger btn-circle btn-remove" onClick="removeRow(' + count + ')" required>' +
-                    '<i class="fa fa-trash"></i></a></td></tr>';
+                add_row += '<td> <div class="d-flex "> <div id="total_product'+count+'"> 0.00  </div>  <span class="text-muted pl-1">DH</span></div></div></td>';
+                add_row += ' <input type="hidden" id="total_productValue'+count+'" name="totalp[]" class="form-control input_or" required> ';
+                add_row += ' <td><a href="" class="prevent-default" onClick="removeRow(event,' + count + ')" ><i class="i-Close-Window text-19 text-danger font-weight-700""></i></a></td></tr>';
+                    
 
 
 
                 if (tableLength > 0) {
 
-                    $("#table tbody tr:last").after(add_row);
+                    $("#table_product tbody tr:last").after(add_row);
                 }
                 if (tableLength == 0) {
 
-                    $("#table tbody ").append(add_row);
+                    $("#table_product tbody ").append(add_row);
                 }
                 tableLength++;
 
@@ -299,9 +340,7 @@ $(document).ready(function() {
 
 
     $(window).on("load", function() {
-        $('#valueclient').select2({
-            theme: "classic"
-        });
+        
         $('.js-example-basic-single').select2({
             theme: "classic"
         });

@@ -1,0 +1,46 @@
+.pink {
+    background-color: #7b7577!important;
+    border-color: #e91e63!important;
+}
+
+.theme--light.v-size--default.success {
+    background-color: #4caf50 !important;
+    border-color: #4caf50 !important;
+}
+
+.theme--light.v-size--default.error {
+    background-color: #ff5252 !important;
+    border-color: #ff5252 !important;
+}
+
+.theme--light .purple {
+    background-color: #1867c0 !important;
+    border-color: #9c27b0!important;
+}
+
+.btn_remove {
+    background: rgba(0, 0, 0, 0.15) !important;
+    background-color: #e74a3b !important;
+    min-width: auto !important;
+}
+
+.color-icon-remove {
+    color: rgb(255 255 255)!important;
+}
+
+body {
+    overflow-y: initial !important;
+}
+
+.ul-contact-main-content {
+
+     height: 430px !important; 
+}
+
+.btn_search {
+    position: relative;
+    right: 50px;
+    top: -11px;
+    color: #ced4da !important; ;
+    font-size: 20px !important; ;
+}
