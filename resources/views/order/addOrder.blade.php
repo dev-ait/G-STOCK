@@ -17,11 +17,8 @@
 
 
 <div class="breadcrumb">
-    <h1>Checkout</h1>
-    <ul>
-        <li><a href="">Apps</a></li>
-        <li>Ecommerce</li>
-    </ul>
+    <h1>Nouvelle Commande</h1>
+   
 </div>
 <div class="separator-breadcrumb border-top"></div>
 
@@ -90,7 +87,7 @@
               <div class="col-lg-12 mt-5">
                 <div class="ul-product-cart__invoice">
                   <div class="card-title">
-                    <h4 class="heading text-primary">Total Payment</h4>
+                    <h4 class="heading text-primary">Paiement total</h4>
                   </div>
                   <table class="table">
                     <tbody>
