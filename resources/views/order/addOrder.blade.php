@@ -17,7 +17,7 @@
 
 
 <div class="breadcrumb">
-    <h1>Checkout</h1>
+    <h1>Nouvelle Commandes</h1>
     <ul>
         <li><a href="">Apps</a></li>
         <li>Ecommerce</li>
