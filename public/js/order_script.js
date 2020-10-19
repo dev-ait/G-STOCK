@@ -1,5 +1,5 @@
 function validateForm() {
-    var tableProductLength = $("#table tbody tr").length;
+    var tableProductLength = $("#table_product tbody tr").length;
  
     for (x = 0; x < tableProductLength; x++) {
         var tr = $("#table tbody tr")[x];

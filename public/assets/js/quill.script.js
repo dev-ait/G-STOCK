@@ -1,6 +1,9 @@
 
     var quill = new Quill('#full-editor', {
         modules: {
+            clipboard: {
+                matchVisual: false
+              },
             syntax: !0,
             toolbar: [
                 [{

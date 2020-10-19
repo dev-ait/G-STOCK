@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,6 +19,8 @@ class CreateProductTable extends Migration
             $table->text('description')->nullable();
             $table->integer('quantite');
             $table->string('statut');
+            $table->integer('modele_id')->nullable();
+            $table->foreign('modele_id')->references('id')->on('modeles');
             $table->integer('gategorie_id');
             $table->foreign('gategorie_id')->references('id')->on('gategories');
             $table->integer('marque_id');

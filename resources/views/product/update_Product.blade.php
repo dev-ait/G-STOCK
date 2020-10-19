@@ -12,6 +12,14 @@
 <div id="msg"></div>
 <div class=" border-top"></div>
 
+
+<style>
+   .dropzone .dz-preview .dz-image img {
+    width: 150px;
+    height: 150px;
+    }
+</style>
+
    <div class="card mt-3">
       <!--begin::form-->
       <div class="card-header bg-transparent">
@@ -32,14 +40,25 @@
                      Please enter your full name
                      </small>
                   </div>
-                  <div class="form-group col-md-12 pb-3">
-                     
+                  @isset($modeles)
+                  <div id="modele" class="form-group col-md-12 ">
+                     <label for="inputtext11" class="ul-form__label">Modele de produit</label>
+                     <select id="modele_id" class="form-control "  id="type_modele">
+      
+                        @foreach($modeles as $modele)   
+                        <option value="{{$modele->id}} " {{ $product['modele_id']  == $modele->id ? 'non_disponible' : '' }}>{{$modele->nom}} </option>
+                        @endforeach 
+                     </select>
+                  </div>
+                  @endisset
+                  <div class="form-group col-md-12 pb-5">
+                     <label for="inputtext11" class="ul-form__label">Description</label>
                      <div id="full-editor">
             
                      </div>
           
                   </div>
-                  <div class="col-md-12 mt-4">
+                  <div class="col-md-12 mt-5">
                      <div class="half-form pr-3">
                         <label for="quantite" class="label-p">Quantite* </label>
                         <input value="{{  $product['quantite'] }}"  type="number" id="quantite" class="form-control input-product">

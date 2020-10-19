@@ -25,8 +25,5 @@ class HomeController extends Controller
     {
         return view('dashboard.dashboardv1');
     }
-    public function x()
-    {
-        return view('extraKits.upload');
-    }
+   
 }

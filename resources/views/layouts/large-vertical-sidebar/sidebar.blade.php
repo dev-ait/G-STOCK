@@ -8,36 +8,43 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            <li class="nav-item @if (Route::current()->getName() == 'users' || Route::current()->getName() == 'permission' ) active @endif"  data-item="utilisateurs">
+                <a class="nav-item-hold" href="{{ route('client.index') }}">
+                        <i class=" nav-icon i-Male"></i>
+                        <span class="nav-text">Utilisateurs</span>
+                    </a>
+                    <div class="triangle"></div>
+            </li>
+
             <li class="nav-item {{ request()->is('client') ? 'active' : '' }}" >
-            <a class="nav-item-hold" href="{{ route('client.index') }}">
+            <a class="nav-item-hold" href="{{ route('client.index') }}" >
                     <i class=" nav-icon i-Conference"></i>
                     <span class="nav-text">Clients</span>
                 </a>
                 <div class="triangle"></div>
             </li>
-            <li class="nav-item @if (Route::current()->getName() == 'product.edit') active @endif {{ request()->is('product/create') ? 'active' : '' }} {{ request()->is('product') ? 'active' : '' }}" >
+
+            @if ($user_role_all->inRole('admin'))
+
+
+             @if ($user_role_all->hasAccess(['product.read']))
+    
+              
+           
+             <li class="nav-item @if (Route::current()->getName() == 'product.edit'  ) active @endif {{ request()->is('product/create') ? 'active' : '' }} {{ request()->is('product') ? 'active' : '' }}" data-item="products" >
                 <a class="nav-item-hold" href="{{ route('product.index') }}">
                     <i class="nav-icon i-Shop-2"></i>
                     <span class="nav-text"> Produits</span>
                 </a>
                 <div class="triangle"></div>
-            </li>
-            <li class="nav-item {{ request()->is('gategorie') ? 'active' : '' }}" >
-                <a class="nav-item-hold" href="{{ route('gategorie.index') }}">
-                    <i class="nav-icon i-Duplicate-Window"></i>
-                    <span class="nav-text">Gategorie</span>
-                </a>
-                <div class="triangle"></div>
-            </li>
-            <li class="nav-item {{ request()->is('marque') ? 'active' : '' }}" >
-                <a class="nav-item-hold" href="{{ route('marque.index') }}">
-                    <i class="nav-icon i-Tag-4"></i>
-                    <span class="nav-text">Marque</span>
-                </a>
-                <div class="triangle"></div>
-            </li>
+             </li>
+                 @endif
+    
+                 @endif
+    
+            
 
-            <li class="nav-item {{ request()->is('order')  ? 'active' : '' }}  {{ request()->is('order/create')  ? 'active' : '' }}" data-item="widgets">
+            <li class="nav-item {{ request()->is('order')  ? 'active' : '' }}  {{ request()->is('order/create')  ? 'active' : '' }}" data-item="commandes">
                 <a class="nav-item-hold" href="#">
                     <i class="nav-icon i-Full-Cart"></i>
                     <span class="nav-text">Commandes</span>
@@ -48,8 +55,8 @@
     </div>
 
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
-        <!-- Submenu Dashboards -->
-        <ul class="childNav" data-parent="widgets">
+        <!-- Submenu commandes -->
+        <ul class="childNav" data-parent="commandes">
             <li class="nav-item ">
                 <a class="{{ Route::currentRouteName()=='order/create' ? 'open' : '' }}"
                     href=" {{ route('order.create') }}">
@@ -64,6 +71,87 @@
                     <span class="item-name">liste des commande</span>
                 </a>
             </li>
+           
+        </ul>
+
+         <!-- Submenu products -->
+         <ul class="childNav" data-parent="products">
+            <li class="nav-item">
+                <a href="{{ route('product.index') }}"
+                    class="{{ Route::currentRouteName()=='marque' ? 'open' : '' }}">
+                    <i class="nav-icon i-Shopping-Basket"></i>
+                    <span class="nav-text"> Produits</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-item {{ Route::currentRouteName()=='gategorie' ? 'open' : '' }}"
+                    href="{{ route('gategorie.index') }}">
+                    <i class="nav-icon i-Duplicate-Window"></i>
+                    <span class="nav-text">Gategorie</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('marque.index') }}"
+                    class="{{ Route::currentRouteName()=='marque' ? 'open' : '' }}">
+                    <i class="nav-icon i-Tag-4"></i>
+                    <span class="nav-text">Marque</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('modele.index') }}"
+                    class="{{ Route::currentRouteName()=='modele' ? 'open' : '' }}">
+                    <i class="nav-icon i-This-Side-Up"></i>
+                    <span class="nav-text">Modele</span>
+                </a>
+            </li>
+      
+           
+        </ul>
+
+        <!-- Submenu utilisateurs -->
+        <ul class="childNav" data-parent="utilisateurs">
+            <li class="nav-item">
+                <a href="{{ URL::route('users') }}"
+                    class="{{ Route::currentRouteName()=='marque' ? 'open' : '' }}">
+                    <i class="nav-icon i-Administrator"></i>
+                    <span class="nav-text"> utilisateurs
+                    </span>
+                    
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ URL::route('permission') }}"
+                    class="{{ Route::currentRouteName()=='permission' ? 'open' : '' }}">
+                    <i class="nav-icon i-Share"></i>
+                    <span class="nav-text"> Assigner Permission
+                    </span>
+                    
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ URL::route('menu_pages') }}"
+                    class="{{ Route::currentRouteName()=='menu_pages' ? 'open' : '' }}">
+                    <i class="nav-icon i-Windows-2"></i>
+                    <span class="nav-text"> Menu des pages
+                    </span>
+                    
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ URL::route('roles.index') }}"
+                    class="{{ Route::currentRouteName()=='roles' ? 'open' : '' }}">
+                    <i class="nav-icon i-Search-People"></i>
+                    <span class="nav-text"> Roles
+                    </span>
+                    
+                </a>
+            </li>
+
+      
            
         </ul>
 

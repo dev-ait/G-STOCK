@@ -25,17 +25,36 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control input-product"  >
+                     <input id="titre" type="text"  name="titre" class="form-control "  >
                      <small  class="ul-form__text form-text ">
                      Please enter your full name
                      </small>
                   </div>
-                  <div class="form-group col-md-12 pb-3">
+                  <div class="form-group col-md-12">
+                     <label for="inputtext11" class="ul-form__label">Type de produit</label>
+                    <select class="form-control "  id="type_modele">
+                       <option value="">Selectionner</option>
+                       <option value="1">Material informatique</option>
+                       <option value="2">Autre</option>
+                       
+                    </select>
+                  </div>
+                  <div id="modele" class="form-group col-md-12 d-none">
+                     <label for="inputtext11" class="ul-form__label">Modele de produit*</label>
+                     <select id="modele_id" class="form-control "  id="type_modele">
+                        <option value="">Selectionner</option>
+                        @foreach($modeles as $modele)   
+                        <option value="{{$modele->id}} ">{{$modele->nom}} </option>
+                        @endforeach 
+                     </select>
+                  </div>
+                  <div class="form-group col-md-12 pb-5">
+                     <label for="inputtext11" class="ul-form__label">Description</label>
                      <div id="full-editor">
             
                      </div>
                   </div>
-                  <div class="col-md-12 mt-4">
+                  <div class="col-md-12 mt-5">
                      <div class="half-form pr-3">
                         <label for="quantite" class="label-p">Quantite* </label>
                         <input  type="number" id="quantite" class="form-control input-product">

@@ -8,9 +8,17 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\Gategorie;
 use App\Models\Marque;
-
+use App\Models\Modele;
 use App\Models\Product;
 use App\Models\Image;
+
+use Illuminate\Support\Facades\Auth;
+
+use Gate;
+
+use Sentinel;
+
+
 
 
 
@@ -26,9 +34,18 @@ class ProductController extends Controller
     {
         $this->middleware('auth');
     }
+
+
+    
     
     public function index()
     {
+        
+
+
+
+
+
        return view('product.indexProduct');
     }
 
@@ -40,8 +57,9 @@ class ProductController extends Controller
     public function create()
     {
         $gategories= Gategorie::all(); 
-        $marques = Marque::all(); 
-        $data = array( 'gategories'=> $gategories , 'marques'=> $marques  );
+        $marques = Marque::all();
+         $Modeles= Modele::all();
+        $data = array( 'gategories'=> $gategories , 'marques'=> $marques ,'modeles'=> $Modeles );
        
         return view('product.add_Product',$data); 
     }
@@ -220,8 +238,9 @@ class ProductController extends Controller
             $add_Product->gategorie_id = $request->input('gategorie');
             $add_Product->marque_id = $request->input('marque');
             $add_Product->photo_id =  $request->input('photo');
+            $add_Product->modele_id =  $request->input('modele_id');
             $add_Product->save();
-            session()->flash('succes','le produit a été bien enregistere');
+            session()->flash('succes','le produit '.$add_Product->titre.' a été bien enregistré');
            return Response()->json(['etat' => true ]);
          
              
@@ -296,6 +315,7 @@ class ProductController extends Controller
          'quantite'=> $products->quantite ,
          'statut'=> $products->statut ,
          'marque_id'=> $products->marque->nom ,
+         'modele_id'=> $products->modele->nom ,
          'photo_nom'=> $products->image->nom ,
          'photo_id'=> $products->photo_id ,      
          'prix'=> $products->prix ,) 
@@ -304,11 +324,13 @@ class ProductController extends Controller
         
         $gategorie   = Gategorie::all();
         $marque   = Marque::all();
+        $modeles   = Modele::all();
+        
 
 
     
      
-        $data = array( "product" => $product , "gategories" => $gategorie  , "marques" => $marque);
+        $data = array( "product" => $product , "gategories" => $gategorie  , "marques" => $marque  , "modeles" => $modeles);
         return view('product.update_Product',$data)  ; 
     }
 

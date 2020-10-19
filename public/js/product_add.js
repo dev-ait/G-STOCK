@@ -3,8 +3,17 @@
 $(document).ready(function() {
 
 
-
- 
+    $("#type_modele").change(function(){
+       var value_modele = $(this).val();
+        if(value_modele==1){
+            $("#modele").removeClass("d-none");
+        }
+        if(value_modele==2){
+            $("#modele").addClass("d-none");
+        }
+        
+        
+      });
 
     $("#submit-all").click(function(e) {
         
@@ -29,6 +38,7 @@ $(document).ready(function() {
             var statut =  $("#statut").val();
             var gategorie =  $("#gategorie").val();
             var marque =  $("#marque").val();
+            var modele_id =  $("#modele_id").val();
             var photo = photo_;
             
     
@@ -51,6 +61,7 @@ $(document).ready(function() {
                     statut:statut,
                     gategorie:gategorie,
                     marque:marque,
+                    modele_id:modele_id,
                     photo:photo
                 },
                 type: 'post',

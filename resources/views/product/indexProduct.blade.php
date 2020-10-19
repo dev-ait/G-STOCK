@@ -56,10 +56,16 @@
                                                           <a    href="{{route('product.create')}}" class="list-group-item list-group-item-action border-0" >
                                                               <i class="nav-icon i-Shopping-Basket"></i>
                                                               Nouveau Produit</a>
+
+                                                             @if ($user_role_all->inRole('admin'))
+                                                               @if ($user_role_all->hasAccess(['product.delete']))
                                                        
-                                                          <a  @click="remove_item" class="list-group-item list-group-item-action border-0" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" aria-selected="false">
+                                                             <a  @click="remove_item" class="list-group-item list-group-item-action border-0" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" aria-selected="false">
                                                               <i class="nav-icon i-Remove"></i>
                                                               Supprimer</a>
+
+                                                               @endif
+                                                             @endif
    
                                                           <label for="" class="text-muted font-weight-600 py-8">MEMBERS</label>
    

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use App\Models\Marque;
-use App\Models\Test;
 
-class MarqueController extends Controller
+use App\Models\Role;
+
+class RoleController extends Controller
 {
-    /**
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -22,35 +21,21 @@ class MarqueController extends Controller
     public function index()
     {  
 
-        return view('marque.indexMarque');
+        return view('roles.indexRoles');
 
     }
     
 
-    public function get_marque()
+    public function get_roles()
     {
-        $marques= Marque::all();
+        $roles= Role::all();
 
    
-        $att=[];
+       
     
-
-        for($i=0;$i<count($marques);$i++)
-        {
-            $att[] =  [ 'id'=> $marques[$i]->id , 
-            'nom'=> $marques[$i]->nom , 
-             'date_create'=> $marques[$i]->date_create , 
-             'total'=> $marques[$i]->product()->count() ,
-            
-            ];
-        
-         
-
-    
-        }
         
     
-       $data = array( 'marques'=> $att);
+       $data = array( 'roles'=> $roles);
        return $data;
 
        echo json_encode($data);
@@ -76,12 +61,12 @@ class MarqueController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('post')){
-            $marque = new Marque; 
-            $marque->nom = $request->nom;
-            $marque->date_create = $request->date_create;
-            $marque->save();
+            $role = new Role; 
+            $role->name = $request->name;
+            $role->slug = $request->slug;
+            $role->save();
         
-            return Response()->json(['etat' => true  , 'id_marq' => $marque->id ]);
+            return Response()->json(['etat' => true  , 'id_role' => $role->id ]);
          }   
     }
 
@@ -116,10 +101,11 @@ class MarqueController extends Controller
      */
     public function update(Request $request)
     {
-            $marque = Marque::find($request->id);
-            $marque->nom = $request->nom;
+            $role = Role::find($request->id);
+            $role->name = $request->name;
+            $role->slug = $request->slug;
            
-            $marque->save();
+            $role->save();
     }
 
     /**
@@ -130,9 +116,10 @@ class MarqueController extends Controller
      */
     public function destroy($id)
     {
-        $delete_marque= Marque::find($id);  
+        $delete_role= Role::find($id);  
 
-        $delete_marque->delete();
+        $delete_role->delete();
     }
+
 
 }
