@@ -21,6 +21,7 @@ class RoleController extends Controller
     public function index()
     {  
 
+        $this->authorize('admin_access_all_page_utilisateurs');
         return view('roles.indexRoles');
 
     }

@@ -22,16 +22,6 @@ class gestion_stock
         
     }
 
-    public function view_product(User $user)
-             {
-
-                $user = Sentinel::findById(1);
-            
-               $auth   = $user->hasAccess('product.read'); 
-               $t= true;
-
-               return true;
-       
-           }
+    
 
 }

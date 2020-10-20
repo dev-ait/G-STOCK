@@ -21,6 +21,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
     public function form(){
 
@@ -38,6 +39,8 @@ class UserController extends Controller
 
         $roles = Sentinel::getRoleRepository()->get();
         $menu = Menu::all();
+
+        $this->authorize('admin_access_all_page_utilisateurs');
 
         $data = array( 'roles'=> $roles ,'menu'=> $menu );
 

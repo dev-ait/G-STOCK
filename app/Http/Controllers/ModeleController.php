@@ -21,7 +21,8 @@ class ModeleController extends Controller
     
     public function index()
     {  
-
+        $this->authorize('view_all_page_product');
+        
         return view('modele.indexModele');
 
     }

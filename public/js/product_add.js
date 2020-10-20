@@ -2,6 +2,30 @@
 
 $(document).ready(function() {
 
+    
+
+ 
+
+
+
+
+    $(".control_input").keyup(function(){
+        var length =  $(this).val().length;
+
+        if(length>0){
+
+            $("#titre").next().addClass("display_input");
+            $("#titre").addClass("invalid");
+
+        }
+
+
+   
+      });
+
+
+   
+
 
     $("#type_modele").change(function(){
        var value_modele = $(this).val();
@@ -16,7 +40,8 @@ $(document).ready(function() {
       });
 
     $("#submit-all").click(function(e) {
-        
+
+ 
         
        var dropzone1= dropzone.files.length;
 
@@ -40,6 +65,9 @@ $(document).ready(function() {
             var marque =  $("#marque").val();
             var modele_id =  $("#modele_id").val();
             var photo = photo_;
+
+
+
             
     
             var ajaxurl = '/product/store';
@@ -77,6 +105,12 @@ $(document).ready(function() {
                     alert1 += "  <span aria-hidden='true'>×</span></button></div>"
                     $("#msg").empty().append(alert1);
                     $("html, body").animate({ scrollTop: 0 }, "slow");
+                    if(data.text == "text"){
+
+                        $("#titre").next().addClass("display_input");
+                        $("#titre").addClass("invalid");
+                        
+                    }
                    }
                    if(data.etat == true){
                     window.location.href = '/product';

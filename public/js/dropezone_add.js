@@ -2,9 +2,11 @@
 var mockFile_delete = false;
 var length_file = 0;
 
-Dropzone.autoDiscover = false;
+
 var dropzone = new Dropzone ("#mydropzone", {
     addRemoveLinks: true,
+ 
+
 
  
     init: function() {
@@ -12,7 +14,18 @@ var dropzone = new Dropzone ("#mydropzone", {
         this.options.addedfile.call(this, mockFile);
         this.options.thumbnail.call(this, mockFile, window.img.url+"/images/"+window.img.photo_nom);
         mockFile.previewElement.classList.add('dz-success');
-        mockFile.previewElement.classList.add('dz-complete');        
+        mockFile.previewElement.classList.add('dz-complete');  
+        
+     if(mockFile_delete== false){
+
+        this.disable();
+
+          }
+            
+          
+    
+       
+        
 
     
 
@@ -25,6 +38,10 @@ var current_file = "non";
 dropzone.on("removedfile", function(file){
     count_file--;
     mockFile_delete = true;
+
+    this.enable();
+
+   
   
 });
 
@@ -32,6 +49,13 @@ dropzone.on("removedfile", function(file){
 dropzone.on("addedfile", function(file) {
     count_file++; 
     current_file = "yes";
+
+   
+    if (this.files.length > 1) {
+        this.removeFile(this.files[0]);
+      }
+
+
 
 });
 

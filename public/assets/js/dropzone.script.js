@@ -6,7 +6,10 @@ var dropzone = new Dropzone ("#mydropzone", {
 
 
   dropzone.on("addedfile", function(file) {
- 
+
+    if (this.files.length > 1) {
+        this.removeFile(this.files[0]);
+      }
     // Create the remove button
     var removeButton = Dropzone.createElement("<button class='btn  dark'>Effacer le fichier</button>");
 
@@ -25,6 +28,16 @@ var dropzone = new Dropzone ("#mydropzone", {
     // Add the button to the file preview element.
     file.previewElement.appendChild(removeButton);
 });
+
+
+Dropzone.prototype.defaultOptions.init = function () {
+
+    this.hiddenFileInput.removeAttribute('multiple');
+    this.on("maxfilesexceeded", function (file) {
+        this.removeAllFiles();
+        this.addFile(file);
+    });
+};
 
 dropzone.on("removedfile", function(file){
 

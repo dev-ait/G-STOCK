@@ -8,6 +8,9 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+            @can('admin_access_all_page_utilisateurs')
+  
+
             <li class="nav-item @if (Route::current()->getName() == 'users' || Route::current()->getName() == 'permission' ) active @endif"  data-item="utilisateurs">
                 <a class="nav-item-hold" href="{{ route('client.index') }}">
                         <i class=" nav-icon i-Male"></i>
@@ -15,6 +18,7 @@
                     </a>
                     <div class="triangle"></div>
             </li>
+            @endcan
 
             <li class="nav-item {{ request()->is('client') ? 'active' : '' }}" >
             <a class="nav-item-hold" href="{{ route('client.index') }}" >
@@ -24,10 +28,12 @@
                 <div class="triangle"></div>
             </li>
 
-            @if ($user_role_all->inRole('admin'))
+         
+
+            @if ($user_logged->inRole($current_user_name_role))
 
 
-             @if ($user_role_all->hasAccess(['product.read']))
+             @if ($user_logged->hasAccess(['product.read']))
     
               
            

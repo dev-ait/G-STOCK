@@ -179,7 +179,7 @@ sup {
 }
 
 a {
-  color: #663399;
+  color: #ad860e;
   text-decoration: none;
   background-color: transparent;
 }
@@ -6942,8 +6942,8 @@ a.badge-gray-900.focus {
 .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #663399;
-  border-color: #663399;
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 
 .list-group-item + .list-group-item {
@@ -13333,6 +13333,16 @@ a.text-gray-900:focus {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="$from", endColorstr="$to",GradientType=1 );
 }
 
+.invalid{
+  border-color: #f44336 !important;
+}
+
+.display_input{
+  display: block !important;
+}
+
+
+
 .gradient-purple-indigo {
   /* fallback/image non-cover color */
   background-color: #663399;
@@ -13340,10 +13350,10 @@ a.text-gray-900:focus {
   /* Safari 4+, Chrome 1+ */
   /* Safari 5.1+, Chrome 10+ */
   /* Opera 11.10+ */
-  background-image: -o-linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background-image: -o-linear-gradient(-154deg, #554e60   0%, #ffc107    100%);
   /* IE10+ */
   /* Standard */
-  background: linear-gradient(-154deg, #663399 0%, #33214b 100%);
+  background: linear-gradient(-154deg, #554e60  0%, #ffc107    100%);
   /* IE6-9 */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="$from", endColorstr="$to",GradientType=1 );
 }
@@ -19883,7 +19893,7 @@ a.typo_link.text-gray-900:after {
   bottom: 0;
   border-style: solid;
   border-width: 0 0 30px 30px;
-  border-color: transparent transparent #663399 transparent;
+  border-color: transparent transparent #ffc107  transparent;
 }
 
 .layout-sidebar-large .sidebar-left-secondary {
@@ -25066,7 +25076,7 @@ select.form-control {
 }
 
 .spinner-bubble-primary {
-  color: #663399;
+  color: #ffc107   ;
 }
 
 .spinner-bubble-secondary {

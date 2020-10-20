@@ -18,6 +18,10 @@
     width: 150px;
     height: 150px;
     }
+    .dz-max-files-reached {
+    pointer-events: none ;
+    cursor: default;
+       }
 </style>
 
    <div class="card mt-3">
@@ -164,7 +168,7 @@
          <div class="mc-footer">
             <div class="row">
                <div class="col-lg-12 text-center">
-                  <button  type="submit" id="submit-all" class="btn  btn-primary m-1">Save</button>
+                  <button onclick="clickbtn(this)"  type="submit" id="submit-all" class="btn  btn-primary m-1">Save</button>
                   <button type="button" class="btn btn-outline-secondary m-1">Cancel</button>
                </div>
             </div>

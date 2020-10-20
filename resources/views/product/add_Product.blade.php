@@ -25,10 +25,10 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control "  >
-                     <small  class="ul-form__text form-text ">
-                     Please enter your full name
-                     </small>
+                     <input id="titre" type="text"  name="titre" class="form-control control_input "  >
+                     <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur.</div>
+                     
+
                   </div>
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Type de produit</label>

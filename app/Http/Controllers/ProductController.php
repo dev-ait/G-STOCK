@@ -34,16 +34,11 @@ class ProductController extends Controller
     {
         $this->middleware('auth');
     }
-
-
-    
     
     public function index()
     {
         
-
-
-
+        $this->authorize('view_all_page_product');
 
 
        return view('product.indexProduct');
@@ -200,31 +195,31 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         if($request->titre == ''){
-            return Response()->json([ 'etat' => false , 'text' => 'Le champs text est obligatoire' ]);
+            return Response()->json([ 'etat' => false , 'text' => 'text' ]);
             exit;
         }
         
         if( $request->quantite == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Le champs quantite est obligatoire' ]);
+            return Response()->json([ 'etat' => false , 'text' => 'quantite' ]);
             exit;
         }
         
         if( $request->prix == '' ){
-            return Response()->json([ 'etat' => false, 'text' => 'Le champs prix est obligatoire']);
+            return Response()->json([ 'etat' => false, 'text' => 'prix']);
             exit;
         }
         
         if( $request->statut == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Le champs statut est obligatoire' ]);
+            return Response()->json([ 'etat' => false , 'text' => 'statut' ]);
             exit;
         }
         
         if( $request->gategorie == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Le champs gategorie est obligatoire' ]);
+            return Response()->json([ 'etat' => false , 'text' => 'gategorie' ]);
             exit;
         }
         if( $request->marque == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Le champs marque est obligatoire' ]);
+            return Response()->json([ 'etat' => false , 'text' => 'marque' ]);
             exit;
         }
 
