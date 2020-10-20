@@ -25,8 +25,8 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control control_input "  >
-                     <div class="invalid-feedback"> Veuillez choisir un nom d'utilisateur.</div>
+                     <input id="titre" type="text"  name="titre" class="form-control  "  >
+                     <div class="invalid-feedback"> Veuillez choisir le Titre de produit.</div>
                      
 
                   </div>
@@ -38,6 +38,8 @@
                        <option value="2">Autre</option>
                        
                     </select>
+                    
+
                   </div>
                   <div id="modele" class="form-group col-md-12 d-none">
                      <label for="inputtext11" class="ul-form__label">Modele de produit*</label>
@@ -57,10 +59,10 @@
                   <div class="col-md-12 mt-5">
                      <div class="half-form pr-3">
                         <label for="quantite" class="label-p">Quantite* </label>
-                        <input  type="number" id="quantite" class="form-control input-product">
-                        <small  class="ul-form__text form-text ">
-                        Please enter your full name
-                        </small>
+                        <input  type="number" id="quantite" class="form-control">
+                     
+                        <div class="invalid-feedback"> Veuillez choisir la Quantite  </div>
+                       
                      </div>
                      <div class="half-form pl-3">
                         <label for="taux" class="label-p">Prix* </label>
@@ -68,22 +70,25 @@
                            <div class="input-group-prepend">
                               <span class="input-group-text">$</span>
                            </div>
-                           <input type="number" step="0.01" id="prix" class="form-control input-product" >
+                           <input type="number" step="0.01" id="prix" class="form-control" >
+                           
                            <div class="input-group-append">
                               <span class="input-group-text">.00</span>
                            </div>
+                           <div class="invalid-feedback"> Veuillez choisir le Prix  </div>
+                          
                         </div>
-                        <small  class="ul-form__text form-text ">
-                        Please enter your full name
-                        </small>
+                        
+                  
                      </div>
                   </div>
                   <div class="col-md-12 pt-3">
                      <label for="statut" class="label-p">Statut* </label>
-                     <select id="statut" class="form-control input-product">
+                     <select id="statut" class="form-control ">
                         <option value="Disponible">Disponible</option>
                         <option value="Non Disponible">Non Disponible</option>
                      </select>
+                     <div class="invalid-feedback"> Veuillez choisir Statut  </div>
                   </div>
                </div>
             </div>
@@ -104,6 +109,7 @@
                      <option value="{{$gategorie->id}} ">{{$gategorie->nom}} </option>
                      @endforeach 
                   </select>
+                  <div class="invalid-feedback"> Veuillez choisir Gategories  </div>
                </div>
             </div>
          </div>
@@ -123,6 +129,7 @@
                      <option value="{{$marque->id}} ">{{$marque->nom}} </option>
                      @endforeach 
                   </select>
+                  <div class="invalid-feedback"> Veuillez choisir la Marque  </div>
                </div>
             </div>
          </div>

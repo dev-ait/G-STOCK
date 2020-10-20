@@ -39,7 +39,7 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input value='{{  $product['titre'] }}' id="titre" type="text"  name="titre" class="form-control input-product"  >
+                     <input value='{{  $product['titre'] }}' id="titre" type="text"  name="titre" class="form-control input-product control_input"  >
                      <small  class="ul-form__text form-text ">
                      Please enter your full name
                      </small>
