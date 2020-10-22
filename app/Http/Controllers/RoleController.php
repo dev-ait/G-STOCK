@@ -106,6 +106,7 @@ class RoleController extends Controller
             $role = Role::find($request->id);
             $role->name = $request->name;
             $role->slug = $request->slug;
+            $role->color = $request->color;
            
             $role->save();
     }

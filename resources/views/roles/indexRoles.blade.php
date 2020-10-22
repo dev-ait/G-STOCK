@@ -140,6 +140,7 @@
                                     <v-btn color="purple" fab small dark  @click="editItem(item)">
                                        <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                                     </v-btn>
+                                    <textarea :style="{color:color}"></textarea>
                                     <v-dialog v-model="dialog" max-width="500px">
                                        <v-card>
                                           <v-card-title>
@@ -150,9 +151,21 @@
                                                 <v-col cols="12" sm="6" md="12">
                                                    <v-text-field pl="5" v-model="editedItem.name"  label="Nom"></v-text-field>
                                                 </v-col>
-                                                <v-col cols="12" sm="6" md="12">
-                                                   <v-text-field  v-model="editedItem.slug" label="Date" disabled></v-text-field>
+                                                <v-col cols="12" sm="6" md="">
+                                                   <v-text-field  v-model="editedItem.slug" label="Slug" disabled></v-text-field>
                                                 </v-col>
+                                                <v-col cols="12" sm="6"  >
+                                                   <v-label>
+                                                      choisir couleur de role
+                                                        </v-label>
+                                                <v-color-picker
+                                                 v-model="editedItem.color"
+                                                   dot-size="20"
+                                                   swatches-max-height="150"
+                                                 ></v-color-picker>
+
+                                                </v-col>
+                                                
                                              </v-row>
                                           </v-container>
                                           </v-form>
