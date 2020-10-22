@@ -35,6 +35,8 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(data) {
 
+                console.log(data);
+
 
                 if (data.etat == true) {
                     window.location.href = '/users';

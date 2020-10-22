@@ -24,6 +24,20 @@
     min-width: auto !important;
 }
 
+.v-input.v-color-picker__hue.v-input--hide-details.theme--light.v-input__slider.v-color-picker__track {
+    background: linear-gradient(90deg,red,#ff0 16.66%,#0f0 33.33%,#0ff 50%,#00f 66.66%,#f0f 83.33%,red);
+}
+.v-slider__thumb.grey.lighten-2 {
+    background-color: #e0e0e0!important;
+    border-color: #e0e0e0!important;
+}
+.v-slider__thumb-container.grey--text.text--lighten-2 {
+    color: #e0e0e0!important;
+    caret-color: #e0e0e0!important;
+}
+.v-color-picker__dot {
+    margin-right: 15px;
+}
 .color-icon-remove {
     color: rgb(255 255 255)!important;
 }

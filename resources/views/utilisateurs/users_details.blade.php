@@ -45,8 +45,11 @@
                         <div class="col-sm-10">
                            <select id="role_id" class=" form-control" >
                               <option value="" >Selectionner</option>
-                              <option value="1" {{ $user['role'] == 'Admin' ? 'selected' : '' }} >Admin</option>
-                              <option value="2" {{ $user['role'] == 'Superviseur' ? 'selected' : '' }} >Superviseur</option>
+                              @foreach ($roles as $role)
+                              <option value="{{$role->id}}" {{ $user['role'] == $role->name ? 'selected' : '' }} >{{$role->name}}</option>
+                              @endforeach
+                           
+                  
                            </select>
                         </div>
                      </div>

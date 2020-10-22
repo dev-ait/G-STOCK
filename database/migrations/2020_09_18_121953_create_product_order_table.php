@@ -15,7 +15,7 @@ class CreateProductOrderTable extends Migration
     {
         Schema::create('product_orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('order_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->string('nom_produit');
             $table->float('prix');

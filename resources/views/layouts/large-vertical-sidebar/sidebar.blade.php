@@ -29,7 +29,7 @@
             </li>
 
          
-
+  
             @if ($user_logged->inRole($current_user_name_role))
 
 

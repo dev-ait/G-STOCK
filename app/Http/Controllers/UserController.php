@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Role_user;
 use App\Models\Menu;
 
+use App\Models\Role;
+
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -111,8 +113,24 @@ class UserController extends Controller
             
             
             $user_role  = Role_user::where('user_id', '=',$request->input('id'))->first();
-            $user_role->role_id = $request->input('role_id');
-            $user_role->save();
+
+            if(!empty($user_role->role_id)){
+
+                $user_role->role_id = $request->input('role_id');
+                $user_role->save();
+
+            }
+
+            if(empty($user_role->role_id)){
+
+                $role_user = new Role_user();
+                $role_user->user_id = $request->input('id');
+                $role_user->role_id = $request->input('role_id');
+                $role_user->save(); 
+
+            }
+
+
             return Response()->json(['etat' => true ]);
         }
 
@@ -124,19 +142,26 @@ class UserController extends Controller
       
 
         $user = Sentinel::findById($id);
+        $role = Role::all();
+
+        $role_user= '';
+
+        if(!empty($user->roles[0])){
+            $role_user = $user->roles[0]->name ;
+        }
 
         $att =  array( 
             'id'=> $user->id ,
             'nom'=>  $user->name , 
             'email'=>  $user->email , 
-            'role'=>  $user->roles[0]->name ,
+            'role'=> $role_user ,
                   ) 
             ; 
 
-            $data = array( "user" => $att  );
+            $data = array( "user" => $att , 'roles' =>  $role );
 
      
-        return view('utilisateurs.contact_details',$data );
+        return view('utilisateurs.users_details',$data );
 
 
 
@@ -204,8 +229,10 @@ class UserController extends Controller
 
         $users = Sentinel::getUserRepository()->with("roles")->get();
 
+        $role = Role::all();
+
  
-        $data = array( 'users'=> $users);
+        $data = array( 'users'=> $users , 'roles' => $role );
         
         return view('utilisateurs.users',$data );
     }

@@ -141,7 +141,7 @@ Route::get('/getroles',[App\Http\Controllers\RoleController::class, 'get_roles']
 
 Route::put('/updaterole',[App\Http\Controllers\RoleController::class, 'update']);
 
-Route::delete('/deleteroles/{id}',[App\Http\Controllers\RoleController::class, 'destroy']);
+Route::delete('/deleterole/{id}',[App\Http\Controllers\RoleController::class, 'destroy']);
 
 
 

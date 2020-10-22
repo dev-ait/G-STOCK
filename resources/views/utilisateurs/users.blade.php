@@ -50,8 +50,9 @@
                                  <div class="col-sm-10">
                                     <select id="role_id" class=" form-control" >
                                        <option value="" >Selectionner</option>
-                                       <option value="1">Admin</option>
-                                       <option value="2">Superviseur</option>
+                                       @foreach ($roles as $role)
+                                       <option value="{{$role->id}}"  >{{$role->name}}</option>
+                                       @endforeach
                                     </select>
                                  </div>
                               </div>
@@ -95,7 +96,7 @@
                            <td>  {{$user->email}} </td>
                            <td>
                               <?php foreach($user->roles as $role){  ?>
-                              <a href="#" class="badge badge-primary <?php if($role->name== "Admin"){ echo "badge-danger"; } ;if($role->name== "Superviseur"){ echo "badge-warning"; }  ?>  m-2 p-2"> 
+                              <a href="#" class="badge badge-primary  m-2 p-2"  style="background-color: {{ $role->color }};"> 
                               <?php  echo $role->name ;  ?>        
                               </a> 
                               <?php break; } ?>

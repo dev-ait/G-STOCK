@@ -65,6 +65,7 @@ class RoleController extends Controller
             $role = new Role; 
             $role->name = $request->name;
             $role->slug = $request->slug;
+            $role->color = $request->color;
             $role->save();
         
             return Response()->json(['etat' => true  , 'id_role' => $role->id ]);

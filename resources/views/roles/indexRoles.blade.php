@@ -57,7 +57,7 @@
                                                                v-on:keyup="set_slug"
                                                                ></v-text-field>
                                                          </v-col>
-                                                         <v-col cols="12" sm="6" md="12" >
+                                                         <v-col cols="12" sm="6" md="" >
                                                             <v-text-field
                                                                label="Slug*"
                                                                v-model="role_a.slug"
@@ -66,6 +66,19 @@
                                                             
                                                                ></v-text-field>
                                                          </v-col>
+                                                         <v-col cols="12" sm="6"  >
+                                                            <v-label>
+                                                               choisir couleur de role
+                                                                 </v-label>
+                                                         <v-color-picker
+                                                          v-model="role_a.color"
+                                                            dot-size="20"
+                                                            swatches-max-height="150"
+                                                          ></v-color-picker>
+
+                                                         </v-col>
+
+
                                                       </v-row>
                                                    </v-container>
                                                    <small>* indique le champ obligatoire</small>

@@ -12,6 +12,7 @@ class CreateProductsTable extends Migration
      * @return void
      */
     public function up()
+
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -19,13 +20,13 @@ class CreateProductsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('quantite');
             $table->string('statut');
-            $table->integer('modele_id')->nullable();
+            $table->unsignedBigInteger('modele_id')->nullable();
             $table->foreign('modele_id')->references('id')->on('modeles');
-            $table->integer('gategorie_id');
+            $table->unsignedBigInteger('gategorie_id');
             $table->foreign('gategorie_id')->references('id')->on('gategories');
-            $table->integer('marque_id');
+            $table->unsignedBigInteger('marque_id');
             $table->foreign('marque_id')->references('id')->on('marques');
-            $table->integer('photo_id');
+            $table->unsignedBigInteger('photo_id');
             $table->foreign('photo_id')->references('id')->on('images');
             $table->float('prix');	
             $table->timestamps();

@@ -7,14 +7,6 @@
    
    }
 
-
- 
-   
-
-   
-   
-
-
    
    ?>
 
@@ -118,7 +110,7 @@
          </tr>
       </thead>
       <tbody>
-         @foreach ($permissions as $permission)
+         @foreach ($permissions ?? '' as $permission)
           @foreach ($menu as $menu_page)
          
          

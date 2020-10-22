@@ -72,11 +72,17 @@ class AppServiceProvider extends ServiceProvider
             $id=Auth::id();
 
 
+            if ($id==1)
+            {
+                $value = true;         
+
+            }
+
             $user = Sentinel::findById($id);
                 if (!empty($user->roles[0]))
                 {
                     $role = $user->roles[0]->slug;
-                    if ($user->inRole($role) or $id==1)
+                    if ($user->inRole($role) )
                                     {
                                         $value = true;         
 

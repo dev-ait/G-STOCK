@@ -17,6 +17,7 @@ new Vue({
                 id: 0,
                 slug: '',
                 name: '',
+                color: '',
                 
             },
             btn_control: false,
@@ -61,11 +62,14 @@ new Vue({
                 id: 0,
                 slug: '',
                 name: '',
+                color: '',
+
             },
             defaultItem: {
                 id: 0,
                 slug: '',
                 name: '',
+                color: '',
             },
 
         }
@@ -233,6 +237,10 @@ new Vue({
             let jsonData = new FormData()
             jsonData.append('name', this.role_a.name)
             jsonData.append('slug', this.role_a.slug)
+            jsonData.append('color', this.role_a.color)
+
+          
+            console.log(jsonData);
 
             axios.post(window.laravel.url + '/postrole', jsonData)
                 .then(response => {
@@ -291,7 +299,10 @@ new Vue({
         },
         set_slug: function () {
 
+            
+
            var slug = this.role_a.name.replace(/\s/g, '-') ;
+            slug = slug.toLowerCase();
            this.role_a.slug = slug;
           },
 
