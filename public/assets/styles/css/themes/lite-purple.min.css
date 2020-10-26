@@ -2874,7 +2874,7 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #ffc107;
+  background-color: #ffc107  ! important;
   border-color: #ffc107;
 }
 
@@ -33327,8 +33327,16 @@ blockquote {
   color: #c2c6dc;
 }
 
+.f-15{
+  font-size: 15px;
+}
+
 .dark-theme .main-header .notification-dropdown .notification-icon {
   background: #10163a !important;
+}
+
+i.v-icon.notranslate.v-icon--left.mdi.mdi-account-circle-outline.theme--light {
+  font-size: 32px;
 }
 
 .dark-theme .dropdown-item:focus,
