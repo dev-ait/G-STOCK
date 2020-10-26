@@ -13,6 +13,9 @@ new Vue({
                 rowsPerPage: 5,
 
             },
+            items_project: [],
+            model_project: [],
+            search_project: null,
             select: { 
                 id: '',
                  name: ''
@@ -262,9 +265,9 @@ new Vue({
             jsonData.append('name', this.user_a.name)
             jsonData.append('email', this.user_a.email)
             jsonData.append('password', this.user_a.password)
-            jsonData.append('role', this.role)
+            jsonData.append('role_id', this.select.id)
 
-            console.log(jsonData);
+            
 
             axios.post(window.laravel.url + '/user_post', jsonData)
                 .then(response => {
@@ -288,13 +291,15 @@ new Vue({
                             icon: 'success',
                             title: 'Ajouté avec succes'
                         })
-                        this.marque_a.id = response.data.id_marq;
-                        this.marque.unshift(this.marque_a);
+                        this.user_a.id = response.data.id_user;
+                        this.users.unshift(this.user_a);
 
-                        this.marque_a = {
-                            id          : 0,
-                            nom         : '',
-                            date_create : '',
+                        this.user_a = {
+                            id: 0,
+                            name : '',
+                            email: '',
+                            role : '',
+                            password:''
 
                         };
                         this.dialog_add =false;
@@ -332,7 +337,15 @@ new Vue({
 
             
 
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+
+                axios.get(window.laravel.url + '/getclient/')
+                .then(response => {
              
+                    this.items_project = response.data.clients;
 
 
                 })

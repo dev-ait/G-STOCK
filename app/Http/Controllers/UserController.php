@@ -202,9 +202,12 @@ class UserController extends Controller
         $role_user->role_id = $request->input('role_id');
         $role_user->save(); 
 
-        session()->flash('succes_user',$new_user->name);
+        
 
         return Response()->json(['etat' => true ]);
+
+
+        return Response()->json(['etat' => true  , 'id_user' =>  $new_user->id ]);
 
 
 

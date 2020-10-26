@@ -13,7 +13,7 @@
    </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-@include('layouts.common.flash_message_user')
+
 <section  id="app_users" data-app>
  
 
@@ -65,15 +65,47 @@
                                                 <v-col cols="12" sm="6" md="12" >
 
                                                    <v-select
-                                                   v-model="user_a.role"
-                                                   :hint="`${select.id}, ${select.name}`"
+                                                   v-model="select"
+                                                  
                                                    :items="role_items"
                                                    item-text="name" item-value="id"
-                                                   label="Select"
+                                                   label="Selectionner"
                                                    persistent-hint
                                                    return-object
                                                    single-line
                                                   ></v-select>
+
+                                                </v-col>
+
+
+                                                <v-col cols="12" sm="6" md="12" >
+
+                                                   <template>
+                                                     
+                                                        <v-combobox
+                                                          v-model="model_project"
+                                                          :items="items_project"
+                                                          :search-input.sync="search_project"
+                                                          hide-selected
+                                                          item-text="nom" item-value="id"
+                                                          hint="Maximum of 5 tags"
+                                                          label="Ajouter des projets"
+                                                          multiple
+                                                          persistent-hint
+                                                          small-chips
+                                                        >
+                                                          <template v-slot:no-data>
+                                                            <v-list-item>
+                                                              <v-list-item-content>
+                                                                <v-list-item-title>
+                                                                  Aucun résultat correspondant
+                                                                </v-list-item-title>
+                                                              </v-list-item-content>
+                                                            </v-list-item>
+                                                          </template>
+                                                        </v-combobox>
+                                                     
+                                                    </template>
 
                                                 </v-col>
 
