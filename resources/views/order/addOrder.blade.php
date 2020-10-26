@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/pickadate/classic.css')}}">
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/pickadate/classic.date.css')}}">
+<link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
 
 <style>
   .table-product.active{
@@ -32,6 +33,12 @@
 
 <form action="{{ url('order')}}" method="POST" id="FormOrder" onsubmit="return validateForm();">
   {{ csrf_field() }}
+
+
+  <script>
+
+    
+  </script>
   
 <section class="chekout-page">
     <div class="row">
@@ -158,7 +165,7 @@
                     <label for="inputtext11" class="ul-form__label">Date de commande:</label>
                     <div class="row">
                     <div class="col-md-11">
-                    <input id="picker3" name="date_commande" class="form-control" placeholder="yyyy-mm-dd"  >
+                    <input id="picker3" name="date_commande" class="form-control" placeholder="yyyy-mm-dd" required >
                      </div>
                     <div class="input-group-append col-md-1">
                       <button class="btn btn-secondary btn-calendrier"  type="button">
@@ -254,6 +261,9 @@
   
   ]) !!}
 </script>
+
+<script src="{{asset('assets/js/vendor/toastr.min.js')}}"></script>
+<script src="{{asset('assets/js/toastr.script.js')}}"></script>
 
 <script src="{{ asset('js/order_script.js') }}"></script>
 

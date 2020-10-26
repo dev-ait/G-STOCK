@@ -25,7 +25,7 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control  "  >
+                     <input id="titre" type="text"  name="titre" class="form-control "  >
                      <div class="invalid-feedback"> Veuillez choisir le Titre de produit.</div>
                      
 
@@ -85,6 +85,7 @@
                   <div class="col-md-12 pt-3">
                      <label for="statut" class="label-p">Statut* </label>
                      <select id="statut" class="form-control ">
+                        <option value="">Selectionner</option>
                         <option value="Disponible">Disponible</option>
                         <option value="Non Disponible">Non Disponible</option>
                      </select>
@@ -104,7 +105,8 @@
             <div class="form-row">
                <div class="form-group col-md-12">
                   <label for="title" class="label-p">Gategorie* </label>
-                  <select id="gategorie" class=" form-control input-product">
+                  <select id="gategorie" class=" form-control">
+                     <option value="">Selectionner</option>
                      @foreach($gategories as $gategorie)   
                      <option value="{{$gategorie->id}} ">{{$gategorie->nom}} </option>
                      @endforeach 
@@ -125,7 +127,8 @@
                <div class="form-group col-md-12">
                   <label for="title" class="label-p">Marque* </label>
                   <select id="marque" class="js-single form-control input-product">
-                     @foreach($marques as $marque)   
+                     @foreach($marques as $marque) 
+                     <option value="">Selectionner</option>  
                      <option value="{{$marque->id}} ">{{$marque->nom}} </option>
                      @endforeach 
                   </select>
@@ -150,10 +153,12 @@
                            <span>Vous pouvez également cliquer pour ouvrir le navigateur de fichiers</span>
                           
                         </div>
-                        <div class="fallback">
+                        <div class="fallback"  >
                             <input name="file" type="file" />
                         </div>
+                       
                     </form>
+                    <div id='file_image' class="invalid-feedback"> Veuillez choisir L'image  </div>
 
                     
                      <!-- You can add extra form fields here -->

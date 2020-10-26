@@ -27,6 +27,9 @@ var dropzone = new Dropzone ("#mydropzone", {
 
     // Add the button to the file preview element.
     file.previewElement.appendChild(removeButton);
+
+    $("#file_image").removeClass("display_input");
+    
 });
 
 

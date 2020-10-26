@@ -1,19 +1,45 @@
 function validateForm() {
+
+    
     var tableProductLength = $("#table_product tbody tr").length;
  
     for (x = 0; x < tableProductLength; x++) {
-        var tr = $("#table tbody tr")[x];
+        var tr = $("#table_product tbody tr")[x];
         var count = $(tr).attr('id');
         count = count.substring(3);
        var val_quantite =  $("#quantite" + count).val();
           if(val_quantite <= 0.0 && val_quantite){
               
-            alert("La valeur de quantite doit etre superieure de 0");
+           
+            toastr.info(" etre superieure de 0", "La valeur de quantite doit", {
+                progressBar: !0,
+                positionClass: "toast-bottom-right",
+                showDuration: 200
+            });
            return false;
           }
           
       
     } 
+
+
+    var date =   $("#picker3").val();
+
+    if(date == '' ){
+
+        toastr.info("La Date de commande", "Veuillez choisir ", {
+            progressBar: !0,
+            positionClass: "toast-bottom-right",
+            showDuration: 200
+        });
+        return false;
+
+
+    }
+
+
+
+
 }
 
 

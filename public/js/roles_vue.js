@@ -47,6 +47,13 @@ new Vue({
                 }
                 ,
                 {
+                    text: "Colour ",
+                    value: "color",
+                    sortable: false,
+                }
+
+                ,
+                {
                     text: "Action",
                     value: "action",
                     sortable: false

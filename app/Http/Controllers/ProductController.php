@@ -302,6 +302,12 @@ class ProductController extends Controller
     {
         $products   = Product::find($id);
 
+        $modele= '';
+
+        if(!empty($products->modele->nom)){
+            $modele = $products->modele->nom;
+        }
+
         $product =  array( 
         'id'=> $products->id ,
         'titre'=> $products->titre , 
@@ -310,7 +316,7 @@ class ProductController extends Controller
          'quantite'=> $products->quantite ,
          'statut'=> $products->statut ,
          'marque_id'=> $products->marque->nom ,
-         'modele_id'=> $products->modele->nom ,
+         'modele_id'=>  $modele ,
          'photo_nom'=> $products->image->nom ,
          'photo_id'=> $products->photo_id ,      
          'prix'=> $products->prix ,) 

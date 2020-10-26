@@ -86,13 +86,23 @@
                               <v-data-table  @input="item($event)" :headers="headers" :items="orders" :search="search" :value="selectedRows" v-model="selected" :items-per-page="10"  :sort-by.sync="sortBy"
                               :sort-desc.sync="sortDesc" show-select   item-key="id"
                               :expanded.sync="expanded" @click:row="clicked">
-                              <template v-slot:item.action="{ item }">
+
+                              <template v-slot:item.print="{ item }">
+
+                                 <v-btn  class="mx-1"  small  fab dark color="purple" @click="print(item)">
+                                    <v-icon dark>mdi-printer</v-icon>
+                                  </v-btn>
+
+                              </template>
+
+
+                              <template v-slot:item.action="{ item }" >
                               
-                                 <div class="p-2 ml-5">
-                                 <v-btn  class="mx-1"  small  fab dark color="teal" @click="editItem(item)">
+                                 
+                                 <v-btn align-center  class="mx-0"  small  fab dark color="teal" @click="show_order_product(item)">
                                     <v-icon dark>mdi-format-list-bulleted-square</v-icon>
                                   </v-btn>
-                                 </div>
+                                 
                               
                                  <v-dialog v-model="dialog" max-width="500px">
                                     <v-card>

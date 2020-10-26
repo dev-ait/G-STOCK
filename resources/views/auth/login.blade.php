@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Password</label>
-                                        <input id="password"
+                                        <input id="password"  type="password"
                                             class="form-control form-control-rounded @error('password') is-invalid @enderror"
                                             name="password" required autocomplete="current-password">
                                         @error('password')

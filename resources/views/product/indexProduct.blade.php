@@ -10,7 +10,7 @@
             
             </div>
 
-            @include('layouts.common.flash_message');
+            @include('layouts.common.flash_message')
 
             <div class=" border-top"></div>
             

@@ -11,7 +11,7 @@
    </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-@include('layouts.common.flash_message_user');
+@include('layouts.common.flash_message_user')
 <section class="contact-list">
    <div class="row">
       <div class="col-md-12 mb-4">

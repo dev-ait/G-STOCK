@@ -44,7 +44,9 @@
                      Please enter your full name
                      </small>
                   </div>
-                  @isset($modeles)
+             
+                
+                  @if (!empty($product['modele_id'])) 
                   <div id="modele" class="form-group col-md-12 ">
                      <label for="inputtext11" class="ul-form__label">Modele de produit</label>
                      <select id="modele_id" class="form-control "  id="type_modele">
@@ -54,7 +56,8 @@
                         @endforeach 
                      </select>
                   </div>
-                  @endisset
+                  @endif
+                  
                   <div class="form-group col-md-12 pb-5">
                      <label for="inputtext11" class="ul-form__label">Description</label>
                      <div id="full-editor">
