@@ -101,6 +101,10 @@ Route::get('permission', [App\Http\Controllers\UserController::class, 'permissio
 
 Route::get('users', [App\Http\Controllers\UserController::class, 'users'])->name('users');
 
+Route::get('get_users', [App\Http\Controllers\UserController::class, 'get_users']);
+
+
+
 Route::post('user_post', [App\Http\Controllers\UserController::class, 'create_user']);
 
 Route::post('/delete_user/{id}', [App\Http\Controllers\UserController::class, 'destroy']);

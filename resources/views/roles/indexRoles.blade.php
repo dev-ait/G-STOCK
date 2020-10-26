@@ -136,11 +136,17 @@
                               <v-data-table  @input="item($event)" :headers="headers" :items="role" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
                                  :sort-desc.sync="sortDesc" show-select  item-key="id"
                                  :expanded.sync="expanded" @click:row="clicked">
+                                 <template v-slot:item.color="{ item }">
+                                    <div v-bind:style="{ 'background-color' : item.color  }" style="width: 30px;height: 30px;"></div>
+                                   
+                                 </template>
+                                 
                                  <template v-slot:item.action="{ item }">
+                                 
                                     <v-btn color="purple" fab small dark  @click="editItem(item)">
                                        <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                                     </v-btn>
-                                    <textarea :style="{color:color}"></textarea>
+                                 
                                     <v-dialog v-model="dialog" max-width="500px">
                                        <v-card>
                                           <v-card-title>

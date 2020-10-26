@@ -8,7 +8,7 @@
 </div>
 <div class="separator-breadcrumb border-top"></div>
 
-@include('layouts.common.flash_message_menu');
+@include('layouts.common.flash_message_menu')
 <!-- begin::modal -->
 <div class="ul-card-list__modal">
    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

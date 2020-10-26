@@ -2874,8 +2874,8 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #663399;
-  border-color: #663399;
+  background-color: #ffc107  ! important;
+  border-color: #ffc107;
 }
 
 .btn-primary:hover {
@@ -2887,8 +2887,8 @@ fieldset:disabled a.btn {
 .btn-primary:focus,
 .btn-primary.focus {
   color: #fff;
-  background-color: #53297c;
-  border-color: #4d2673;
+  background-color: #ffc107;
+  border-color: #ffc107;
   box-shadow: 0 0 0 0.2rem rgba(125, 82, 168, 0.5);
 }
 
@@ -6156,8 +6156,8 @@ input[type=button].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #663399;
-  border-color: #663399;
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 
 .page-item.disabled .page-link {
@@ -21850,7 +21850,7 @@ html [type=button],
 
 .btn-primary,
 .btn-outline-primary {
-  border-color: #663399;
+  border-color: #ffc107;
 }
 
 .btn-primary .btn-spinner,
@@ -21861,19 +21861,19 @@ html [type=button],
 
 .btn-primary:hover,
 .btn-outline-primary:hover {
-  background: #663399;
-  box-shadow: 0 8px 25px -8px #663399;
-  border-color: #663399;
+  background: #ffc107;
+  box-shadow: 0 8px 25px -8px #ffc107;
+  border-color: #ffc107;
 }
 
 .btn-primary:focus,
 .btn-outline-primary:focus {
   box-shadow: none;
-  box-shadow: 0 8px 25px -8px #663399;
+  box-shadow: 0 8px 25px -8px #ffbf00;
 }
 
 .btn-raised.btn-raised-primary {
-  background: #663399;
+  background: #ffc107;
   box-shadow: 0 4px 6px rgba(102, 51, 153, 0.11), 0 1px 3px rgba(102, 51, 153, 0.08);
 }
 
@@ -28370,13 +28370,13 @@ ngb-rating .half {
 }
 
 .nav-tabs {
-  border-bottom: 1px solid #663399;
+  border-bottom: 1px solid #ffc107  ;
 }
 
 .nav-tabs .nav-item .nav-link.active {
   border: 1px solid transparent;
   background: rgba(102, 51, 153, 0.1);
-  border-color: #663399 #663399 #fff;
+  border-color: #efba1e  #efba1e  #fff;
 }
 
 .dropdown-toggle:after {
@@ -33327,8 +33327,16 @@ blockquote {
   color: #c2c6dc;
 }
 
+.f-15{
+  font-size: 15px;
+}
+
 .dark-theme .main-header .notification-dropdown .notification-icon {
   background: #10163a !important;
+}
+
+i.v-icon.notranslate.v-icon--left.mdi.mdi-account-circle-outline.theme--light {
+  font-size: 32px;
 }
 
 .dark-theme .dropdown-item:focus,

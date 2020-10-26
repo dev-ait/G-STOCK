@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app_roles',
+    el: '#app_users',
     vuetify: new Vuetify(),
 
     data() {
@@ -13,12 +13,19 @@ new Vue({
                 rowsPerPage: 5,
 
             },
-            role_a: {
+            select: { 
+                id: '',
+                 name: ''
+                 },
+                 role_items: [
+       
+                  ],
+            user_a: {
                 id: 0,
-                slug: '',
-                name: '',
-                color: '',
-                
+                name : '',
+                email: '',
+                role : '',
+                password:''
             },
             btn_control: false,
             singleSelect: false,
@@ -42,16 +49,13 @@ new Vue({
                     value: 'name'
                 },
                 {
-                    text: 'slug',
-                    value: 'slug'
-                }
-                ,
+                    text: 'Email',
+                    value: 'email'
+                },
                 {
-                    text: "Colour ",
-                    value: "color",
-                    sortable: false,
+                    text: "roles",
+                    value: "roles[0].name",
                 }
-
                 ,
                 {
                     text: "Action",
@@ -61,22 +65,24 @@ new Vue({
 
             ],
 
-            role: [
+            users: [
 
             ],
             editedIndex: -1,
             editedItem: {
                 id: 0,
-                slug: '',
-                name: '',
-                color: '',
+                name : '',
+                email: '',
+                role : '',
+                password:''
 
             },
             defaultItem: {
                 id: 0,
-                slug: '',
-                name: '',
-                color: '',
+                name : '',
+                email: '',
+                role : '',
+                password:''
             },
 
         }
@@ -87,10 +93,21 @@ new Vue({
 
         reset() {
 
-            this.role_a.name = ""
-            this.role_a.slug = ""
+            this.user_a.name = "";
+
+            this.user_a.email = "";
+
+            this.user_a.role = "";
+            this.user_a.password = "";
 
 
+        },
+
+        get_color(name,color) {
+
+            var role_print = '<a style="background-color: '+color+';" class="badge badge-primary  p-2">'+name+'</a>';
+
+           return role_print;
         },
 
         clicked(value) {
@@ -108,7 +125,7 @@ new Vue({
         },
 
         editItem(item) {
-            this.editedIndex = this.role.indexOf(item)
+            this.editedIndex = this.users.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
 
@@ -117,11 +134,11 @@ new Vue({
         save() {
 
             if (this.editedIndex > -1) {
-                Object.assign(this.role[this.editedIndex], this.editedItem)
-                this.update_role(this.editedItem)
+                Object.assign(this.marque[this.editedIndex], this.editedItem)
+                this.update_marque(this.editedItem)
 
             } else {
-                this.role.push(this.editedItem)
+                this.marque.push(this.editedItem)
             }
 
             this.close()
@@ -170,7 +187,7 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deleterole/' + this.selected[i].id)
+                        axios.delete(window.laravel.url + '/deletemarque/' + this.selected[i].id)
                             .then(response => {
 
                             })
@@ -178,10 +195,10 @@ new Vue({
                                 console.log(error);
                             })
 
-                        const index = this.role.indexOf(this.selected[i]);
+                        const index = this.marque.indexOf(this.selected[i]);
 
 
-                        this.role.splice(index, 1);
+                        this.marque.splice(index, 1);
                     }
                     this.selected = [];
 
@@ -225,11 +242,11 @@ new Vue({
 
 
         },
-        update_role: function(item_object) {
+        update_marque: function(item_object) {
 
 
 
-            axios.put(window.laravel.url + '/updaterole', item_object)
+            axios.put(window.laravel.url + '/updatemarque', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -242,14 +259,14 @@ new Vue({
 
         add: function() {
             let jsonData = new FormData()
-            jsonData.append('name', this.role_a.name)
-            jsonData.append('slug', this.role_a.slug)
-            jsonData.append('color', this.role_a.color)
+            jsonData.append('name', this.user_a.name)
+            jsonData.append('email', this.user_a.email)
+            jsonData.append('password', this.user_a.password)
+            jsonData.append('role', this.role)
 
-          
             console.log(jsonData);
 
-            axios.post(window.laravel.url + '/postrole', jsonData)
+            axios.post(window.laravel.url + '/user_post', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -271,14 +288,13 @@ new Vue({
                             icon: 'success',
                             title: 'Ajouté avec succes'
                         })
-                        this.role_a.id = response.data.id_role;
-                        this.role.unshift(this.role_a);
+                        this.marque_a.id = response.data.id_marq;
+                        this.marque.unshift(this.marque_a);
 
-                        this.role_a = {
-                            id: 0,
-                            nom: '',
-                            slug:''
-
+                        this.marque_a = {
+                            id          : 0,
+                            nom         : '',
+                            date_create : '',
 
                         };
                         this.dialog_add =false;
@@ -293,7 +309,7 @@ new Vue({
             if(this.btn_control){
                 this.deleteItem();
             }
-            else{
+            else {
 
                 Swal.fire({
                     icon: 'error',
@@ -304,24 +320,17 @@ new Vue({
             }
 
         },
-        set_slug: function () {
-
-            
-
-           var slug = this.role_a.name.replace(/\s/g, '-') ;
-            slug = slug.toLowerCase();
-           this.role_a.slug = slug;
-          },
 
         get_data: function() {
-
-            
            
-            axios.get(window.laravel.url + '/getroles/')
+            axios.get(window.laravel.url + '/get_users/')
                 .then(response => {
                 
-                    this.role = response.data.roles;
+                    this.users = response.data.users;
 
+                    this.role_items = response.data.roles_all;
+
+            
 
              
 

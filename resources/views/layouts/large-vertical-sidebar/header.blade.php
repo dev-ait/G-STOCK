@@ -156,8 +156,8 @@
         <!-- User avatar dropdown -->
         <div class="dropdown">
             <div class="user col align-self-end">
-                <img src="{{asset('assets/images/faces/1.jpg')}}" id="userDropdown" alt="" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+               
+                <i aria-hidden="true" class="v-icon notranslate v-icon--left mdi mdi-account-circle-outline theme--light" id="userDropdown" alt="" data-toggle="dropdown"></i>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <div class="dropdown-header">

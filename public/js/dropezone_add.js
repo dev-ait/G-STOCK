@@ -54,6 +54,7 @@ dropzone.on("addedfile", function(file) {
     if (this.files.length > 1) {
         this.removeFile(this.files[0]);
       }
+    
 
 
 

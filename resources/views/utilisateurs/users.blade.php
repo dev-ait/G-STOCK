@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('page-css')
-<link rel="stylesheet" href="{{ asset('assets/styles/vendor/datatables.min.css') }}">
+<link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/materialdesignicons.min.css') }}>
+<link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/vuetify.min.css') }}>
+<link rel="stylesheet" type="text/css" href={{ asset('assets/styles/css/custom_vuetify.css') }}>
 @endsection
 @section('main-content')
 <div class="breadcrumb">
@@ -11,128 +13,211 @@
    </ul>
 </div>
 <div class="separator-breadcrumb border-top"></div>
-@include('layouts.common.flash_message_user');
-<section class="contact-list">
-   <div class="row">
-      <div class="col-md-12 mb-4">
-         <div class="card text-left">
-            <div class="card-header text-right bg-transparent">
-               <button type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary btn-md m-1"><i class="i-Add-User text-white mr-2"></i>    Ajouter utilisateur</button>
-            </div>
-            <!-- begin::modal -->
-            <div class="ul-card-list__modal">
-               <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-lg">
-                     <div class="modal-content">
-                        <div class="modal-body">
-                           <form  >
-                              <div id="msg"> </div>
-                              <div class="form-group row">
-                                 <label for="inputName" class="col-sm-2 col-form-label">Nom</label>
-                                 <div class="col-sm-10">
-                                    <input id="nom" type="text" class="form-control"  placeholder="Nom" >
-                                 </div>
+@include('layouts.common.flash_message_user')
+<section  id="app_users" data-app>
+ 
+
+       
+               
+                     <div class="card">
+                        <v-card>
+
+
+                           <template>
+                              <v-row justify="center">
+                                 <v-dialog
+                                    v-model="dialog_add"
+                                    persistent
+                                    max-width="600px"
+                                    >
+                                    <v-card>
+                                       <v-form @submit.prevent="add">
+                                          <v-card-title>
+                                             <span class="headline">Ajouter un utilisateur</span>
+                                          </v-card-title>
+                                          <v-card-text>
+                                             <v-container>
+                                                <v-row>
+                                                   <v-col cols="12" sm="6" md="12"  >
+                                                      <v-text-field
+                                                         label="Nom*"
+                                                         v-model="user_a.name"
+                                                         required
+                                                         ></v-text-field>
+                                                   </v-col>
+                                                   <v-col cols="12" sm="6" md="12" >
+                                                      <v-text-field
+                                                         label="Email*"
+                                                         v-model="user_a.email"
+                                                         required
+                                                         ></v-text-field>
+                                                   </v-col>
+                                                   <v-col cols="12" sm="6" md="12" >
+                                                      <v-text-field
+                                                         label="password*"
+                                                         v-model="user_a.password"
+                                                         :type="show1 ? 'text' : 'password'"
+                                                         required
+                                                         
+                                                         ></v-text-field>
+                                                   </v-col>
+                                                
+                                                <v-col cols="12" sm="6" md="12" >
+
+                                                   <v-select
+                                                   v-model="user_a.role"
+                                                   :hint="`${select.id}, ${select.name}`"
+                                                   :items="role_items"
+                                                   item-text="name" item-value="id"
+                                                   label="Select"
+                                                   persistent-hint
+                                                   return-object
+                                                   single-line
+                                                  ></v-select>
+
+                                                </v-col>
+
+                                                   
+                                                   
+                                                </v-row>
+                                             </v-container>
+                                             <small>* indique le champ obligatoire</small>
+                                          </v-card-text>
+                                          <v-card-actions>
+                                             <v-spacer></v-spacer>
+                                             <v-btn
+                                                color="primary mr-3"
+                                                dark
+                                                @click="dialog_add = false"
+                                                >
+                                                Fermer 
+                                             </v-btn>
+                                             <v-btn color="error" class="mr-4" @click="reset">
+                                                Effacer
+                                             </v-btn>
+                                             <v-btn color="success"   class="mr-4" type="submit">
+                                                Ajouter
+                                             </v-btn>
+                                          </v-card-actions>
+                                       </v-form>
+                                    </v-card>
+                                 </v-dialog>
+                              </v-row>
+                           </template>
+
+
+
+
+                           
+                           <v-card-title>
+                              Utilisateurs
+                           <v-spacer></v-spacer>
+            
+                           <v-text-field
+                           v-model="search"
+                           append-icon="mdi-magnify"
+                           label="Rechercher"
+                           single-line
+                           hide-details ></v-text-field>
+
+                         
+                           
+                           </v-card-title>
+
+                           <v-card-title class="text-right">
+
+                              <v-spacer></v-spacer>
+
+                           
+                           <button  @click="dialog_add = true" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary btn-md m-1 text-white "><i class="i-Add-User text-white mr-2"></i>    Ajouter utilisateur</button>
+                         
+                           <button   @click="remove_item" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary btn-md m-1 text-white"><i class="i-Close mr-2"></i>   Supprimer utilisateur</button>
+                           
+                            </v-card-title>
+
+                           <v-data-table  @input="item($event)" :headers="headers" :items="users" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
+                              :sort-desc.sync="sortDesc" show-select  item-key="id"
+                              :expanded.sync="expanded" @click:row="clicked">
+                              <template v-slot:item.roles[0].name="{ item }">
+                              
+                               
+
+                                     <div v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
+
+                      
+                                  
+                                  
+                                    
+                                    
+                              
+                               
+                                 
+
+                           
+
+                              </template>
+                              <template v-slot:item.action="{ item }">
+                                 <v-btn class="btn-primary"  fab small  @click="editItem(item)">
+                                    <i class="nav-icon f-15 i-Pen-2 font-weight-bold"></i>
+                                 </v-btn>
+                                 <v-btn class="btn-primary" fab small   @click="editItem(item)">
+                                    <i class="nav-icon  i-Close f-15 font-weight-bold"></i>
+                                 </v-btn>
+                                 <v-dialog v-model="dialog" max-width="500px">
+                                    <v-card>
+                                       <v-card-title>
+                                          <span class="headline">Modifier la marque</span>
+                                       </v-card-title>
+                                       <v-container>
+                                          <v-row class="pl-3 pr-3" >
+                                             <v-col cols="12" sm="6" md="12">
+                                                <v-text-field pl="5" v-model="editedItem.nom"  label="Nom"></v-text-field>
+                                             </v-col>
+                                             <v-col cols="12" sm="6" md="12">
+                                                <v-text-field  v-model="editedItem.date_create" label="Date" disabled></v-text-field>
+                                             </v-col>
+                                          </v-row>
+                                       </v-container>
+                                       </v-form>
+                                       </v-card-title>
+                                       <v-card-actions>
+                                          <v-spacer></v-spacer>
+                                          <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
+                                          <v-btn color="blue darken-1" text @click="save">Sauvegarder
+                                          </v-btn>
+                                       </v-card-actions>
+                                    </v-card>
+                                 </v-dialog>
+                              </template>
+                              <div class="pt-2 pb-2 pl-2">
+                                 <v-btn class="ma-2" color="purple" dark @click="editItem(item)">
+                                    <v-icon dark>mdi-wrench</v-icon>
+                                 </v-btn>
                               </div>
-                              <div class="form-group row">
-                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                                 <div class="col-sm-10">
-                                    <input id="email" type="email" class="form-control" id="inputEmail3" placeholder="Email" >
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
-                                 <div class="col-sm-10">
-                                    <input id="password" type="password" class="form-control"  placeholder="" >
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <div class="col-sm-2">Role</div>
-                                 <div class="col-sm-10">
-                                    <select id="role_id" class=" form-control" >
-                                       <option value="" >Selectionner</option>
-                                       @foreach ($roles as $role)
-                                       <option value="{{$role->id}}"  >{{$role->name}}</option>
-                                       @endforeach
-                                    </select>
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <div class="col-sm-10">
-                                    <a id="submit-all"  class="btn btn-success">Créer</a>
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
+                           </v-data-table>
+                        </v-card>
                      </div>
-                  </div>
-               </div>
-            </div>
-            <!-- end::modal -->
-            <div class="card-body">
-               <div class="table-responsive">
-                  <table id="ul-contact-list" class="display table " style="width:100%">
-                     <thead>
-                        <tr>
-                           <th>id</th>
-                           <th>Nom</th>
-                           <th>Email</th>
-                           <th>Role</th>
-                           <th>Date de creation</th>
-                           <th>Action</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                           <td>  {{$user->id}}  </td>
-                           <td>
-                              <a href="">
-                                 <div class="ul-widget-app__profile-pic">
-                                    <img class="profile-picture avatar-sm mb-2 rounded-circle img-fluid" src="{{ asset('assets/images/faces/1.jpg') }}" alt="">
-                                    {{$user->name}}
-                                 </div>
-                              </a>
-                           </td>
-                           <td>  {{$user->email}} </td>
-                           <td>
-                              <?php foreach($user->roles as $role){  ?>
-                              <a href="#" class="badge badge-primary  m-2 p-2"  style="background-color: {{ $role->color }};"> 
-                              <?php  echo $role->name ;  ?>        
-                              </a> 
-                              <?php break; } ?>
-                           </td>
-                           <td>April 25, 2019</td>
-                           <td>
-                              <a href="/user/{{$user->id}}/edit" class="ul-link-action text-success"  data-toggle="tooltip" data-placement="top" title="Edit">
-                              <i class="i-Edit"></i>
-                              </a>
-                              <input id="id_user" type="hidden" value="{{$user->id}}">
-                              <a href="javascript:;"  class="delete ul-link-action text-danger mr-1"  data-toggle="tooltip" data-placement="top" title="Want To Delete !!!">
-                              <i class="i-Eraser-2"></i>
-                              </a>  
-                              <input id="id_user" type="hidden" value="{{$user->id}}">
-                           </td>
-                        </tr>
-                        @endforeach                            
-                     </tbody>
-                  </table>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+             
+           
+        
+     
 </section>
+
 @endsection
 @section('page-js')
-<script src="{{ asset('js/plugins/jquery-3.5.1.min.js') }}"></script> 
-<script src="{{ asset('assets/js/vendor/datatables.min.js') }}"></script>
-<!-- page script -->
-<script src="{{ asset('assets/js/tooltip.script.js') }}"></script>
-<script src="{{ asset('js/user_add.js') }}"></script>
+<script src="{{ asset('js/plugins/vue.js') }}"></script>
+<script src="{{ asset('js/plugins/vee-validate.js') }}"></script>
+<script src="{{ asset('js/plugins/axios.min.js') }}"></script>
+<script src="{{ asset('js/plugins/sweetalert2@9.js') }}"></script>
+<script src="{{ asset('js/plugins/vuetify.js') }}"></script>
 <script>
-   $('#ul-contact-list').DataTable( {
-           "order": [[ 0, "desc" ]]
-       } );
+   window.laravel ={!! json_encode([
+     'token' => csrf_token(),
+     'url'   => url('/'),
+     'date'   => date('Y-m-d'),
    
+   
+   ]) !!}
 </script>
+<script src="{{ asset('js/users_vue.js') }}"></script>
 @endsection

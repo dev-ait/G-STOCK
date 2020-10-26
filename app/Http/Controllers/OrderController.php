@@ -108,6 +108,7 @@ class OrderController extends Controller
             $add_order->client_id= $request->input('idclient');
             $add_order->subtotal= $request->input('subTotalvalue');
             $add_order->tva= $request->input('tvavalue');
+            $add_order->date_create= $request->input('date_commande');
             $add_order->total= $request->input('total');    
             $add_order->typepaiement= $request->input('typepaiement');
             $add_order->statutpaiement= $request->input('statutpaiement');  
@@ -156,7 +157,28 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $order= Order::find($id);
+        $client= Client::find($order->client_id);
+        
+        $att[] =  [ 'id'=>  $order->id , 'nom_client'=> $client->nom , 
+        'client_telephone'=> $client->telephone
+         ,'product_order'=> $order->orderproduct()->get()  ,
+         'subtotal'=>  $order->subtotal,
+         'tva'=>  $order->tva,
+         'date_create'=>  $order->date_create,
+         'total'=> $order->total,
+         'typepaiement'=> $order->typepaiement,
+         'statutpaiement'=> $order->statutpaiement,
+
+        ];
+
+        $data = array( 'orders'=> $att);
+  
+
+
+
+        return view('order.invoice',$data);
     }
 
     /**

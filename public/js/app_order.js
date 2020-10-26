@@ -80,7 +80,14 @@ new Vue({
                 ,
                 {
                     text: 'Les produits commandes',
+                    align: "center",
                     value: 'action'
+                }
+
+                ,
+                {
+                    text: 'Imprimer',
+                    value: 'print'
                 }
 
 
@@ -117,11 +124,16 @@ new Vue({
 
     methods: {
 
-        editItem(item) {
+        show_order_product(item) {
            
              this.product_order =  item.product_order
             
             this.dialog = true
+        },
+
+        print(item) {
+            
+            window.location.href = "order/" + item.id + "/edit"
         },
 
         clicked(value) {

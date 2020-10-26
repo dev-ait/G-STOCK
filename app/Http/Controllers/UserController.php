@@ -25,16 +25,22 @@ class UserController extends Controller
         $this->middleware('auth');
         
     }
-    public function form(){
 
+
+    public function get_users()
+    {
+
+        $users = Sentinel::getUserRepository()->with("roles")->get();
+
+        $role = Role::all();
+
+ 
+        $data = array( 'users'=> $users , 'roles_all' => $role );
         
-        $user = Sentinel::findById(1);
+   
 
-
-        $data = array( 'user'=> $user);
-        return view('form', $data );
-
-
+       echo json_encode($data);
+       exit;
     }
 
     public function permissions(){
@@ -56,6 +62,7 @@ class UserController extends Controller
         return view('utilisateurs.menu_pages', $data);
       
     }
+    
 
     public function create_name_page(Request $request){
         $new_page = new Menu();
@@ -179,33 +186,12 @@ class UserController extends Controller
 
     public function create_user(Request $request){
 
-        if (User::where('email', '=', $request->input('email'))->count() > 0) {
-            return Response()->json([ 'email' => true  ]);
-         }
-
-        if( $request->input('nom') == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Nom' ]);
-            exit;
-        }
-        if( $request->input('email') == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Email' ]);
-            exit;
-        }
-
-        if( $request->input('password') == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Password' ]);
-            exit;
-        }
-
-        if( $request->input('role_id') == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'Role' ]);
-            exit;
-        }
+       
 
 
         $new_user = new User();
 
-        $new_user->name = $request->input('nom');
+        $new_user->name = $request->input('name');
         $new_user->email = $request->input('email');
         $new_user->password = Hash::make($request->input('password'));
 
