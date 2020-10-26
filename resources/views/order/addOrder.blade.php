@@ -28,6 +28,10 @@
     <h1>Nouvelle Commandes</h1>
   
 </div>
+
+
+
+
 <div class="separator-breadcrumb border-top"></div>
 
 <form action="{{ url('order')}}" method="POST" id="FormOrder" onsubmit="return validateForm();">
