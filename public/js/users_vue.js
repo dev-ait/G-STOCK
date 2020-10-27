@@ -200,6 +200,77 @@ new Vue({
 
 
         },
+        delete_single_Item(item) {
+
+            Swal.fire({
+                title: 'Êtes-vous sûr?',
+                text: "voulez vous vraiment  supprimé",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Retour',
+                confirmButtonText: 'Oui, Supprimé !'
+            }).then((result) => {
+                if (result.value) {
+
+                  
+
+                        axios.delete(window.laravel.url + '/delete_user/' + item.id)
+                            .then(response => {
+
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            })
+
+                        const index = this.users.indexOf(item.id);
+
+
+                        this.users.splice(index, 1);
+                    
+                 
+
+
+
+
+                    this.btn_control = false;
+
+                    Swal.fire({
+
+                            title: 'Supprimer!',
+                            html: 'Votre experience été supprimer aver succes.',
+                            icon: 'success',
+                            timer: 1000,
+                            showConfirmButton: false,
+
+
+                            onBeforeOpen: () => {
+
+                                timerInterval = setInterval(() => {
+                                    const content = Swal.getContent()
+                                    if (content) {
+                                        const b = content.querySelector('b')
+                                        if (b) {
+                                            b.textContent = Swal.getTimerLeft()
+                                        }
+                                    }
+                                }, 100)
+                            },
+                            onClose: () => {
+                                clearInterval(timerInterval)
+                            }
+
+
+                        }
+
+                    )
+                }
+            })
+
+
+
+        },
 
         deleteItem() {
 
@@ -225,10 +296,10 @@ new Vue({
                                 console.log(error);
                             })
 
-                        const index = this.marque.indexOf(this.selected[i]);
+                        const index = this.users.indexOf(this.selected[i]);
 
 
-                        this.marque.splice(index, 1);
+                        this.users.splice(index, 1);
                     }
                     this.selected = [];
 

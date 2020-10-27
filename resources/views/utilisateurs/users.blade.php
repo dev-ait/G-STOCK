@@ -170,11 +170,11 @@
                            <v-data-table  @input="item($event)" :headers="headers" :items="users" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
                               :sort-desc.sync="sortDesc" show-select  item-key="id"
                               :expanded.sync="expanded" @click:row="clicked">
-                              <template v-slot:item.roles="{ item }" v-if="check_role(item.roles)">
+                              <template v-slot:item.roles="{ item }">
                               
                                
 
-                                     <div v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
+                                     <div  v-if="check_role(item.roles[0])" v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
 
                       
                                   
@@ -192,7 +192,7 @@
                                  <v-btn class="btn-primary"  fab small  @click="editItem(item)">
                                     <i class="nav-icon f-15 i-Pen-2 font-weight-bold"></i>
                                  </v-btn>
-                                 <v-btn class="btn-primary" fab small   @click="editItem(item)">
+                                 <v-btn class="btn-primary" fab small   @click="delete_single_Item(item)">
                                     <i class="nav-icon  i-Close f-15 font-weight-bold"></i>
                                  </v-btn>
                                  <v-dialog v-model="dialog" max-width="500px">
