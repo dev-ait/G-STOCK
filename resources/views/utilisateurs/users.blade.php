@@ -174,7 +174,7 @@
                               
                                
 
-                                     <div v-html="get_color(item.roles.name,item.roles.color)"> </div>
+                                     <div v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
 
                       
                                   

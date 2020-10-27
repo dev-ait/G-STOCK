@@ -131,7 +131,9 @@ new Vue({
         get_color(name , color ) {
 
 
-           return 'ok';
+            var role_print = '<a style="background-color: ' + color + ';" class="badge badge-primary  p-2">' + name + '</a>';
+
+            return role_print;
         },
 
         clicked(value) {
