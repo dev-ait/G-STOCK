@@ -25,7 +25,7 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control "  >
+                     <input id="titre" type="text"  name="titre" class="form-control  "  >
                      <div class="invalid-feedback"> Veuillez choisir le Titre de produit.</div>
                      
 

@@ -107,7 +107,7 @@ Route::get('get_users', [App\Http\Controllers\UserController::class, 'get_users'
 
 Route::post('user_post', [App\Http\Controllers\UserController::class, 'create_user']);
 
-Route::post('/delete_user/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
+Route::delete('/delete_user/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
 
 Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
 

@@ -63,9 +63,6 @@ $(document).ready(function() {
 
 });
 
-
-
-
   $("#type_modele").change(function() {
       var value_modele = $(this).val();
       if (value_modele == 1) {
@@ -138,23 +135,15 @@ $(document).ready(function() {
           $("#marque").addClass("invalid");
 
       }
-
       if (dropzone1 > 0) {
           var photo_ = dropzone.files[0].previewElement.id;
           var photo = photo_;
-
-
-
-
           var ajaxurl = '/product/store';
-
           $.ajaxSetup({
               headers: {
                   'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
               }
           });
-
-
           $.ajax({
               url: ajaxurl,
               data: {
@@ -172,34 +161,18 @@ $(document).ready(function() {
               dataType: 'json',
               success: function(data) {
 
-
-
-
                   if (data.etat == false) {
                       $("html, body").animate({
                           scrollTop: 0
                       }, "slow");
-
-                  
                   }
                   if (data.etat == true) {
                       window.location.href = '/product';
                   }
-
-
               },
               error: function(data) {
-
-
               }
           });
       }
-
-
-
   });
-
-
-
-
 });

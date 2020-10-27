@@ -65,7 +65,7 @@
                                                 <v-col cols="12" sm="6" md="12" >
 
                                                    <v-select
-                                                   v-model="select"
+                                                   v-model="user_a.select"
                                                   
                                                    :items="role_items"
                                                    item-text="name" item-value="id"
@@ -170,11 +170,11 @@
                            <v-data-table  @input="item($event)" :headers="headers" :items="users" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
                               :sort-desc.sync="sortDesc" show-select  item-key="id"
                               :expanded.sync="expanded" @click:row="clicked">
-                              <template v-slot:item.roles[0].name="{ item }">
+                              <template v-slot:item.roles="{ item }" v-if="check_role(item.roles)">
                               
                                
 
-                                     <div v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
+                                     <div v-html="get_color(item.roles.name,item.roles.color)"> </div>
 
                       
                                   
@@ -198,15 +198,79 @@
                                  <v-dialog v-model="dialog" max-width="500px">
                                     <v-card>
                                        <v-card-title>
-                                          <span class="headline">Modifier la marque</span>
+                                          <span class="headline">Modifier l 'utilisateur</span>
                                        </v-card-title>
                                        <v-container>
                                           <v-row class="pl-3 pr-3" >
                                              <v-col cols="12" sm="6" md="12">
-                                                <v-text-field pl="5" v-model="editedItem.nom"  label="Nom"></v-text-field>
+                                                <v-text-field
+                                                label="Nom*"
+                                                v-model="editedItem.name"
+                                                required
+                                                ></v-text-field>
                                              </v-col>
                                              <v-col cols="12" sm="6" md="12">
-                                                <v-text-field  v-model="editedItem.date_create" label="Date" disabled></v-text-field>
+                                                <v-text-field
+                                                label="Email*"
+                                                v-model="editedItem.email"
+                                                required
+                                                ></v-text-field>
+                                             </v-col>
+                                             <v-col cols="12" sm="6" md="12">
+                                                <v-text-field
+                                                label="password*"
+                                                v-model="editedItem.password"
+                                                :type="show1 ? 'text' : 'password'"
+                                                required
+                                                
+                                                ></v-text-field>
+                                     
+                                             </v-col>
+                                             <v-col cols="12" sm="6" md="12">
+
+                                                
+
+                                                <v-select
+                                                v-model="editedItem.select"
+                                               
+                                                :items="role_items"
+                                                item-text="name" item-value="id"
+                                                label="Selectionner"
+                                                persistent-hint
+                                                return-object
+                                                single-line
+                                               ></v-select>
+                                 
+                                             </v-col>
+                                             <v-col cols="12" sm="6" md="12">
+
+                                                <template>
+                                                     
+                                                   <v-combobox
+                                                     v-model="model_project"
+                                                     :items="items_project"
+                                                     :search-input.sync="search_project"
+                                                     hide-selected
+                                                     item-text="nom" item-value="id"
+                                                     hint="Maximum of 5 tags"
+                                                     label="Ajouter des projets"
+                                                     multiple
+                                                     persistent-hint
+                                                     small-chips
+                                                   >
+                                                     <template v-slot:no-data>
+                                                       <v-list-item>
+                                                         <v-list-item-content>
+                                                           <v-list-item-title>
+                                                             Aucun résultat correspondant
+                                                           </v-list-item-title>
+                                                         </v-list-item-content>
+                                                       </v-list-item>
+                                                     </template>
+                                                   </v-combobox>
+                                                
+                                               </template>
+                                      
                                              </v-col>
                                           </v-row>
                                        </v-container>

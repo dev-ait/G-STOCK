@@ -2,9 +2,6 @@ var dropzone = new Dropzone ("#mydropzone", {
  
     
   });
-
-
-
   dropzone.on("addedfile", function(file) {
 
     if (this.files.length > 1) {

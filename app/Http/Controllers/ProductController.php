@@ -124,10 +124,6 @@ class ProductController extends Controller
     {
         $photo = Image::find($id);
         $destinationPath = public_path(). "\images" .$photo->nom;
-   
-
-        
-            
 
             if(file_exists($destinationPath)) {
                 File::delete($destinationPath);
@@ -135,9 +131,7 @@ class ProductController extends Controller
 
                  return response('Photo deleted', 200); //return success
             }
-           
 
-        
       
      }
 

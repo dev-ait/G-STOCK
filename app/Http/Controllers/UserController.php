@@ -56,6 +56,38 @@ class UserController extends Controller
     }
 
 
+    public function  edit($id)
+    {
+
+      
+
+        $user = Sentinel::findById($id);
+        $role = Role::all();
+
+        $role_user= '';
+
+        if(!empty($user->roles[0])){
+            $role_user = $user->roles[0]->name ;
+        }
+
+        $att =  array( 
+            'id'=> $user->id ,
+            'nom'=>  $user->name , 
+            'email'=>  $user->email , 
+            'role'=> $role_user ,
+                  ) 
+            ; 
+
+            $data = array( "user" => $att , 'roles' =>  $role );
+
+     
+        return view('utilisateurs.users_details',$data );
+
+
+
+    }
+
+
     public function menu_pages(){
         $menu_page = Menu::all();
         $data = array('menu_pages'=>$menu_page );
@@ -143,36 +175,7 @@ class UserController extends Controller
 
     }
 
-    public function  edit($id)
-    {
-
-      
-
-        $user = Sentinel::findById($id);
-        $role = Role::all();
-
-        $role_user= '';
-
-        if(!empty($user->roles[0])){
-            $role_user = $user->roles[0]->name ;
-        }
-
-        $att =  array( 
-            'id'=> $user->id ,
-            'nom'=>  $user->name , 
-            'email'=>  $user->email , 
-            'role'=> $role_user ,
-                  ) 
-            ; 
-
-            $data = array( "user" => $att , 'roles' =>  $role );
-
-     
-        return view('utilisateurs.users_details',$data );
-
-
-
-    }
+ 
  
     public function delete_user($id){
         
@@ -202,12 +205,14 @@ class UserController extends Controller
         $role_user->role_id = $request->input('role_id');
         $role_user->save(); 
 
-        
 
-        return Response()->json(['etat' => true ]);
+        $role = Role::find($request->input('role_id')); 
 
 
-        return Response()->json(['etat' => true  , 'id_user' =>  $new_user->id ]);
+
+
+
+        return Response()->json(['etat' => true  , 'id_user' =>  $new_user->id , 'color'  =>  $role->color , 'name'  =>  $role->name ]);
 
 
 
