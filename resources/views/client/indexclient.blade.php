@@ -54,7 +54,9 @@
                                                            >
                                                             
                                                              <v-card>
-                                                               <v-form @submit.prevent="add">
+                                                               <v-form @submit.prevent="validate"   ref="form"
+                                                               v-model="valid"
+                                                               lazy-validation>
                                                                <v-card-title>
                                                                  <span class="headline">Ajouter un client</span>
                                                                </v-card-title>
@@ -67,6 +69,7 @@
                                                                         <v-text-field
                                                                          label="Nom*"
                                                                          v-model="client_a.nom"
+                                                                         :rules="nameRules"
                                                                          required
                                                                        ></v-text-field>
 
@@ -80,6 +83,7 @@
                                                                         <v-text-field
                                                                         label="Telephone*"
                                                                         v-model="client_a.telephone"
+                                                                        :rules="phoneRules"
                                                                         required
                                                                       ></v-text-field>
                                                                       
@@ -91,6 +95,7 @@
                                                                        <v-text-field
                                                                          label="Adresse*"
                                                                          v-model="client_a.adresse"
+                                                                         :rules="adresseRules"
                                                                          persistent-hint
                                                                          required >
                                                                        </v-text-field>
@@ -114,10 +119,12 @@
                                                                  >
                                                                    Fermer 
                                                                  </v-btn>
-                                                                 <v-btn color="error" class="mr-4" @click="reset">
+                                                                 <v-btn color="error" class="mr-4" @click="resetValidation">
                                                                   Effacer
                                                                   </v-btn>
-                                                                 <v-btn color="success"   class="mr-4" type="submit">
+                                                                 <v-btn color="success"   class="mr-4" type="submit"  :disabled="!valid"
+                                                                 color="success"
+                                                                 class="mr-4">
                                                                   Ajouter
                                                                  </v-btn>
                                                                </v-card-actions>
@@ -182,7 +189,7 @@
                                                       <v-container>
                                                          <v-row class="pl-3 pr-3" >
                                                             <v-col cols="12" sm="6" md="12">
-                                                               <v-text-field pl="5" v-model="editedItem.nom"  label="Nom"></v-text-field>
+                                                               <v-text-field pl="5" v-model="editedItem.nom"   label="Nom"></v-text-field>
                                                             </v-col>
                                                             <v-col cols="12" sm="6" md="12">
                                                                <v-text-field  v-model="editedItem.telephone" label="tTelephone" ></v-text-field>

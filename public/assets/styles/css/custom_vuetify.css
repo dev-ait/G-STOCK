@@ -38,6 +38,14 @@
 .v-color-picker__dot {
     margin-right: 15px;
 }
+.v-messages__message {
+    color: #ff5252 !important;
+    caret-color: #ff5252 !important;
+}
+label.v-label.theme--light.error--text {
+    color: #ff5252 !important;
+    caret-color: #ff5252 !important;
+}
 .color-icon-remove {
     color: rgb(255 255 255)!important;
 }
