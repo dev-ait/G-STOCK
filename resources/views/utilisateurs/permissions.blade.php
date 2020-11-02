@@ -1,14 +1,4 @@
-<?php 
-   foreach ($roles as $role){
-   
-   $json_permissions = json_encode($role->permissions, true);
-   
-   $permissions[]  = array('role_slug' => $role->slug , $role->slug => json_decode( $json_permissions,true) , 'role_nom' => $role->name );   ;
-   
-   }
-   
-   
-   ?>
+
 @section('page-css')
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
 <link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/materialdesignicons.min.css') }}>

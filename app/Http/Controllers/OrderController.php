@@ -158,6 +158,8 @@ class OrderController extends Controller
     public function edit($id)
     {
 
+        $clients = Client::all();
+
         $order= Order::find($id);
         $client= Client::find($order->client_id);
         
@@ -173,7 +175,7 @@ class OrderController extends Controller
 
         ];
 
-        $data = array( 'orders'=> $att);
+        $data = array( 'orders'=> $att , 'clients' =>  $clients );
   
 
 

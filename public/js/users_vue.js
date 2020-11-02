@@ -13,8 +13,7 @@ new Vue({
                 rowsPerPage: 5,
 
             },
-            items_project: [],
-            model_project: [],
+           
             search_project: null,
 
             role_items: [
@@ -32,7 +31,8 @@ new Vue({
                     id: '',
                     name: ''
                 },
-                password: ''
+                password: '',
+                project_id : []
             },
             btn_control: false,
             singleSelect: false,
@@ -88,7 +88,8 @@ new Vue({
                     id: '',
                     name: ''
                 },
-                password: ''
+                password: '',
+                project_id : []
 
             },
             defaultItem: {
@@ -345,12 +346,22 @@ new Vue({
         },
      
         add: function() {
+
+            var value_projet_id = [];
             let jsonData = new FormData()
             jsonData.append('name', this.user_a.name)
             jsonData.append('email', this.user_a.email)
             jsonData.append('password', this.user_a.password)
             jsonData.append('role_id', this.user_a.select.id)
 
+
+            for ( var i = 0; i < this.user_a.project_id.length; i++) {
+                value_projet_id[i] = this.user_a.project_id[i].id;
+              }
+              
+
+             jsonData.append('projet_id', value_projet_id); 
+             
 
 
             axios.post(window.laravel.url + '/user_post', jsonData)

@@ -59,7 +59,7 @@
                                             <p>{{$orders[0]['client_telephone']}}</p>
                                             <span style="white-space: pre-line">
                                                 <h5 class="font-weight-bold">Type de paiement </h5>
-                                                <p>{{$orders[0]['client_telephone']}}</p>
+                                                <p>{{$orders[0]['typepaiement']}}</p>
                                          
                                             </span>
                                         </div>
@@ -117,37 +117,29 @@
                                 <form >
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h4 class="font-weight-bold">Order Info</h4>
+                                            <h4 class="font-weight-bold">Informations de commande</h4>
                                             <div class="col-sm-4 form-group mb-3 pl-0">
-                                                <label for="orderNo">Order Number</label>
+                                                <label for="orderNo">Numero de commande</label>
                                                 <input type="text" class="form-control"
-                                                    id="orderNo" placeholder="Enter order number">
+                                                    id="orderNo" placeholder="Enter order number" value=" {{$orders[0]['id']}}" disabled>
                                             </div>
                                         </div>
+                                        
+                                            
+                                       
                                         <div class="col-md-3 offset-md-3 text-right">
                                             <label class="d-block text-12 text-muted">Order Status</label>
-                                            <div class="col-md-6 offset-md-6 pr-0 mb-4">
-                                                <label class="radio radio-reverse radio-danger">
-                                                    <input type="radio" name="orderStatus" value="Pending">
-                                                    <span>Pending</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                                <label class="radio radio-reverse radio-warning">
-                                                    <input type="radio" name="orderStatus" value="Processing">
-                                                    <span>Processing</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                                <label class="radio radio-reverse radio-success">
-                                                    <input type="radio" name="orderStatus" value="Delivered">
-                                                    <span>Delivered</span>
-                                                    <span class="checkmark"></span>
-                                                </label>
-
-                                            </div>
+                                            <select class="form-control input-product" style="width: 100%" name="typepaiement" required="">
+                                                <option value=""  >Selectionner </option>
+                                                <option value="Règlement de la totalité" @if ($orders[0]['statutpaiement'] =='Règlement de la totalité') selected  @endif>Règlement de la totalité</option>
+                                                <option value="paiement anticipét" @if ($orders[0]['statutpaiement'] =='paiement anticipét') selected  @endif>paiement anticipét</option>
+                                                <option value="aucun paiement" @if ($orders[0]['statutpaiement'] =='aucun paiement') selected  @endif>aucun paiement</option>
+                                               
+                                             </select>
                                             <div class="form-group mb-3">
-                                                <label for="order-datepicker">Order Date</label>
+                                                <label for="order-datepicker">Date de commande</label>
                                                     <input id="order-datepicker" class="form-control text-right"
-                                                        placeholder="yyyy-mm-dd" name="dp">
+                                                        placeholder="yyyy-mm-dd" name="dp" value="{{$orders[0]['date_create']}}">
 
 
                                             </div>
@@ -157,27 +149,28 @@
                                     <div class="mt-3 mb-4 border-top"></div>
                                     <div class="row mb-5">
                                         <div class="col-md-6" >
-                                            <h5 class="font-weight-bold">Bill From</h5>
+                                            <h5 class="font-weight-bold">Nom client</h5>
                                             <div class="col-md-10 form-group mb-3 pl-0">
-                                                <input type="text" class="form-control" id="billFrom"
-                                                    placeholder="Bill From">
+                                              
+                                                <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
+                                                    <option class="select2-results__group"  value="">Selectionner le Client</option>
+                                                    @foreach ($clients as $client)
+                                                    <option  value="{{$client->id}}">{{$client->nom}}</option>
+                                                    @endforeach
+                                                 </select>
                                             </div>
-                                            <div class="col-md-10 form-group mb-3 pl-0">
-                                                <textarea class="form-control"
-                                                    placeholder="Bill From Address"></textarea>
-                                            </div>
+                                        
                                         </div>
 
                                         <div class="col-md-6 text-right" >
-                                            <h5 class="font-weight-bold">Bill To</h5>
+                                            <h5 class="font-weight-bold">Numero Telephone de client :</h5>
                                             <div class="col-md-10 offset-md-2 form-group mb-3 pr-0">
-                                                <input type="text" class="form-control text-right"
-                                                    id="billFrom2" placeholder="Bill From">
+                                             
+                                                
+                                                    <input type="text" id="phone_client"  class="form-control" disabled required>
+                                                  
                                             </div>
-                                            <div class="col-md-10 offset-md-2 form-group mb-3 pr-0">
-                                                <textarea class="form-control text-right"
-                                                    placeholder="Bill From Address"></textarea>
-                                            </div>
+                                         
                                         </div>
                                     </div>
                                     <div class="row">
@@ -186,71 +179,50 @@
                                                 <thead class="bg-gray-300">
                                                     <tr>
                                                         <th scope="col">#</th>
-                                                        <th scope="col">Item Name</th>
-                                                        <th scope="col">Unit Price</th>
-                                                        <th scope="col">Unit</th>
-                                                        <th scope="col">Cost</th>
+                                                        <th scope="col">Nom produit</th>
+                                                        <th scope="col">Prix</th>
+                                                        <th scope="col">Quantite</th>
+                                                        <th scope="col">Total</th>
                                                         <th scope="col"></th>
                                                     </tr>
+                                                  
                                                 </thead>
-                                                <tbody>
+
+                                                <?php $count_edit =1 ;?>
+                                             
+                                                    @foreach ($orders[0]['product_order'] as $product_order)
+
                                                     <tr>
-                                                        <th scope="row">1</th>
+                                                    <th scope="row">{{$count_edit}}</th>
+                                                        <td>{{$product_order['nom_produit']}}</td>
+                                                        <td>{{$product_order['prix']}} DH</td>
+                                                        <td>{{$product_order['quantite']}}</td>
+                                                        <td>{{$product_order['total']}} DH</td>
                                                         <td>
-                                                            <input value="Product 1" type="text" class="form-control"
-                                                                placeholder="Item Name">
-                                                        </td>
-                                                        <td>
-                                                            <input value="300" type="number" class="form-control"
-                                                                placeholder="Unit Price">
-                                                        </td>
-                                                        <td>
-                                                            <input value="2" type="number" class="form-control"
-                                                                placeholder="Unit">
-                                                        </td>
-                                                        <td>600</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-secondary float-right">Delete</button>
+                                                            <button class="btn btn-outline-secondary float-right">Supprimer</button>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>
-                                                            <input value="Product 1" type="text" class="form-control"
-                                                                placeholder="Item Name">
-                                                        </td>
-                                                        <td>
-                                                            <input value="300" type="number" class="form-control"
-                                                                placeholder="Unit Price">
-                                                        </td>
-                                                        <td>
-                                                            <input value="2" type="number" class="form-control"
-                                                                placeholder="Unit">
-                                                        </td>
-                                                        <td>600</td>
-                                                        <td>
-                                                            <button class="btn btn-outline-secondary float-right">Delete</button>
-                                                        </td>
-                                                    </tr>
+
+                                                    <?php $count_edit   ++ ;?>
+                                                        
+                                                    @endforeach
+                                                  
+                                                  
                                                 </tbody>
                                             </table>
-                                            <button class="btn btn-primary float-right mb-4">Add Item</button>
+                                            <button class="btn btn-primary float-right mb-4">Ajouter un produit</button>
                                         </div>
 
                                         <div class="col-md-12">
 
                                             <div class="invoice-summary invoice-summary-input">
-                                                <p>Sub total: <span>$1200</span></p>
-                                                <p class="d-flex align-items-center">Vat(%):<span>
-                                                        <input type="text" class="form-control small-input" value="10">$120</span>
-                                                </p>
-                                                <h5 class="font-weight-bold d-flex align-items-center">Grand Total:
-                                                    <span>
-                                                        <input type="text" class="form-control small-input" value="$">
-                                                        $1320
-                                                    </span>
-                                                </h5>
+                                                <p>Sous total: <span>{{$orders[0]['subtotal']}} DH</span></p>
+                                                <p>Tva: <span>{{$orders[0]['tva']}} DH</span></p>
+                                                <h5 class="font-weight-bold"> Total: <span>{{$orders[0]['total']}} DH</span></h5>
                                             </div>
+
+
+
                                         </div>
 
                                     </div>

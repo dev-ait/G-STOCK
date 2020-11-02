@@ -83,7 +83,7 @@
                                                    <template>
                                                      
                                                         <v-combobox
-                                                          v-model="model_project"
+                                                          v-model="user_a.project_id"
                                                           :items="items_project"
                                                           :search-input.sync="search_project"
                                                           hide-selected
