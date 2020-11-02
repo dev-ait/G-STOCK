@@ -8,11 +8,24 @@ new Vue({
             dialog: false,
             dialog_add: false,
             expanded: [],
+            valid: true,
             singleExpand: true,
             pagination: {
                 rowsPerPage: 5,
 
             },
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              phoneRules: [
+                v => !!v || 'Le Champs Telephone est obligatoire',
+            
+              ],
+              adresseRules: [
+                v => !!v || 'Le Champs Adresse est obligatoire',
+            
+              ],
             client_a: {
                 id: 0,
                 nom: '',
@@ -81,13 +94,22 @@ new Vue({
 
     methods: {
 
-        reset() {
-
+        resetValidation () {
+            this.$refs.form.resetValidation()
             this.client_a.nom = "";
             this.client_a.telephone = "";
             this.client_a.adresse = "";
+          },
+        validate () {
+            
+            
+            if(this.$refs.form.validate()==true){
+                this.add()
 
-        },
+            }
+            
+          },
+
 
         clicked(value) {
             const index = this.expanded.indexOf(value)
@@ -256,6 +278,8 @@ new Vue({
         },
 
         add: function() {
+
+    
             let jsonData = new FormData()
             jsonData.append('nom', this.client_a.nom)
             jsonData.append('telephone', this.client_a.telephone)

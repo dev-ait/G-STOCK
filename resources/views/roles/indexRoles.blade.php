@@ -42,43 +42,47 @@
                                           max-width="600px"
                                           >
                                           <v-card>
-                                             <v-form @submit.prevent="add">
+                                             <v-form @submit.prevent="add"
+                                             ref="form"
+                                             v-model="valid"
+                                             lazy-validation
+                                             >
                                                 <v-card-title>
                                                    <span class="headline">Ajouter un Roles</span>
                                                 </v-card-title>
                                                 <v-card-text>
                                                    <v-container>
                                                       <v-row>
-                                                         <v-col cols="12" sm="6" md="12"  >
-                                                            <v-text-field
-                                                               label="Nom*"
-                                                               v-model="role_a.name"
-                                                               required
-                                                               v-on:keyup="set_slug"
-                                                               ></v-text-field>
-                                                         </v-col>
-                                                         <v-col cols="12" sm="6" md="" >
-                                                            <v-text-field
-                                                               label="Slug*"
-                                                               v-model="role_a.slug"
-                                                               required
-                                                               disabled
-                                                            
-                                                               ></v-text-field>
-                                                         </v-col>
-                                                         <v-col cols="12" sm="6"  >
-                                                            <v-label>
-                                                               choisir couleur de role
-                                                                 </v-label>
-                                                         <v-color-picker
-                                                          v-model="role_a.color"
-                                                            dot-size="20"
-                                                            swatches-max-height="150"
-                                                          ></v-color-picker>
-
-                                                         </v-col>
-
-
+                                                  
+                                                            <v-col cols="12" sm="6" md="12"  >
+                                                               <v-text-field
+                                                                  label="Nom*"
+                                                                  v-model="role_a.name"
+                                                         
+                                                                  required
+                                                                  :rules="nameRules"
+                                                                  v-on:keyup="set_slug"
+                                                                  ></v-text-field>
+                                                            </v-col>
+                                                            <v-col cols="12" sm="6" md="" >
+                                                               <v-text-field
+                                                                  label="Slug*"
+                                                                  v-model="role_a.slug"
+                                                                  required
+                                                                  disabled
+                                                                  ></v-text-field>
+                                                            </v-col>
+                                                            <v-col cols="12" sm="6"  >
+                                                               <v-label>
+                                                                  choisir couleur de role
+                                                               </v-label>
+                                                               <v-color-picker
+                                                                  v-model="role_a.color"
+                                                                  dot-size="20"
+                                                                  swatches-max-height="150"
+                                                                  ></v-color-picker>
+                                                            </v-col>
+                                                     
                                                       </v-row>
                                                    </v-container>
                                                    <small>* indique le champ obligatoire</small>
@@ -92,10 +96,13 @@
                                                       >
                                                       Fermer 
                                                    </v-btn>
-                                                   <v-btn color="error" class="mr-4" @click="reset">
+                                                   <v-btn color="error" class="mr-4"  @click="resetValidation">
                                                       Effacer
                                                    </v-btn>
-                                                   <v-btn color="success"   class="mr-4" type="submit">
+                                                   <v-btn color="success"   class="mr-4" type="submit"
+                                                   :disabled="!valid"
+      color="success"
+      class="mr-4">
                                                       Ajouter
                                                    </v-btn>
                                                 </v-card-actions>
@@ -131,23 +138,20 @@
                         <div class="card">
                            <v-card>
                               <v-card-title>
-                                 la liste des Roles                                 <v-spacer></v-spacer>
+                                 la liste des Roles                                 
+                                 <v-spacer></v-spacer>
                               </v-card-title>
                               <v-data-table  @input="item($event)" :headers="headers" :items="role" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
                                  :sort-desc.sync="sortDesc" show-select  item-key="id"
                                  :expanded.sync="expanded" @click:row="clicked">
                                  <template v-slot:item.color="{ item }">
                                     <div v-bind:style="{ 'background-color' : item.color  }" style="width: 30px;height: 30px;"></div>
-                                   
                                  </template>
-                                 
                                  <template v-slot:item.action="{ item }">
-                                 
                                     <v-btn color="purple" fab small dark  @click="editItem(item)">
                                        <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                                     </v-btn>
-                                 
-                                    <v-dialog v-model="dialog" max-width="500px">
+                                    <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
                                        <v-card>
                                           <v-card-title>
                                              <span class="headline">Modifier la Roles</span>
@@ -163,15 +167,13 @@
                                                 <v-col cols="12" sm="6"  >
                                                    <v-label>
                                                       choisir couleur de role
-                                                        </v-label>
-                                                <v-color-picker
-                                                 v-model="editedItem.color"
-                                                   dot-size="20"
-                                                   swatches-max-height="150"
-                                                 ></v-color-picker>
-
+                                                   </v-label>
+                                                   <v-color-picker
+                                                      v-model="editedItem.color"
+                                                      dot-size="20"
+                                                      swatches-max-height="150"
+                                                      ></v-color-picker>
                                                 </v-col>
-                                                
                                              </v-row>
                                           </v-container>
                                           </v-form>
@@ -185,11 +187,6 @@
                                        </v-card>
                                     </v-dialog>
                                  </template>
-                                 <div class="pt-2 pb-2 pl-2">
-                                    <v-btn class="ma-2" color="purple" dark @click="editItem(item)">
-                                       <v-icon dark>mdi-wrench</v-icon>
-                                    </v-btn>
-                                 </div>
                               </v-data-table>
                            </v-card>
                         </div>
@@ -208,7 +205,6 @@
 <script src="{{ asset('js/plugins/axios.min.js') }}"></script>
 <script src="{{ asset('js/plugins/sweetalert2@9.js') }}"></script>
 <script src="{{ asset('js/plugins/vuetify.js') }}"></script>
-
 <script>
    window.laravel ={!! json_encode([
      'token' => csrf_token(),
@@ -218,8 +214,5 @@
    
    ]) !!}
 </script>
-
 <script src="{{ asset('js/roles_vue.js') }}"></script>
 @endsection
-
-

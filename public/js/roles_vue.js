@@ -7,6 +7,11 @@ new Vue({
         return {
             dialog: false,
             expanded: [],
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              valid: true,
             dialog_add: false,
             singleExpand: true,
             pagination: {
@@ -85,13 +90,13 @@ new Vue({
 
     methods: {
 
-        reset() {
-
-            this.role_a.name = ""
-            this.role_a.slug = ""
-
-
-        },
+      
+        resetValidation () {
+            this.$refs.form.resetValidation()
+          },
+         validate () {
+        this.$refs.form.validate()
+      },
 
         clicked(value) {
             const index = this.expanded.indexOf(value)
@@ -241,6 +246,8 @@ new Vue({
         },
 
         add: function() {
+
+            this.validate()
             let jsonData = new FormData()
             jsonData.append('name', this.role_a.name)
             jsonData.append('slug', this.role_a.slug)
@@ -335,6 +342,7 @@ new Vue({
     mounted: function() {
 
         this.get_data();
+
 
 
 
