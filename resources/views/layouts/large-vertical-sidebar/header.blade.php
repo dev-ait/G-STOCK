@@ -1,3 +1,10 @@
+<link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/materialdesignicons.min.css') }}>
+<style>
+    .theme--light.blue--text.text--darken-2 {
+    color: #1976d2!important;
+    caret-color: #1976d2!important;
+}
+</style>
 <div class="main-header">
     <div class="logo">
         <img src="{{asset('assets/images/logo.png')}}" alt="">
@@ -157,7 +164,7 @@
         <div class="dropdown">
             <div class="user col align-self-end">
                
-                <i aria-hidden="true" class="v-icon notranslate v-icon--left mdi mdi-account-circle-outline theme--light" id="userDropdown" alt="" data-toggle="dropdown"></i>
+                <i aria-hidden="true" class="v-icon notranslate mdi mdi-message-text theme--light blue--text text--darken-2" style="font-size: 25px;" id="userDropdown" alt="" data-toggle="dropdown"></i>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <div class="dropdown-header">

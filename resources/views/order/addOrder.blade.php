@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/pickadate/classic.css')}}">
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/pickadate/classic.date.css')}}">
 <link rel="stylesheet" href="{{asset('assets/styles/vendor/toastr.css')}}">
+<link href="{{asset('assets/styles/css/select2.min.css')}}" rel="stylesheet" />
 
 <style>
   .table-product.active{
@@ -249,9 +250,7 @@
 @section('page-js')
 
 <script src="{{ asset('js/plugins/jquery-3.5.1.min.js') }}"></script>
-<link href="{{asset('assets/styles/css/select2.min.css')}}" rel="stylesheet" />
 <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
-
 <script src="{{asset('assets/js/vendor/pickadate/picker.js')}}"></script>
 <script src="{{asset('assets/js/vendor/pickadate/picker.date.js')}}"></script>
 
@@ -267,7 +266,7 @@
 </script>
 
 <script src="{{asset('assets/js/vendor/toastr.min.js')}}"></script>
-<script src="{{asset('assets/js/toastr.script.js')}}"></script>
+
 
 <script src="{{ asset('js/order_script.js') }}"></script>
 

@@ -90,6 +90,7 @@ Route::delete('/deletemarque/{id}',[App\Http\Controllers\MarqueController::class
 Route::resource('order', App\Http\Controllers\OrderController::class);
 Route::post('/getphone',[App\Http\Controllers\OrderController::class, 'get_phone_client']);
 Route::get('/getorder',[App\Http\Controllers\OrderController::class, 'getorder']);
+Route::post('update_order', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\OrderController::class, 'destroy']);
 
 

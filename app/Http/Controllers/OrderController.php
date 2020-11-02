@@ -159,13 +159,16 @@ class OrderController extends Controller
     {
 
         $clients = Client::all();
+        $products = Product::all();
 
         $order= Order::find($id);
         $client= Client::find($order->client_id);
         
-        $att[] =  [ 'id'=>  $order->id , 'nom_client'=> $client->nom , 
-        'client_telephone'=> $client->telephone
-         ,'product_order'=> $order->orderproduct()->get()  ,
+        $att[] =  [ 'id'=>  $order->id ,
+         'id_client'=> $client->id , 
+         'nom_client'=> $client->nom , 
+         'client_telephone'=> $client->telephone,
+         'product_order'=> $order->orderproduct()->get()  ,
          'subtotal'=>  $order->subtotal,
          'tva'=>  $order->tva,
          'date_create'=>  $order->date_create,
@@ -175,7 +178,7 @@ class OrderController extends Controller
 
         ];
 
-        $data = array( 'orders'=> $att , 'clients' =>  $clients );
+        $data = array( 'orders'=> $att , 'clients' =>  $clients  , 'products' =>  $products);
   
 
 
@@ -190,9 +193,39 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $order = Order::find($request->input('id_order'));
+    
+        $order->client_id= $request->input('idclient');
+        $order->subtotal= $request->input('subTotalvalue');
+        $order->tva= $request->input('tvavalue');
+        $order->date_create= $request->input('date_commande');
+        $order->total= $request->input('total');    
+        $order->typepaiement= $request->input('typepaiement');
+        $order->save();
+
+        $product_order_delete = Product_order::where('order_id', '=', $request->input('id_order'))
+        ->first();
+        $product_order_delete->delete();
+
+        for($i=0;$i<count($request->totalp);$i++){
+            $products_item = new Product_order();
+            $id = $request->product[$i];
+            $nom_produit =  Product::find($id);
+            $products_item->nom_produit = $nom_produit->titre;
+            $products_item->total = $request->totalp[$i];
+            $products_item->prix = $request->rate[$i];
+            $products_item->quantite = $request->quantite[$i];
+            $products_item->order_id = $add_order->id;
+            $products_item->save();
+            $up_product =  Product::find($id);
+            $quantite_product = $up_product->quantite;
+            $up_product->quantite =  $quantite_product  - $request->quantite[$i];
+            $up_product->save();
+        }
+
+        return redirect('order');
     }
 
     /**
@@ -214,4 +247,5 @@ class OrderController extends Controller
 
 
     }
+    
 }

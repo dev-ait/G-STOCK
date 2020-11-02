@@ -4,6 +4,25 @@
 <link rel="stylesheet" href="<?php echo e(asset('assets/styles/vendor/quill.snow.css')); ?>">
 <link rel="stylesheet" type="text/css" href={{ asset('assets/styles/css/custom_style.css') }}>
 <link rel="stylesheet" href="<?php echo e(asset('assets/styles/vendor/dropzone.min.css')); ?>">
+
+<style>
+
+
+.spinner:after {
+    background: #ffc107;
+
+}
+span.spinner.spinner-primary {
+    font-size: 5px;
+}
+.buttonload {
+  background-color: #4CAF50; /* Green background */
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px /* Set a font size */
+}
+</style>
 @endsection
 @section('main-content')
 <div class="breadcrumb">
@@ -171,7 +190,11 @@
          <div class="mc-footer">
             <div class="row">
                <div class="col-lg-12 text-center">
-                  <button  type="submit" id="submit-all" class="btn  btn-primary m-1">Save</button>
+                 
+                  <button id="submit-all" class="btn d-inline  btn-primary m-1" type="button">
+                     Save
+                   </button>
+                 
                   <button type="button" class="btn btn-outline-secondary m-1">Cancel</button>
                </div>
             </div>

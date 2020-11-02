@@ -1,7 +1,8 @@
 function validateForm() {
 
-    
+
     var tableProductLength = $("#table_product tbody tr").length;
+
 
     if(tableProductLength == 0){
         toastr.info("il faut choisir au mois un produit", {
@@ -15,10 +16,16 @@ function validateForm() {
     }
  
     for (x = 0; x < tableProductLength; x++) {
+
         var tr = $("#table_product tbody tr")[x];
         var count = $(tr).attr('id');
+
         count = count.substring(3);
+
+       
+   
        var val_quantite =  $("#quantite" + count).val();
+     
           if(val_quantite <= 0.0 && val_quantite){
               
            
@@ -27,7 +34,8 @@ function validateForm() {
                 positionClass: "toast-bottom-right",
                 showDuration: 200
             });
-           return false;
+            return false;
+           
           }
           
       
@@ -90,7 +98,10 @@ function subAmount() {
     
         count = count.substring(3);
 
+        
+
         totalSubAmount = Number(totalSubAmount) + Number($("#total_product" + count).html());
+        console.log(count)
     } // /for
 
     totalSubAmount = totalSubAmount.toFixed(2);
@@ -335,7 +346,7 @@ $(document).ready(function() {
                 add_row += '<td><input type="number" onclick="calcul_total('+count+')" name="quantite[]" id="quantite' + count + '" name="" class="form-control input_or" required></td>';
                 add_row += '<td> <div class="d-flex "> <div id="total_product'+count+'"> 0.00  </div>  <span class="text-muted pl-1">DH</span></div></div></td>';
                 add_row += ' <input type="hidden" id="total_productValue'+count+'" name="totalp[]" class="form-control input_or" required> ';
-                add_row += ' <td><a href="" class="prevent-default" onClick="removeRow(event,' + count + ')" ><i class="i-Close-Window text-19 text-danger font-weight-700""></i></a></td></tr>';
+                add_row += ' <td><button class="btn btn-outline-secondary float-right" onClick="removeRow(event,' + count + ')" >Supprimer</button></td></tr>';
                     
 
 

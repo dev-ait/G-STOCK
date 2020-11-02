@@ -43,19 +43,7 @@
                                  <button class="btn btn-outline-secondary btn-block mb-4" >
                                  Parametres
                                  </button>
-                                 <template>
-                                    <v-row justify="center">
-                                       <v-dialog
-                                          v-model="dialog_add"
-                                          persistent
-                                          max-width="600px"
-                                          >
-                                          <v-card>
-                                           
-                                          </v-card>
-                                       </v-dialog>
-                                    </v-row>
-                                 </template>
+                           
                                  <!-- end:modal  -->
                                  <div class="list-group" id="list-tab" role="tablist">
                                    

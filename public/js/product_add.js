@@ -77,6 +77,9 @@ $(document).ready(function() {
 
   $("#submit-all").click(function(e) {
 
+
+    
+
       $(".form-control").addClass("control_input");
 
       var dropzone1 = dropzone.files.length;
