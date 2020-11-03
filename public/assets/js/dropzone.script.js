@@ -53,7 +53,7 @@ $.ajaxSetup({
 });        
 $.ajax({
     type: 'POST',
-    url: 'remove_img/'+ file.previewElement.id,
+    url: '/product/remove_img/'+ file.previewElement.id,
     data: "id="+file.previewElement.id,
     type: 'delete',
 });

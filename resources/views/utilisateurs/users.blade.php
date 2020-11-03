@@ -31,7 +31,9 @@
                                     max-width="600px"
                                     >
                                     <v-card>
-                                       <v-form @submit.prevent="add">
+                                       <v-form  @submit.prevent="validate"   ref="form"
+                                       v-model="valid"
+                                       lazy-validation>
                                           <v-card-title>
                                              <span class="headline">Ajouter un utilisateur</span>
                                           </v-card-title>
@@ -42,6 +44,7 @@
                                                       <v-text-field
                                                          label="Nom*"
                                                          v-model="user_a.name"
+                                                         :rules="nameRules"
                                                          required
                                                          ></v-text-field>
                                                    </v-col>
@@ -49,6 +52,7 @@
                                                       <v-text-field
                                                          label="Email*"
                                                          v-model="user_a.email"
+                                                         :rules="emailRules"
                                                          required
                                                          ></v-text-field>
                                                    </v-col>
@@ -57,6 +61,7 @@
                                                          label="password*"
                                                          v-model="user_a.password"
                                                          :type="show1 ? 'text' : 'password'"
+                                                         :rules="passwordRules"
                                                          required
                                                          
                                                          ></v-text-field>
@@ -73,6 +78,8 @@
                                                    persistent-hint
                                                    return-object
                                                    single-line
+                                                   :rules="roleRules"
+                                                     required
                                                   ></v-select>
 
                                                 </v-col>
@@ -88,11 +95,12 @@
                                                           :search-input.sync="search_project"
                                                           hide-selected
                                                           item-text="nom" item-value="id"
-                                                          hint="Maximum of 5 tags"
+                                                       
                                                           label="Ajouter des projets"
                                                           multiple
                                                           persistent-hint
                                                           small-chips
+                                                          :rules="projetRules"
                                                         >
                                                           <template v-slot:no-data>
                                                             <v-list-item>
@@ -124,12 +132,14 @@
                                                 >
                                                 Fermer 
                                              </v-btn>
-                                             <v-btn color="error" class="mr-4" @click="reset">
+                                             <v-btn color="error" class="mr-4" @click="resetValidation">
                                                 Effacer
-                                             </v-btn>
-                                             <v-btn color="success"   class="mr-4" type="submit">
+                                                </v-btn>
+                                               <v-btn class="mr-4" type="submit"  :disabled="!valid"
+                                               color="success"
+                                               class="mr-4">
                                                 Ajouter
-                                             </v-btn>
+                                               </v-btn>
                                           </v-card-actions>
                                        </v-form>
                                     </v-card>

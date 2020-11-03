@@ -163,7 +163,7 @@
                               </td>
                               <td>
                                  <div class="d-flex ">
-                                    <div id="price1"> {{$product_order['prix']}} </div>
+                                    <div id="price{{$count_edit}}"> {{$product_order['prix']}} </div>
                                     <span class="text-muted pl-1">DH</span>
                                     <input type="hidden"  name="rate[]"  value="{{$product_order['prix']}}"  >
                                  </div>
@@ -173,7 +173,7 @@
                               </td>
                               <td>
                                  <div class="d-flex ">
-                                    <div id="total_product1"> {{$product_order['total']}}  </div>
+                                    <div id="total_product{{$count_edit}}"> {{$product_order['total']}}  </div>
                                     <span class="text-muted pl-1">DH</span>
                                     <input type="hidden" id="total_productValue{{$count_edit}}"  name="totalp[]"  value="{{$product_order['total']}}" >
                                  </div>
@@ -214,6 +214,7 @@
 <script src="{{ asset('js/plugins/jquery-3.5.1.min.js') }}"></script>
 <script src="{{asset('assets/js/vendor/pickadate/picker.js')}}"></script>
 <script src="{{asset('assets/js/vendor/pickadate/picker.date.js')}}"></script>
+<script src="{{asset('assets/js/invoice.script.js')}}"></script>
 <script src="{{ asset('js/plugins/select2.min.js') }}"></script>
 <script src="{{asset('assets/js/vendor/toastr.min.js')}}"></script>
 <script src="{{ asset('js/update_order.js') }}"></script>
@@ -221,3 +222,4 @@
 @section('bottom-js')
 <script src="{{asset('assets/js/form.basic.script.js')}}"></script>
 @endsection
+

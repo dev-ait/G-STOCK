@@ -38,7 +38,7 @@
               
            
              <li class="nav-item @if (Route::current()->getName() == 'product.edit'  ) active @endif {{ request()->is('product/create') ? 'active' : '' }} {{ request()->is('product') ? 'active' : '' }}" data-item="products" >
-                <a class="nav-item-hold" href="{{ route('product.index') }}">
+                <a class="nav-item-hold" href="">
                     <i class="nav-icon i-Shop-2"></i>
                     <span class="nav-text"> Produits</span>
                 </a>
@@ -83,7 +83,7 @@
          <!-- Submenu products -->
          <ul class="childNav" data-parent="products">
             <li class="nav-item">
-                <a href="{{ route('product.index') }}"
+                <a href="{{ url('product') }}"
                     class="{{ Route::currentRouteName()=='marque' ? 'open' : '' }}">
                     <i class="nav-icon i-Shopping-Basket"></i>
                     <span class="nav-text"> Produits</span>

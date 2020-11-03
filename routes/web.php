@@ -43,14 +43,18 @@ Route::put('/updateclient',[App\Http\Controllers\ClientController::class, 'updat
 Route::delete('/deleteclient/{id}',[App\Http\Controllers\ClientController::class, 'destroy']);
 
 
-/*** Model product  * */
 
+Route::prefix('product')->group(function () {
+  
 
-Route::resource('product', App\Http\Controllers\ProductController::class);
+    /*** Model product  * */
+
+Route::resource('/', App\Http\Controllers\ProductController::class);
 Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_product']);
-Route::post('/product/store',[App\Http\Controllers\ProductController::class, 'store']);
-Route::post('/product/store_img',[App\Http\Controllers\ProductController::class, 'stote_img']);
-Route::delete('/product/remove_img/{id}',[App\Http\Controllers\ProductController::class, 'dropzoneRemove']);
+Route::get('/{id}/edit',[App\Http\Controllers\ProductController::class, 'edit']);
+Route::post('/store',[App\Http\Controllers\ProductController::class, 'store']);
+Route::post('/store_img',[App\Http\Controllers\ProductController::class, 'stote_img']);
+Route::delete('/remove_img/{id}',[App\Http\Controllers\ProductController::class, 'dropzoneRemove']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('/updateproduct',[App\Http\Controllers\ProductController::class, 'update']);
 
@@ -59,6 +63,7 @@ Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_pr
 Route::post('/getproduct_data',[App\Http\Controllers\ProductController::class, 'get_data_product']);
 
 Route::get('/search_product',[App\Http\Controllers\ProductController::class, 'search_product']);
+
 
 /*** Model gategorie   * */
 
@@ -84,6 +89,30 @@ Route::get('/getmarque',[App\Http\Controllers\MarqueController::class, 'get_marq
 Route::put('/updatemarque',[App\Http\Controllers\MarqueController::class, 'update']);
 
 Route::delete('/deletemarque/{id}',[App\Http\Controllers\MarqueController::class, 'destroy']);
+
+
+/*** Model Modeles  * */
+
+
+Route::resource('modele', App\Http\Controllers\ModeleController::class);
+
+Route::post('/postmodele',[App\Http\Controllers\ModeleController::class, 'store']);
+
+Route::get('/getmodele',[App\Http\Controllers\ModeleController::class, 'get_modele']);
+
+Route::put('/updatemodele',[App\Http\Controllers\ModeleController::class, 'update']);
+
+Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class, 'destroy']);
+
+
+});
+
+
+
+
+
+
+
 
 /*** Model order   * */
 
@@ -114,18 +143,7 @@ Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit
 
 Route::post('/update_user',[App\Http\Controllers\UserController::class, 'update']);
 
-/*** Model Modeles  * */
 
-
-Route::resource('modele', App\Http\Controllers\ModeleController::class);
-
-Route::post('/postmodele',[App\Http\Controllers\ModeleController::class, 'store']);
-
-Route::get('/getmodele',[App\Http\Controllers\ModeleController::class, 'get_modele']);
-
-Route::put('/updatemodele',[App\Http\Controllers\ModeleController::class, 'update']);
-
-Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class, 'destroy']);
 
 
 /*** Model menu_page  * */

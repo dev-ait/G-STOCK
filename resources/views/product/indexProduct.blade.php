@@ -52,7 +52,7 @@
    
    
                                                       <div class="list-group" id="list-tab" role="tablist">
-                                                          <a    href="{{route('product.create')}}" class="list-group-item list-group-item-action border-0" >
+                                                          <a    href="{{url('product/create')}}" class="list-group-item list-group-item-action border-0" >
                                                               <i class="nav-icon i-Shopping-Basket"></i>
                                                               Nouveau Produit</a>
 
