@@ -9,6 +9,11 @@ new Vue({
             expanded: [],
             dialog_add: false,
             singleExpand: true,
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              valid: true,
             pagination: {
                 rowsPerPage: 5,
 
@@ -79,10 +84,24 @@ new Vue({
 
     methods: {
 
-        reset() {
 
-            this.gategorie_a.nom = ""
-        },
+        resetValidation () {
+            this.$refs.form.resetValidation()
+            this.gategorie_a.nom = "";
+   
+          },
+          
+        validate () {
+            
+            
+            if(this.$refs.form.validate()==true){
+                this.add()
+
+            }
+            
+          },
+
+    
 
         clicked(value) {
             const index = this.expanded.indexOf(value)
@@ -177,7 +196,7 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deletegategorie/' + this.selected[i].id)
+                        axios.delete(window.laravel.url + '/product/deletegategorie/' + this.selected[i].id)
                             .then(response => {
 
                             })
@@ -236,7 +255,7 @@ new Vue({
 
 
 
-            axios.put(window.laravel.url + '/updategategorie', item_object)
+            axios.put(window.laravel.url + '/product/updategategorie', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -254,7 +273,7 @@ new Vue({
 
 
 
-            axios.post(window.laravel.url + '/postgategorie', jsonData)
+            axios.post(window.laravel.url + '/product/postgategorie', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -295,7 +314,7 @@ new Vue({
         },
 
         get_data: function() {
-            axios.get(window.laravel.url + '/getgategorie/')
+            axios.get(window.laravel.url + '/product/getgategorie/')
                 .then(response => {
 
                     this.gategorie = response.data.gategories;

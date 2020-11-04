@@ -161,7 +161,7 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deleteproduct/' + this.selected[i].id)
+                        axios.delete(window.laravel.url + '/product/deleteproduct/' + this.selected[i].id)
                             .then(response => {
 
                             })
@@ -234,7 +234,7 @@ new Vue({
         },
 
         get_data: function() {
-            axios.get(window.laravel.url + '/getproduct/')
+            axios.get(window.laravel.url + '/product/getproduct/')
                 .then(response => {
 
                     this.products = response.data.products;

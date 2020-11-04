@@ -92,19 +92,22 @@ var count = 1;
 function subAmount() {
     var tableProductLength = $("#table_product tbody tr").length;
     var totalSubAmount = 0;
+
     for (x = 0; x < tableProductLength; x++) {
         var tr = $("#table_product tbody tr")[x];
         var count = $(tr).attr('id');
     
         count = count.substring(3);
 
-        
+        console.log(count)
 
         totalSubAmount = Number(totalSubAmount) + Number($("#total_product" + count).html());
-        console.log(count)
+       
     } // /for
 
     totalSubAmount = totalSubAmount.toFixed(2);
+
+   
 
    
 
@@ -162,7 +165,7 @@ function getProductData(row = null) {
         });
 
         $.ajax({
-            url: '/getproduct_data',
+            url: '/product/getproduct_data',
             data: {
                 productId: productId
             },
@@ -308,7 +311,7 @@ $(document).ready(function() {
             scrollTop: 9999
         }, 'slow');
 
-        var ajaxurl = '/getproduct';
+        var ajaxurl = '/product/getproduct';
 
         $.ajaxSetup({
             headers: {
@@ -326,9 +329,11 @@ $(document).ready(function() {
                 len = data['products'].length;
                 count++;
 
+                var count_tr = $("#table_product tbody tr").length + 1;
+
                 
 
-                var add_row = '<tr id=row' + count + '><td><select id="productName' + count + '" onchange="getProductData(' + count + ')" class="js-example-basic-single form-control input-product" style="width: 100%" name="product[]" required>';
+                var add_row = '<tr id=row' + count_tr + '><td><select id="productName' + count_tr + '" onchange="getProductData(' + count_tr + ')" class="js-example-basic-single form-control input-product" style="width: 100%" name="product[]" required>';
                 add_row += '<option  value="">Selectionner le produit</option>';
                 if (len > 0) {
                     for (var i = 0; i < len; i++) {
@@ -341,12 +346,12 @@ $(document).ready(function() {
                     }
                 }
                 add_row += '</select></td>';
-                add_row += '<td>  <div class="d-flex "> <div id="price'+count+'"> 0 </div>  <span class="text-muted pl-1">DH</span>  </div> </td>';
-                add_row += ' <input type="hidden" id="priceValue'+count+'" name="rate[]" class="form-control input_or" required>';
-                add_row += '<td><input type="number" onclick="calcul_total('+count+')" name="quantite[]" id="quantite' + count + '" name="" class="form-control input_or" required></td>';
-                add_row += '<td> <div class="d-flex "> <div id="total_product'+count+'"> 0.00  </div>  <span class="text-muted pl-1">DH</span></div></div></td>';
-                add_row += ' <input type="hidden" id="total_productValue'+count+'" name="totalp[]" class="form-control input_or" required> ';
-                add_row += ' <td><button class="btn btn-outline-secondary float-right" onClick="removeRow(event,' + count + ')" >Supprimer</button></td></tr>';
+                add_row += '<td>  <div class="d-flex "> <div id="price'+count_tr+'"> 0 </div>  <span class="text-muted pl-1">DH</span>  </div> </td>';
+                add_row += ' <input type="hidden" id="priceValue'+count_tr+'" name="rate[]" class="form-control input_or" required>';
+                add_row += '<td><input type="number" onclick="calcul_total('+count_tr+')" name="quantite[]" id="quantite' + count_tr + '" name="" class="form-control input_or" required></td>';
+                add_row += '<td> <div class="d-flex "> <div id="total_product'+count_tr+'"> 0.00  </div>  <span class="text-muted pl-1">DH</span></div></div></td>';
+                add_row += ' <input type="hidden" id="total_productValue'+count_tr+'" name="totalp[]" class="form-control input_or" required> ';
+                add_row += ' <td><button class="btn btn-outline-secondary float-right" onClick="removeRow(event,' + count_tr + ')" >Supprimer</button></td></tr>';
                     
 
 

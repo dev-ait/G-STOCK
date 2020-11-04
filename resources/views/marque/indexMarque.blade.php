@@ -42,7 +42,9 @@
                                           max-width="600px"
                                           >
                                           <v-card>
-                                             <v-form @submit.prevent="add">
+                                             <v-form  @submit.prevent="validate"   ref="form"
+                                             v-model="valid"
+                                             lazy-validation>
                                                 <v-card-title>
                                                    <span class="headline">Ajouter un Marque</span>
                                                 </v-card-title>
@@ -53,6 +55,7 @@
                                                             <v-text-field
                                                                label="Nom*"
                                                                v-model="marque_a.nom"
+                                                               :rules="nameRules"
                                                                required
                                                                ></v-text-field>
                                                          </v-col>
@@ -77,12 +80,14 @@
                                                       >
                                                       Fermer 
                                                    </v-btn>
-                                                   <v-btn color="error" class="mr-4" @click="reset">
+                                                   <v-btn color="error" class="mr-4" @click="resetValidation">
                                                       Effacer
-                                                   </v-btn>
-                                                   <v-btn color="success"   class="mr-4" type="submit">
+                                                      </v-btn>
+                                                     <v-btn class="mr-4" type="submit"  :disabled="!valid"
+                                                     color="success"
+                                                     class="mr-4">
                                                       Ajouter
-                                                   </v-btn>
+                                                     </v-btn>
                                                 </v-card-actions>
                                              </v-form>
                                           </v-card>

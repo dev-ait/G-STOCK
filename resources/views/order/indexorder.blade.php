@@ -84,6 +84,20 @@
                               </template>
 
 
+                              <template v-slot:item.validate ="{ item }">
+
+
+
+                                  <v-btn
+                                  depressed
+                                  color="purple"   small   dark  @click="valide_commande(item)"
+                                >
+                                  Validé
+                                </v-btn>
+
+                              </template>
+
+
                               <template v-slot:item.action="{ item }" >
                               
                                  

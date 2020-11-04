@@ -37,7 +37,7 @@ $(document).ready(function() {
             var photo = photo_;
             
     
-            var ajaxurl = '/updateproduct';
+            var ajaxurl = '/product/updateproduct';
     
             $.ajaxSetup({
                 headers: {

@@ -205,28 +205,49 @@ class OrderController extends Controller
         $order->typepaiement= $request->input('typepaiement');
         $order->save();
 
-        $product_order_delete = Product_order::where('order_id', '=', $request->input('id_order'))
-        ->first();
+        $product_order_delete = Product_order::where('order_id', '=', $request->input('id_order'));
+       
         $product_order_delete->delete();
 
         for($i=0;$i<count($request->totalp);$i++){
             $products_item = new Product_order();
             $id = $request->product[$i];
-            $nom_produit =  Product::find($id);
-            $products_item->nom_produit = $nom_produit->titre;
+
+            if(is_numeric($id)){
+                $nom_produit =  Product::find($id);
+                $products_item->nom_produit = $nom_produit->titre;
+            }else{
+                $products_item->nom_produit = $id;
+            }
+            
+           
             $products_item->total = $request->totalp[$i];
             $products_item->prix = $request->rate[$i];
             $products_item->quantite = $request->quantite[$i];
-            $products_item->order_id = $add_order->id;
+            $products_item->order_id = $request->input('id_order');
             $products_item->save();
-            $up_product =  Product::find($id);
-            $quantite_product = $up_product->quantite;
-            $up_product->quantite =  $quantite_product  - $request->quantite[$i];
-            $up_product->save();
+            if(is_numeric($id)){
+                $up_product =  Product::find($id);
+                $quantite_product = $up_product->quantite;
+                $up_product->quantite =  $quantite_product  - $request->quantite[$i];
+                $up_product->save();
+
+            }
+           
         }
 
-        return redirect('order');
+        return redirect('order/'.$request->input('id_order').'/edit');
     }
+
+
+
+    public function validation_commande(Request $request)
+    {
+           return 
+           $id = $request->id;
+           $validation =  Order::find($id);
+    }
+
 
     /**
      * Remove the specified resource from storage.

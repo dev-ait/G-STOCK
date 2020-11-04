@@ -9,6 +9,29 @@ new Vue({
             expanded: [],
             dialog_add: false,
             singleExpand: true,
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              emailRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            
+              ],
+              passwordRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              roleRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              
+              projetRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              valid: true,
             pagination: {
                 rowsPerPage: 5,
 
@@ -27,12 +50,9 @@ new Vue({
                     name: '',
                     color: ''
                 }],
-                select: {
-                    id: '',
-                    name: ''
-                },
+                select: null,
                 password: '',
-                project_id : []
+                project_id : null
             },
             btn_control: false,
             singleSelect: false,
@@ -114,8 +134,9 @@ new Vue({
 
     methods: {
 
-        reset() {
 
+        resetValidation () {
+            this.$refs.form.resetValidation()
             this.user_a.name = "";
 
             this.user_a.email = "";
@@ -125,9 +146,21 @@ new Vue({
 
 
             this.user_a.password = "";
+            this.user_a.select = "";
+   
+          },
+          
+        validate () {
+            
+            
+            if(this.$refs.form.validate()==true){
+                this.add()
 
+            }
+            
+          },
 
-        },
+    
 
         get_color(name , color ) {
 

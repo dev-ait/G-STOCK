@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->float('total');
             $table->string('typepaiement');
             $table->string('statutpaiement');
+            $table->string('status');
 
             $table->timestamps();
         });

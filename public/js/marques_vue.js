@@ -9,10 +9,16 @@ new Vue({
             expanded: [],
             dialog_add: false,
             singleExpand: true,
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              valid: true,
             pagination: {
                 rowsPerPage: 5,
 
             },
+            
             marque_a: {
                 id: 0,
                 nom: '',
@@ -78,10 +84,21 @@ new Vue({
 
     methods: {
 
-        reset() {
+        resetValidation () {
+            this.$refs.form.resetValidation()
+            this.gategorie_a.nom = "";
+   
+          },
+          
+        validate () {
+            
+            
+            if(this.$refs.form.validate()==true){
+                this.add()
 
-            this.marque_a.nom = ""
-        },
+            }
+            
+          },
 
         clicked(value) {
             const index = this.expanded.indexOf(value)
@@ -219,7 +236,7 @@ new Vue({
 
 
 
-            axios.put(window.laravel.url + '/updatemarque', item_object)
+            axios.put(window.laravel.url + '/product/updatemarque', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -235,7 +252,7 @@ new Vue({
             jsonData.append('nom', this.marque_a.nom)
             jsonData.append('date_create', this.marque_a.date_create)
 
-            axios.post(window.laravel.url + '/postmarque', jsonData)
+            axios.post(window.laravel.url + '/product/postmarque', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -293,7 +310,7 @@ new Vue({
 
         get_data: function() {
            
-            axios.get(window.laravel.url + '/getmarque/')
+            axios.get(window.laravel.url + '/product/getmarque/')
                 .then(response => {
                 
                     this.marque = response.data.marques;

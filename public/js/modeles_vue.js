@@ -9,6 +9,11 @@ new Vue({
             expanded: [],
             dialog_add: false,
             singleExpand: true,
+            nameRules: [
+                v => !!v || 'Le Champs Nom est obligatoire',
+            
+              ],
+              valid: true,
             pagination: {
                 rowsPerPage: 5,
 
@@ -78,10 +83,21 @@ new Vue({
 
     methods: {
 
-        reset() {
-
+        resetValidation () {
+            this.$refs.form.resetValidation()
             this.modele_a.nom = ""
-        },
+   
+          },
+          
+        validate () {
+            
+            
+            if(this.$refs.form.validate()==true){
+                this.add()
+
+            }
+            
+          },
 
         clicked(value) {
             const index = this.expanded.indexOf(value)
@@ -222,7 +238,7 @@ new Vue({
 
 
 
-            axios.put(window.laravel.url + '/updatemodele', item_object)
+            axios.put(window.laravel.url + '/product/updatemodele', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -238,7 +254,7 @@ new Vue({
             jsonData.append('nom', this.modele_a.nom)
             jsonData.append('date_create', this.modele_a.date_create)
 
-            axios.post(window.laravel.url + '/postmodele', jsonData)
+            axios.post(window.laravel.url + '/product/postmodele', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -296,7 +312,7 @@ new Vue({
 
         get_data: function() {
            
-            axios.get(window.laravel.url + '/getmodele/')
+            axios.get(window.laravel.url + '/product/getmodele/')
                 .then(response => {
                 console.log(response.data.modeles);
                     this.modele = response.data.modeles;

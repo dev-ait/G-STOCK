@@ -151,7 +151,7 @@ function getProductData(row = null) {
         });
 
         $.ajax({
-            url: '/getproduct_data',
+            url: '/product/getproduct_data',
             data: {
                 productId: productId
             },
@@ -297,7 +297,7 @@ $(document).ready(function() {
             scrollTop: 9999
         }, 'slow');
 
-        var ajaxurl = '/getproduct';
+        var ajaxurl = '/product/getproduct';
 
         $.ajaxSetup({
             headers: {
