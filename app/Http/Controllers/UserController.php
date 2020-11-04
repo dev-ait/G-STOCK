@@ -125,29 +125,9 @@ class UserController extends Controller
 
     }
 
-    public function menu_pages()
-    {
-        $menu_page = Menu::all();
-        $data = array(
-            'menu_pages' => $menu_page
-        );
-        return view('utilisateurs.menu_pages', $data);
+  
 
-    }
 
-    public function create_name_page(Request $request)
-    {
-        $new_page = new Menu();
-
-        $new_page->nom = $request->input('nom');
-
-        $new_page->save();
-
-        session()
-            ->flash('succes_menu', 'La page ' . $new_page->nom . ' a été bien enregistré');
-        return redirect("menu_pages");
-
-    }
 
     public function destroy($id)
     {
@@ -253,14 +233,34 @@ class UserController extends Controller
 
     }
 
-    public function delete_user($id)
+    public function permission_order()
     {
 
-        $delete_Menu = Menu::find($id);
+   
+        $roles = Sentinel::getRoleRepository()->get();
+        $menu = 'order';
 
-        $delete_Menu->delete();
+        $this->authorize('admin_access_all_page_utilisateurs');
 
-        return redirect('menu_pages');
+        foreach ($roles as $role)
+        {
+
+            $json_permissions = json_encode($role->permissions, true);
+
+            $permissions[] = array(
+                'role_slug' => $role->slug,
+                $role->slug => json_decode($json_permissions, true) ,
+                'role_nom' => $role->name
+            );;
+
+        }
+
+        $data = array(
+            'menu' => $menu,
+            'permissions' => $permissions
+        );
+
+        return view('utilisateurs.permission_order', $data);
     }
 
     public function create_user(Request $request)

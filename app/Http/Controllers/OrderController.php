@@ -239,6 +239,16 @@ class OrderController extends Controller
         return redirect('order/'.$request->input('id_order').'/edit');
     }
 
+
+
+    public function validation_commande(Request $request)
+    {
+           return 
+           $id = $request->id;
+           $validation =  Order::find($id);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *

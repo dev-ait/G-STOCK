@@ -119,6 +119,7 @@ Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class
 Route::resource('order', App\Http\Controllers\OrderController::class);
 Route::post('/getphone',[App\Http\Controllers\OrderController::class, 'get_phone_client']);
 Route::get('/getorder',[App\Http\Controllers\OrderController::class, 'getorder']);
+Route::put('/validation_commande',[App\Http\Controllers\OrderController::class, 'validation_commande']);
 Route::post('update_order', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\OrderController::class, 'destroy']);
 
@@ -144,14 +145,9 @@ Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit
 Route::post('/update_user',[App\Http\Controllers\UserController::class, 'update']);
 
 
+Route::get('permission_order', [App\Http\Controllers\UserController::class, 'permission_order'])->name('permission_order');
 
 
-/*** Model menu_page  * */
-
-
-Route::get('menu_pages', [App\Http\Controllers\UserController::class, 'menu_pages'])->name('menu_pages');
-Route::post('/postmenu', [App\Http\Controllers\UserController::class, 'create_name_page']);
-Route::post('/deletemodele/{id}', [App\Http\Controllers\UserController::class, 'delete_user']);
 Route::get('permission', [App\Http\Controllers\UserController::class, 'permissions'])->name('permission');
 
 /*** Model Role  * */

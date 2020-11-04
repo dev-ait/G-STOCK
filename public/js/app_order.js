@@ -90,6 +90,12 @@ new Vue({
                     value: 'print'
                 }
 
+                ,
+                {
+                    text: 'Validation de commande',
+                    value: 'validate'
+                }
+
 
 
             ],
@@ -130,6 +136,26 @@ new Vue({
             
             this.dialog = true
         },
+
+
+        valide_commande: function(item) {
+
+
+     
+            axios.put(window.laravel.url + '/validation_commande',  item)
+            .then(response => {
+                
+                console.log(response.data);
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+         },
+
+
+       
 
         print(item) {
             

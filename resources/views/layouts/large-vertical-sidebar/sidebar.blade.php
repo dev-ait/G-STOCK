@@ -138,10 +138,10 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ URL::route('menu_pages') }}"
+                <a href="{{ URL::route('permission_order') }}"
                     class="{{ Route::currentRouteName()=='menu_pages' ? 'open' : '' }}">
-                    <i class="nav-icon i-Windows-2"></i>
-                    <span class="nav-text"> Menu des pages
+                    <i class="nav-icon i-Share"></i>
+                    <span class="nav-text"> Permission Commande
                     </span>
                     
                 </a>

@@ -52,7 +52,7 @@ new Vue({
                 }],
                 select: null,
                 password: '',
-                project_id : []
+                project_id : null
             },
             btn_control: false,
             singleSelect: false,
