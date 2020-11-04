@@ -43,14 +43,18 @@ Route::put('/updateclient',[App\Http\Controllers\ClientController::class, 'updat
 Route::delete('/deleteclient/{id}',[App\Http\Controllers\ClientController::class, 'destroy']);
 
 
-/*** Model product  * */
 
+Route::prefix('product')->group(function () {
+  
 
-Route::resource('product', App\Http\Controllers\ProductController::class);
+    /*** Model product  * */
+
+Route::resource('/', App\Http\Controllers\ProductController::class);
 Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_product']);
-Route::post('/product/store',[App\Http\Controllers\ProductController::class, 'store']);
-Route::post('/product/store_img',[App\Http\Controllers\ProductController::class, 'stote_img']);
-Route::delete('/product/remove_img/{id}',[App\Http\Controllers\ProductController::class, 'dropzoneRemove']);
+Route::get('/{id}/edit',[App\Http\Controllers\ProductController::class, 'edit']);
+Route::post('/store',[App\Http\Controllers\ProductController::class, 'store']);
+Route::post('/store_img',[App\Http\Controllers\ProductController::class, 'stote_img']);
+Route::delete('/remove_img/{id}',[App\Http\Controllers\ProductController::class, 'dropzoneRemove']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\ProductController::class, 'destroy']);
 Route::post('/updateproduct',[App\Http\Controllers\ProductController::class, 'update']);
 
@@ -59,6 +63,7 @@ Route::get('/getproduct',[App\Http\Controllers\ProductController::class, 'get_pr
 Route::post('/getproduct_data',[App\Http\Controllers\ProductController::class, 'get_data_product']);
 
 Route::get('/search_product',[App\Http\Controllers\ProductController::class, 'search_product']);
+
 
 /*** Model gategorie   * */
 
@@ -85,11 +90,36 @@ Route::put('/updatemarque',[App\Http\Controllers\MarqueController::class, 'updat
 
 Route::delete('/deletemarque/{id}',[App\Http\Controllers\MarqueController::class, 'destroy']);
 
+
+/*** Model Modeles  * */
+
+
+Route::resource('modele', App\Http\Controllers\ModeleController::class);
+
+Route::post('/postmodele',[App\Http\Controllers\ModeleController::class, 'store']);
+
+Route::get('/getmodele',[App\Http\Controllers\ModeleController::class, 'get_modele']);
+
+Route::put('/updatemodele',[App\Http\Controllers\ModeleController::class, 'update']);
+
+Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class, 'destroy']);
+
+
+});
+
+
+
+
+
+
+
+
 /*** Model order   * */
 
 Route::resource('order', App\Http\Controllers\OrderController::class);
 Route::post('/getphone',[App\Http\Controllers\OrderController::class, 'get_phone_client']);
 Route::get('/getorder',[App\Http\Controllers\OrderController::class, 'getorder']);
+Route::put('/validation_commande',[App\Http\Controllers\OrderController::class, 'validation_commande']);
 Route::post('update_order', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\OrderController::class, 'destroy']);
 
@@ -114,26 +144,10 @@ Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit
 
 Route::post('/update_user',[App\Http\Controllers\UserController::class, 'update']);
 
-/*** Model Modeles  * */
+
+Route::get('permission_order', [App\Http\Controllers\UserController::class, 'permission_order'])->name('permission_order');
 
 
-Route::resource('modele', App\Http\Controllers\ModeleController::class);
-
-Route::post('/postmodele',[App\Http\Controllers\ModeleController::class, 'store']);
-
-Route::get('/getmodele',[App\Http\Controllers\ModeleController::class, 'get_modele']);
-
-Route::put('/updatemodele',[App\Http\Controllers\ModeleController::class, 'update']);
-
-Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class, 'destroy']);
-
-
-/*** Model menu_page  * */
-
-
-Route::get('menu_pages', [App\Http\Controllers\UserController::class, 'menu_pages'])->name('menu_pages');
-Route::post('/postmenu', [App\Http\Controllers\UserController::class, 'create_name_page']);
-Route::post('/deletemodele/{id}', [App\Http\Controllers\UserController::class, 'delete_user']);
 Route::get('permission', [App\Http\Controllers\UserController::class, 'permissions'])->name('permission');
 
 /*** Model Role  * */
@@ -155,5 +169,3 @@ Route::delete('/deleterole/{id}',[App\Http\Controllers\RoleController::class, 'd
 
 
 Auth::routes();
-
-
