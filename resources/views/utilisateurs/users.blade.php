@@ -186,14 +186,7 @@
 
                                      <div  v-if="check_role(item.roles[0])" v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
 
-                      
-                                  
-                                  
-                                    
-                                    
-                              
-                               
-                                 
+
 
                            
 

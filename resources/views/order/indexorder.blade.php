@@ -13,10 +13,18 @@
 }
 </style>
 <div class="breadcrumb">
-   <h1>  La liste des Commandes </h1>
+
+
+
+
+
+
+     <h1>  La liste des Commandes </h1>
+       
+ 
 </div>
 <div class=" border-top"></div>
-<div id="app_order" data-app>
+<div id="app_order" data-app >
    <div class="row">
       <div class="col-md-12">
          <div class="card">
@@ -46,10 +54,17 @@
                            
                                  <!-- end:modal  -->
                                  <div class="list-group" id="list-tab" role="tablist">
+
+                                    @if ($user_logged->inRole($current_user_name_role)  )
+
+                                       @if ($user_logged->hasAccess(['order.delete_validation']))
                                    
                                     <a  @click="remove_item" class="list-group-item list-group-item-action border-0" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" aria-selected="false">
                                     <i class="nav-icon i-Remove"></i>
                                     Supprimer</a>
+                                       @endif
+       
+                                    @endif
                                     <label for="" class="text-muted font-weight-600 py-8">MEMBERS</label>
                                     <a class="list-group-item list-group-item-action border-0 " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
                                     <i class="nav-icon i-Arrow-Next"></i>
@@ -75,27 +90,48 @@
                               :sort-desc.sync="sortDesc" show-select   item-key="id"
                               :expanded.sync="expanded" @click:row="clicked">
 
-                              <template v-slot:item.print="{ item }">
 
-                                 <v-btn  class="mx-1"  small  fab dark color="purple" @click="print(item)">
-                                    <v-icon dark>mdi-printer</v-icon>
-                                  </v-btn>
+                              
+                              @if ($user_logged->inRole($current_user_name_role)  )
 
-                              </template>
+                              @if ($user_logged->hasAccess(['order.delete_validation']))
 
+                              <template v-slot:item.details="{ item }">
 
-                              <template v-slot:item.validate ="{ item }">
+                            
 
-
-
-                                  <v-btn
+                                  <v-btn 
                                   depressed
-                                  color="purple"   small   dark  @click="valide_commande(item)"
-                                >
-                                  Validé
+                                  color="purple"   small   dark   @click="print(item)"
+                                  >
+                                  Voir
                                 </v-btn>
 
                               </template>
+
+                              @endif
+       
+                              @endif
+
+
+
+
+
+
+                           
+
+
+                              <template v-slot:item.status="{ item }">
+                              
+                               
+
+                                 <div v-html="get_status(item.status)"> </div>
+
+
+
+                       
+
+                               </template>
 
 
                               <template v-slot:item.action="{ item }" >
@@ -106,7 +142,7 @@
                                   </v-btn>
                                  
                               
-                                 <v-dialog v-model="dialog" max-width="500px">
+                                 <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
                                     <v-card>
                                        <v-card-title>
                                           <span class="headline">Les produits commandes</span>

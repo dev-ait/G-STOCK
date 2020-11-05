@@ -276,7 +276,58 @@ function resetOrderForm() {
 $(document).ready(function() {
 
 
-    
+    $(".valide_order,.reject_order").click(function(){
+
+        var button_attr =$(this).attr('data-key');
+        var action = '';
+        var ajax_url = '/validation_commande';
+
+        if(button_attr ==  "valider" ){
+            action = 'valider';
+        }
+
+        if(button_attr ==  "reject" ){
+            action = 'reject';
+        }
+
+
+        var id_order =$("#id_order").val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $.ajax({
+            url: ajax_url,
+            type: 'post',
+            data: {
+
+                id: id_order,
+                action :action 
+              
+            },
+            dataType: 'json',
+            success: function(data) {
+
+                if(data.etat == true){
+
+                    window.location.href = "/order/" + data.id + "/edit"
+                }
+
+               
+            },
+            error: function(data) {
+
+                
+
+
+            }
+        });
+
+        
+      });
 
     
 
