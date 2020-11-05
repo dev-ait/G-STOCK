@@ -169,5 +169,3 @@ Route::delete('/deleterole/{id}',[App\Http\Controllers\RoleController::class, 'd
 
 
 Auth::routes();
-
-
