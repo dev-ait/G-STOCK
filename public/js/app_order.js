@@ -12,6 +12,7 @@ new Vue({
                 rowsPerPage: 5,
 
             },
+            show_button_validation : true,
             btn_control: false,
             singleSelect: false,
             selectedRows: [],
@@ -78,6 +79,12 @@ new Vue({
                     value: 'statutpaiement'
                 }
                 ,
+           
+                {
+                    text: 'Status',
+                    value: 'status'
+                }
+                ,
                 {
                     text: 'Les produits commandes',
                     align: "center",
@@ -86,15 +93,11 @@ new Vue({
 
                 ,
                 {
-                    text: 'Imprimer',
-                    value: 'print'
+                    text: 'Details',
+                    value: 'details'
                 }
 
-                ,
-                {
-                    text: 'Validation de commande',
-                    value: 'validate'
-                }
+                
 
 
 
@@ -138,25 +141,6 @@ new Vue({
         },
 
 
-        valide_commande: function(item) {
-
-
-     
-            axios.put(window.laravel.url + '/validation_commande',  item)
-            .then(response => {
-                
-                console.log(response.data);
-
-            })
-            .catch(error => {
-                console.log(error);
-            })
-
-         },
-
-
-       
-
         print(item) {
             
             window.location.href = "order/" + item.id + "/edit"
@@ -175,6 +159,36 @@ new Vue({
             }
 
         },
+
+        get_status(id) {
+
+            var status = "";
+
+            var color = '';
+
+            if(id == 1){
+                status = "En cours"
+                color = '#ff9800'; 
+            }
+
+            if(id == 2){
+                status = "Validé"
+                color = '#4caf50';
+            }
+
+
+            if(id == 3){
+                status = "Refuser"
+                color = '#f44336';
+            }
+
+
+            var role_print = '<a style="background-color: ' + color + ';" class="badge badge-primary  p-2">' + status + '</a>';
+
+            return role_print;
+        },
+
+        
         remove_item() {
 
             if(this.btn_control){

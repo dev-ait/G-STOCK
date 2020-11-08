@@ -8,6 +8,11 @@ use App\Models\Client;
 use App\Models\Order;
 use App\Models\Product_order;
 
+use Illuminate\Support\Facades\Auth;
+
+
+use Sentinel;
+
 class OrderController extends Controller
 {
     /**
@@ -19,9 +24,10 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index()
     {
-        
+     
         return view('order.indexOrder');
     }
 
@@ -35,10 +41,44 @@ class OrderController extends Controller
 
     public function getorder(){
 
-        $orders= Order::all(); 
-     
 
-     
+        $id = Auth::id();
+        $user = Sentinel::findById($id);
+
+
+        $role = $user->roles[0]->slug;
+
+   
+        if ($user->inRole($role) && $role != "admin" )
+        {
+            if ($user->hasAccess(['order.delete_validation']))
+            {
+                $orders = Order::where('status', '=', '1' )->get();
+            }            
+        }
+
+
+        if ($user->inRole($role) && $role != "admin" )
+        {
+            if ($user->hasAccess(['order.view']))
+            {
+                $orders = Order::where('status', '=', '2' )->get();
+            }            
+        }
+
+        if ($user->inRole($role) )
+        {
+            if ($user->hasAccess(['order.create']))
+            {
+                $orders = Order::where('user_id', '=', $id  )->get();
+            }            
+        }
+
+        if ( $user->inRole('admin') or $id == 1 )
+        {
+                $orders= Order::all();                
+            
+        }
 
 
         for($i=0;$i<count($orders);$i++)
@@ -54,6 +94,7 @@ class OrderController extends Controller
              'total'=> $orders[$i]->total,
              'typepaiement'=> $orders[$i]->typepaiement,
              'statutpaiement'=> $orders[$i]->statutpaiement,
+             'status'=> $orders[$i]->status,
   
             ];
         
@@ -65,7 +106,7 @@ class OrderController extends Controller
 
 
 
-        $data = array( 'orders'=> $att);
+        $data = array( 'orders'=> $att , 'user' => $user );
         return $data;
 
         echo json_encode($data);
@@ -100,7 +141,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $id_user = Auth::id();
 
         if($request->isMethod('post')){
 
@@ -111,7 +152,10 @@ class OrderController extends Controller
             $add_order->date_create= $request->input('date_commande');
             $add_order->total= $request->input('total');    
             $add_order->typepaiement= $request->input('typepaiement');
-            $add_order->statutpaiement= $request->input('statutpaiement');  
+            $add_order->statutpaiement= $request->input('statutpaiement'); 
+            $add_order->user_id = $id_user;  
+            $add_order->status = '1';  
+
             $add_order->save();
 
             for($i=0;$i<count($request->totalp);$i++){
@@ -175,6 +219,7 @@ class OrderController extends Controller
          'total'=> $order->total,
          'typepaiement'=> $order->typepaiement,
          'statutpaiement'=> $order->statutpaiement,
+         'status'=> $order->status,
 
         ];
 
@@ -243,9 +288,27 @@ class OrderController extends Controller
 
     public function validation_commande(Request $request)
     {
-           return 
+           
            $id = $request->id;
-           $validation =  Order::find($id);
+           $validation_order =  Order::find($id);
+           if($request->action == 'valider') {
+
+            $validation_order->status = '2';
+
+           }
+
+           if($request->action == 'reject') {
+
+            $validation_order->status = '3';
+
+           }
+          
+           $validation_order->save();
+
+            return Response()->json([ 'etat' => true , 'id' => $id   ]);
+            exit;
+
+
     }
 
 
