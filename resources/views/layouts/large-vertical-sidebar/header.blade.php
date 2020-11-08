@@ -164,7 +164,7 @@
         <div class="dropdown">
             <div class="user col align-self-end">
                
-                <i aria-hidden="true" class="v-icon notranslate mdi mdi-message-text theme--light blue--text text--darken-2" style="font-size: 25px;" id="userDropdown" alt="" data-toggle="dropdown"></i>
+                <i aria-hidden="true" class="v-icon notranslate v-icon--left mdi mdi-account-circle-outline theme--light" id="userDropdown" alt="" data-toggle="dropdown"></i>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <div class="dropdown-header">
