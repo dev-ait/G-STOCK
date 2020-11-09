@@ -153,7 +153,7 @@
                             <span class="flex-grow-1"></span>
                             <span class="text-small text-muted ml-auto">14 hours ago</span>
                         </p>
-                        <p class="text-small text-muted m-0">Server rebooted successfully</p>
+                        <p class="text-small text-muted m-0">Serve    r rebooted successfully </p>
                     </div>
                 </div>
             </div>
@@ -170,9 +170,7 @@
                     <div class="dropdown-header">
                         <i class="i-Lock-User mr-1"></i> {{ Auth::user()->name }} 
                     </div>
-                    <a class="dropdown-item">Account settings</a>
-                    <a class="dropdown-item">Billing history</a>
-                  
+                    <a class="dropdown-item" href="{{ url ('user/'.Auth::user()->id.'/edit_owner') }}">Paramètres du compte </a>                  
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a> 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;"> @csrf </form>
                 </div>

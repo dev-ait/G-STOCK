@@ -15,7 +15,7 @@ $(document).ready(function() {
         var email = $("#email").val();
         var password = $("#password").val();
         var role_id = $("#role_id").val();
-
+        var type_user = $("#type_user").val();
         var project_id = $('#project_id').val(); 
 
       
@@ -41,7 +41,8 @@ $(document).ready(function() {
                 email: email,
                 password: password,
                 role_id: role_id,
-                project_id :project_id 
+                project_id :project_id ,
+                type_user: type_user,
             },
             type: 'post',
             dataType: 'json',
@@ -50,7 +51,12 @@ $(document).ready(function() {
                 console.log(data);
 
 
-                if (data.etat == true) {
+                if (data.redirect_home == true) {
+                    window.location.href = '/';
+                }
+
+
+                if (data.redirect_users == true) {
                     window.location.href = '/users';
                 }
 

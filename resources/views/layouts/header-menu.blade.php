@@ -156,8 +156,7 @@
                             <div class="dropdown-header">
                                 <i class="i-Lock-User mr-1"></i> Timothy Carlson
                             </div>
-                            <a class="dropdown-item">Account settings</a>
-                            <a class="dropdown-item">Billing history</a>
+                            <a class="dropdown-item">Paramètres du compte</a>
                             <a class="dropdown-item" href="{{route('signIn')}}">Sign out</a>
                         </div>
                     </div>

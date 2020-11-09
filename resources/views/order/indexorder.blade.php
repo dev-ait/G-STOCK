@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.master')
 @section('main-content')
 <link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/materialdesignicons.min.css') }}>
@@ -8,20 +5,12 @@
 <link rel="stylesheet" type="text/css" href={{ asset('assets/styles/css/custom_vuetify.css') }}>
 <style>
    .theme--light .teal {
-    background-color: #009688!important;
-    border-color: #009688!important;
-}
+   background-color: #009688!important;
+   border-color: #009688!important;
+   }
 </style>
 <div class="breadcrumb">
-
-
-
-
-
-
-     <h1>  La liste des Commandes </h1>
-       
- 
+   <h1>  La liste des Commandes </h1>
 </div>
 <div class=" border-top"></div>
 <div id="app_order" data-app >
@@ -51,19 +40,14 @@
                                  <button class="btn btn-outline-secondary btn-block mb-4" >
                                  Parametres
                                  </button>
-                           
                                  <!-- end:modal  -->
                                  <div class="list-group" id="list-tab" role="tablist">
-
                                     @if ($user_logged->inRole($current_user_name_role)  )
-
-                                       @if ($user_logged->hasAccess(['order.delete_validation']))
-                                   
+                                      @if ($user_logged->hasAccess(['order.delete_validation']))
                                     <a  @click="remove_item" class="list-group-item list-group-item-action border-0" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings" aria-selected="false">
                                     <i class="nav-icon i-Remove"></i>
                                     Supprimer</a>
-                                       @endif
-       
+                                      @endif
                                     @endif
                                     <label for="" class="text-muted font-weight-600 py-8">MEMBERS</label>
                                     <a class="list-group-item list-group-item-action border-0 " id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
@@ -84,92 +68,52 @@
                         <div class="card">
                            <v-card>
                               <v-card-title>
-                                 la liste des Commandes                                 <v-spacer></v-spacer>
+                                 la liste des Commandes                                 
+                                 <v-spacer></v-spacer>
                               </v-card-title>
                               <v-data-table  @input="item($event)" :headers="headers" :items="orders" :search="search" :value="selectedRows" v-model="selected" :items-per-page="10"  :sort-by.sync="sortBy"
-                              :sort-desc.sync="sortDesc" show-select   item-key="id"
-                              :expanded.sync="expanded" @click:row="clicked">
-
-
-                              
-                              @if ($user_logged->inRole($current_user_name_role)  )
-
-                              @if ($user_logged->hasAccess(['order.delete_validation']))
-
-                              <template v-slot:item.details="{ item }">
-
-                            
-
-                                  <v-btn 
-                                  depressed
-                                  color="purple"   small   dark   @click="print(item)"
-                                  >
-                                  Voir
-                                </v-btn>
-
-                              </template>
-
-                              @endif
-       
-                              @endif
-
-
-
-
-
-
-                           
-
-
-                              <template v-slot:item.status="{ item }">
-                              
-                               
-
-                                 <div v-html="get_status(item.status)"> </div>
-
-
-
-                       
-
-                               </template>
-
-
-                              <template v-slot:item.action="{ item }" >
-                              
-                                 
-                                 <v-btn align-center  class="mx-0"  small  fab dark color="teal" @click="show_order_product(item)">
-                                    <v-icon dark>mdi-format-list-bulleted-square</v-icon>
-                                  </v-btn>
-                                 
-                              
-                                 <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
-                                    <v-card>
-                                       <v-card-title>
-                                          <span class="headline">Les produits commandes</span>
-                                       </v-card-title>
-                              
-                                       <v-data-table :headers="subHeaders"
-                                       :items="product_order"
-                                       item-key="color"
-                                       hide-actions
-                                       class="elevation-10">
-                              
-                                            </v-data-table>
-                              
-                                       </v-card-title>
-                                       <v-card-actions>
-                                          <v-spacer></v-spacer>
-                                          <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
-                                     
-                                       </v-card-actions>
-                                    </v-card>
-                                 </v-dialog>
-                              </template>
-                              
-                              
-                              </template>
+                                 :sort-desc.sync="sortDesc" show-select   item-key="id"
+                                 :expanded.sync="expanded" @click:row="clicked">
+                                 @if ($user_logged->inRole($current_user_name_role)  )
+                                 @if ($user_logged->hasAccess(['order.delete_validation']))
+                                 <template v-slot:item.details="{ item }">
+                                    <v-btn 
+                                       depressed
+                                       color="purple"   small   dark   @click="print(item)"
+                                       >
+                                       Voir
+                                    </v-btn>
+                                 </template>
+                                 @endif
+                                 @endif
+                                 <template v-slot:item.status="{ item }">
+                                    <div v-html="get_status(item.status)"> </div>
+                                 </template>
+                                 <template v-slot:item.action="{ item }" >
+                                    <v-btn align-center  class="mx-0"  small  fab dark color="teal" @click="show_order_product(item)">
+                                       <v-icon dark>mdi-format-list-bulleted-square</v-icon>
+                                    </v-btn>
+                                    <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
+                                       <v-card>
+                                          <v-card-title>
+                                             <span class="headline">Les produits commandes</span>
+                                          </v-card-title>
+                                          <v-data-table :headers="subHeaders"
+                                             :items="product_order"
+                                             item-key="color"
+                                             hide-actions
+                                             class="elevation-10">
+                                          </v-data-table>
+                                          </v-card-title>
+                                          <v-card-actions>
+                                             <v-spacer></v-spacer>
+                                             <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
+                                          </v-card-actions>
+                                       </v-card>
+                                    </v-dialog>
+                                 </template>
+                                 </template>
                               </v-data-table>
-                              
                            </v-card>
                         </div>
                      </div>
@@ -198,5 +142,3 @@
 </script>
 <script src="{{ asset('js/app_order.js') }}"></script>
 @endsection
-
-

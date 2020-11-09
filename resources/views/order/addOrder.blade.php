@@ -195,7 +195,7 @@
                     <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
                      <option class="select2-results__group"  value="">Selectionner le Client</option>
                      @foreach ($clients as $client)
-                     <option  value="{{$client->id}}">{{$client->nom}}</option>
+                     <option  value="{{$client['id']}}">{{$client['name']}}</option>
                      @endforeach
                   </select>
                   </div>

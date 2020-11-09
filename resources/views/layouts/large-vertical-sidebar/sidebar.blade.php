@@ -63,6 +63,8 @@
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
         <!-- Submenu commandes -->
         <ul class="childNav" data-parent="commandes">
+            @if ($user_logged->inRole($current_user_name_role)  )
+              @if ($user_logged->hasAccess(['order.create']))
             <li class="nav-item ">
                 <a class="{{ Route::currentRouteName()=='order/create' ? 'open' : '' }}"
                     href=" {{ route('order.create') }}">
@@ -70,6 +72,8 @@
                     <span class="item-name">Nouvelle commande</span>
                 </a>
             </li>
+             @endif
+            @endif
             <li class="nav-item">
                 <a href="{{ route('order.index') }}"
                     class="{{ Route::currentRouteName()=='order' ? 'open' : '' }}">

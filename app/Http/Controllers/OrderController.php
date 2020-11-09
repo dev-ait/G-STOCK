@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Client;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Product_order;
 
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,33 @@ class OrderController extends Controller
     public function create()
     {
         $products= Product::all();
-        $clients= Client::all();
+
+        $id = Auth::id();
+        $user = User::find($id);
+
+       
+        $project = $user->project[0]->clients_id;
+
+
+        
+        
+
+            $arry_project = json_decode($project, true);
+
+            for ($i = 0;$i < count($arry_project);$i++)
+            {
+
+                $clients[] = array(
+                    'id' => Client::find((int)$arry_project[$i]['id'])->id,
+                    'name' => Client::find((int)$arry_project[$i]['id'])->nom,
+
+                );
+            }
+
+        
+
+         
+
         $data = array( 'products'=> $products , 'clients'=> $clients);
         return view('order.addOrder',$data);
     }
@@ -48,37 +75,39 @@ class OrderController extends Controller
 
         $role = $user->roles[0]->slug;
 
-   
-        if ($user->inRole($role) && $role != "admin" )
-        {
-            if ($user->hasAccess(['order.delete_validation']))
-            {
-                $orders = Order::where('status', '=', '1' )->get();
-            }            
-        }
-
-
-        if ($user->inRole($role) && $role != "admin" )
-        {
-            if ($user->hasAccess(['order.view']))
-            {
-                $orders = Order::where('status', '=', '2' )->get();
-            }            
-        }
-
-        if ($user->inRole($role) )
-        {
-            if ($user->hasAccess(['order.create']))
-            {
-                $orders = Order::where('user_id', '=', $id  )->get();
-            }            
-        }
 
         if ( $user->inRole('admin') or $id == 1 )
         {
                 $orders= Order::all();                
             
+        }else if ($user->inRole($role) && $role != "admin" ) {
+
+            if ($user->hasAccess(['order.delete_validation']))
+            {
+                $orders = Order::where('status', '=', '1' )->get();
+
+            }  else  if ($user->hasAccess(['order.view']))
+            {
+                $orders = Order::where('status', '=', '2' )->get();
+                
+            } else  if ($user->hasAccess(['order.create']))
+            {
+                $user = User::find($id) ;   
+
+                $orders = $user->order()->get();
+            } 
+                      
         }
+
+   
+
+
+        
+     
+
+        
+
+       
 
 
         for($i=0;$i<count($orders);$i++)

@@ -142,6 +142,8 @@ Route::delete('/delete_user/{id}', [App\Http\Controllers\UserController::class, 
 
 Route::get('/user/{id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
 
+Route::get('/user/{id}/edit_owner', [App\Http\Controllers\UserController::class, 'edit_owner'])->name('edit_owner');
+
 Route::post('/update_user',[App\Http\Controllers\UserController::class, 'update']);
 
 

@@ -125,9 +125,58 @@ class UserController extends Controller
 
     }
 
-  
+    public function edit_owner($id)
+    {
 
+        $user = Sentinel::findById($id);
+        $role = Role::all();
+        $clients = Client::all();
+        $projets = Project::where('user_id', '=', $id)->first();
 
+        $client = [];
+
+        if (!empty($projets))
+        {
+
+            $arry_project = json_decode($projets->clients_id, true);
+
+            for ($i = 0;$i < count($arry_project);$i++)
+            {
+
+                $client[] = array(
+                    'id' => Client::find((int)$arry_project[$i]['id'])->id,
+                    'name' => Client::find((int)$arry_project[$i]['id'])->nom,
+
+                );
+            }
+
+        }
+
+        $role_user = '';
+
+        if (!empty($user->roles[0]))
+        {
+            $role_user = $user->roles[0]->name;
+        }
+
+        $att = array(
+            'id' => $user->id,
+            'nom' => $user->name,
+            'email' => $user->email,
+            'role' => $role_user,
+        );
+
+        $data = array(
+            "user" => $att,
+            'roles' => $role,
+            'projets' => $role,
+            'project' => $client,
+            'clients' => $clients
+        );
+
+        return view('utilisateurs.user_owner_update', $data);
+
+    }
 
     public function destroy($id)
     {
@@ -155,13 +204,12 @@ class UserController extends Controller
             exit;
         }
 
-        if ($request->input('role_id') == '')
-        {
-            return Response()
-                ->json(['etat' => false, 'text' => 'Role']);
-            exit;
-        }
-
+        // if ($request->input('role_id') == '')
+        // {
+        //     return Response()
+        //         ->json(['etat' => false, 'text' => 'Role']);
+        //     exit;
+        // }
         if ($request->isMethod('post'))
         {
 
@@ -175,60 +223,84 @@ class UserController extends Controller
             }
             $user->save();
 
-            $user_role = Role_user::where('user_id', '=', $request->input('id'))
-                ->first();
-
-            if (!empty($user_role->role_id))
+            if (empty($request->type_user))
             {
 
-                $user_role->role_id = $request->input('role_id');
-                $user_role->save();
+                $user_role = Role_user::where('user_id', '=', $request->input('id'))
+                    ->first();
+
+                if (!empty($user_role->role_id))
+                {
+
+                    $user_role->role_id = $request->input('role_id');
+                    $user_role->save();
+
+                } else{
+
+                    
+                    $role_user = new Role_user();
+                    $role_user->user_id = $request->input('id');
+                    $role_user->role_id = $request->input('role_id');
+                    $role_user->save();
+
+
+                }
+
+                
+
+                $project_update = Project::where('user_id', '=', $request->input('id'))
+                    ->first();
+
+                if (!empty($request->project_id))
+                {
+
+                    for ($i = 0;$i < count($request->project_id);$i++)
+                    {
+                        $index_project_id[] = array(
+                            'id' => $request->project_id[$i]
+                        );
+                        $project_id_json = json_encode($index_project_id);
+
+                    }
+
+                }
+
+                if (!empty($project_update))
+                {
+
+                    $project_update->clients_id = $project_id_json;
+                    $project_update->save();
+
+                }else{
+
+                    $project = new Project();
+                    $project->user_id = $request->input('id');
+                    $project->clients_id = $project_id_json;
+
+                    $project->save();
+
+
+                }
+
+              
 
             }
 
-            if (empty($user_role->role_id))
+            if (!empty($request->type_user))
             {
 
-                $role_user = new Role_user();
-                $role_user->user_id = $request->input('id');
-                $role_user->role_id = $request->input('role_id');
-                $role_user->save();
+                return Response()
+                    ->json(['redirect_home' => true ] );
+
+            }
+            else
+            {
+
+                return Response()
+                    ->json(['redirect_users' => true]);
 
             }
 
-            $project_update = Project::where('user_id', '=', $request->input('id'))
-                ->first();
-
-            for ($i = 0;$i < count($request->project_id);$i++)
-            {
-                $index_project_id[] = array(
-                    'id' => $request->project_id[$i]
-                );
-                $project_id_json = json_encode($index_project_id);
-
-            }
-
-            if (!empty($project_update))
-            {
-
-                $project_update->clients_id = $project_id_json;
-                $project_update->save();
-
-            }
-
-            if (empty($project_update))
-            {
-
-                $project = new Project();
-                $project->user_id = $request->input('id');
-                $project->clients_id = $project_id_json;
-
-                $project->save();
-
-            }
-
-            return Response()
-                ->json(['etat' => true]);
         }
 
     }
@@ -236,7 +308,6 @@ class UserController extends Controller
     public function permission_order()
     {
 
-   
         $roles = Sentinel::getRoleRepository()->get();
         $menu = 'order';
 

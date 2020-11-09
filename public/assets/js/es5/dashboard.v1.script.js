@@ -107,7 +107,7 @@ $(document).ready(function () {
             },
 
             series: [{
-                name: 'Sales by Country',
+                name: 'Les utilisateurs les plus Commandés',
                 type: 'pie',
                 radius: '60%',
                 center: ['50%', '50%'],
