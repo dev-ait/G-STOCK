@@ -28,12 +28,17 @@ class OrderController extends Controller
 
     public function index()
     {
+
+        $this->authorize('view_all_page_order');
      
         return view('order.indexOrder');
     }
 
     public function create()
     {
+        $this->authorize('view_page_create_order');
+        $this->authorize('view_all_page_order');
+
         $products= Product::all();
 
         $id = Auth::id();

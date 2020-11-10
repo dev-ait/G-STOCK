@@ -168,7 +168,7 @@
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <div class="dropdown-header">
-                        <i class="i-Lock-User mr-1"></i> {{ Auth::user()->name }} 
+                        <i class="i-Lock-User mr-1"></i> {{ Auth::user()->name }}  
                     </div>
                     <a class="dropdown-item" href="{{ url ('user/'.Auth::user()->id.'/edit_owner') }}">Paramètres du compte </a>                  
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a> 

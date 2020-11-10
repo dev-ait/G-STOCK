@@ -98,6 +98,9 @@
                                     <template v-slot:item.img="{ item }">
                                        <img :src="'images/' + item.photo" style="width: 55px; height: 55px" />
                                     </template>
+                                    <template v-slot:item.status="{ item }">
+                                        <div v-html="get_status(item.statut)"> </div>
+                                     </template>
                                     <template v-slot:item.action="{ item }">
                                         <v-btn color="purple" fab small dark  @click="editItem(item)">
                                             <i class="nav-icon i-Pen-2 font-weight-bold"></i>

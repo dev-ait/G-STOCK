@@ -4,6 +4,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 $(document).ready(function () {
 
+  
+
+
+ 
+
+
+
     // Chart in Dashboard version 1
     var echartElemBar = document.getElementById('echartBar');
     if (echartElemBar) {
@@ -95,8 +102,24 @@ $(document).ready(function () {
         });
     }
 
+    
+
     // Chart in Dashboard version 1
     var echartElemPie = document.getElementById('echartPie');
+
+    var set_data =[];
+    for (let i = 0; i < user_statistique_order.length; ++i) {
+       
+        var data = { value: user_statistique_order[i]["total"] , name: user_statistique_order[i]["name"] } ;
+         set_data.push(data)
+    }
+   
+
+
+
+
+     
+      
     if (echartElemPie) {
         var echartPie = echarts.init(echartElemPie);
         echartPie.setOption({
@@ -111,7 +134,7 @@ $(document).ready(function () {
                 type: 'pie',
                 radius: '60%',
                 center: ['50%', '50%'],
-                data: [{ value: 535, name: 'USA' }, { value: 310, name: 'Brazil' }, { value: 234, name: 'France' }, { value: 155, name: 'BD' }, { value: 130, name: 'UK' }, { value: 348, name: 'India' }],
+                data: set_data,
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,

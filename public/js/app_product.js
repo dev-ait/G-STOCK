@@ -43,7 +43,7 @@ new Vue({
                 },
                 {
                     text: 'Statut',
-                    value: 'statut'
+                    value: 'status'
                 },
                 {
                     text: 'Gategorie',
@@ -101,6 +101,33 @@ new Vue({
                 this.expanded.splice(index, 1)
             }
 
+        },
+
+
+        get_status(status_item) {
+
+            console.log(status_item);
+
+            var text = "";
+
+            var color = '';
+
+            if(status_item == 'Disponible'){
+                text = "Disponible"
+                color = 'badge-success'; 
+            }
+
+            if(status_item == 'Non Disponible'){
+                text = "Non Disponible"
+                color = 'badge-danger';
+            }
+
+
+
+
+            var status_print = '<span  class="badge badge-pill ' + color + '  p-2 m-1">' + text + '</span>';
+
+            return status_print;
         },
 
 

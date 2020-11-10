@@ -228,9 +228,9 @@ class ProductController extends Controller
             $add_Product->marque_id = $request->input('marque');
             $add_Product->photo_id =  $request->input('photo');
             $add_Product->modele_id =  $request->input('modele_id');
-            $add_Product->save();
+            $add_Product->save(); 
             session()->flash('succes','le produit '.$add_Product->titre.' a été bien enregistré');
-           return Response()->json(['etat' => true ]);
+           return Response()->json(['etat' => true ]); 
          
              
             

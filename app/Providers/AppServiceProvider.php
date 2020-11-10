@@ -66,6 +66,61 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+        Gate::define('view_page_create_order', function ()
+        {
+            $value = false;
+
+            $id = Auth::id();
+            $user = Sentinel::findById($id);
+           
+
+            if (!empty($user->roles[0]))
+            {
+                $role = $user->roles[0]->slug;
+               
+               
+                if ($user->inRole($role))
+                {
+                    if ($user->hasAccess(['order.create']))
+                    {
+                        $value = true;
+                    }
+                }
+
+            }
+
+            return $value;
+
+        });
+
+
+        Gate::define('view_all_page_order', function ()
+        {
+            $value = false;
+
+            $id = Auth::id();
+            $user = Sentinel::findById($id);
+           
+
+            if (!empty($user->roles[0]))
+            {
+                $role = $user->roles[0]->slug;
+               
+               
+                if ($user->inRole($role))
+                {
+                    if ($user->hasAccess(['order.read']))
+                    {
+                        $value = true;
+                    }
+                }
+
+            }
+
+            return $value;
+
+        });
+
         Gate::define('admin_access_all_page_utilisateurs', function ($user)
         {
             $value = false;
@@ -88,8 +143,6 @@ class AppServiceProvider extends ServiceProvider
 
                    }
                 }
-
-
             
             return $value;
 

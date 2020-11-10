@@ -49,7 +49,11 @@
                  @endif
     
             
+            @if ($user_logged->inRole($current_user_name_role))
 
+
+                @if ($user_logged->hasAccess(['order.read']))
+        
             <li class="nav-item {{ request()->is('order')  ? 'active' : '' }}  {{ request()->is('order/create')  ? 'active' : '' }}" data-item="commandes">
                 <a class="nav-item-hold" href="#">
                     <i class="nav-icon i-Full-Cart"></i>
@@ -57,6 +61,9 @@
                 </a>
                 <div class="triangle"></div>
             </li>
+               @endif
+    
+            @endif
         </ul>
     </div>
 
