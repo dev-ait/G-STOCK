@@ -169,13 +169,7 @@ function getProductData(row = null) {
                 $("#price" + row).html(price);
                 $("#priceValue" + row).val(price);
                 $("#quantite" + row).val(quantite);
-
-                
-                $("#quantite" + row).val();
-                $("#quantite" + row).attr({
-                    "max" : data.product.quantite,        
-                    "min" : 0         
-                 });
+           
 
                 var total = Number(data.product.prix) * Number(data.product.quantite);
              

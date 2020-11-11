@@ -70,9 +70,9 @@
                 <thead>
                   <tr>
                     <th scope="col">Product</th>
-                    <th scope="col">Price</th>
+                    <th scope="col"></th>
                     <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
+                    <th scope="col"></th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -86,14 +86,14 @@
                         @endforeach
                      </select>
                     </td>
-                    <td> <div class="d-flex "> <div id="price1"> 0  </div>  <span class="text-muted pl-1">DH</span>  </div> 
+                    <td> <div class="d-flex "> <div id="price1" class="d-none" > 0  </div>   </div> 
                       <input type="hidden" id="priceValue1" name="rate[]" class="form-control input_or" >
                     </td>
                     <td>
                        <input type="number" onclick="calcul_total(1)" value="0" id="quantite1" name="quantite[]" class="form-control input_or" required>
                       
                     </td>
-                    <td><div class="d-flex "> <div id="total_product1"> 0.00  </div>  <span class="text-muted pl-1">DH</span>
+                    <td><div class="d-flex "> <div id="total_product1" class="d-none" > 0.00  </div> 
                       <input type="hidden" id="total_productValue1" name="totalp[]" class="form-control input_or">
                      </td>
                     <td>
@@ -109,9 +109,9 @@
               <div class="col-lg-12 mt-5">
                 <div class="ul-product-cart__invoice">
                   <div class="card-title">
-                    <h4 class="heading text-primary">Total Payment</h4>
+                    <h4 class="heading text-primary d-none">Total Payment</h4>
                   </div>
-                  <table class="table">
+                  <table class="table d-none">
                     <tbody>
                       <tr>
                         <th scope="row" class="text-16">Sous Total</th>
@@ -194,9 +194,12 @@
                     <label for="inputtext14" class="ul-form__label">Nom de client:</label>
                     <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
                      <option class="select2-results__group"  value="">Selectionner le Client</option>
+                     @if (!empty($clients))
                      @foreach ($clients as $client)
                      <option  value="{{$client['id']}}">{{$client['name']}}</option>
                      @endforeach
+                     @endif
+                   
                   </select>
                   </div>
                   <div class="form-group col-md-6">

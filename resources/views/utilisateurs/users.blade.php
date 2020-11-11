@@ -52,7 +52,8 @@
                                                       <v-text-field
                                                          label="Email*"
                                                          v-model="user_a.email"
-                                                         :rules="emailRules"
+                                                        
+                                                         :rules="[checkDuplicate, rules.required]"
                                                          required
                                                          ></v-text-field>
                                                    </v-col>
@@ -181,13 +182,8 @@
                               :sort-desc.sync="sortDesc" show-select  item-key="id"
                               :expanded.sync="expanded" @click:row="clicked">
                               <template v-slot:item.roles="{ item }">
-                              
-                               
 
-                                     <div  v-if="check_role(item.roles[0])" v-html="get_color(item.roles[0].name,item.roles[0].color)"> </div>
-
-
-
+                                     <div  v-if="check_role(item.roles[0])" v-html="get_color(  item.roles[0].name , item.roles[0].color )"> </div>         
                            
 
                               </template>
@@ -201,7 +197,7 @@
                                  <v-dialog v-model="dialog" max-width="500px">
                                     <v-card>
                                        <v-card-title>
-                                          <span class="headline">Modifier l 'utilisateur</span>
+                                          <span class="headline"> Modifier l 'utilisateur   </span>
                                        </v-card-title>
                                        <v-container>
                                           <v-row class="pl-3 pr-3" >

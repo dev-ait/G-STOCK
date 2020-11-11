@@ -44,24 +44,32 @@ class OrderController extends Controller
         $id = Auth::id();
         $user = User::find($id);
 
-       
-        $project = $user->project[0]->clients_id;
+        $clients= [];
+         
 
-
-        
-        
-
+        if(!empty($user->project[0]->clients_id)){
+            $project = $user->project[0]->clients_id;
+            
             $arry_project = json_decode($project, true);
 
             for ($i = 0;$i < count($arry_project);$i++)
             {
 
                 $clients[] = array(
-                    'id' => Client::find((int)$arry_project[$i]['id'])->id,
+                    'id'   =>   Client::find((int)$arry_project[$i]['id'])->id,
                     'name' => Client::find((int)$arry_project[$i]['id'])->nom,
 
                 );
             }
+
+        }
+       
+       
+
+
+        
+        
+
 
         
 
@@ -197,15 +205,12 @@ class OrderController extends Controller
                 $id = $request->product[$i];
                 $nom_produit =  Product::find($id);
                 $products_item->nom_produit = $nom_produit->titre;
+                $products_item->id_product = $id ;
                 $products_item->total = $request->totalp[$i];
                 $products_item->prix = $request->rate[$i];
                 $products_item->quantite = $request->quantite[$i];
                 $products_item->order_id = $add_order->id;
                 $products_item->save();
-                $up_product =  Product::find($id);
-                $quantite_product = $up_product->quantite;
-                $up_product->quantite =  $quantite_product  - $request->quantite[$i];
-                $up_product->save();
             }
 
             return redirect('order');
@@ -325,22 +330,25 @@ class OrderController extends Controller
            
            $id = $request->id;
            $validation_order =  Order::find($id);
-           if($request->action == 'valider') {
+        //    if($request->action == 'valider') {
 
-            $validation_order->status = '2';
+        //     $validation_order->status = '2';
 
-           }
+        //    }
 
-           if($request->action == 'reject') {
+        //    if($request->action == 'reject') {
 
-            $validation_order->status = '3';
+        //     $validation_order->status = '3';
 
-           }
+        //    }
           
-           $validation_order->save();
+        // $up_product =  Product::find($id);
+        // $quantite_product = $up_product->quantite;
+        // $up_product->quantite =  $quantite_product  - $request->quantite[$i];
+        // $up_product->save();
 
-            return Response()->json([ 'etat' => true , 'id' => $id   ]);
-            exit;
+        //     return Response()->json([ 'etat' => true , 'id' => $id   ]);
+        //     exit;
 
 
     }

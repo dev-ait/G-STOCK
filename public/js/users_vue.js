@@ -15,9 +15,12 @@ new Vue({
               ],
               emailRules: [
                 v => !!v || 'Le Champs Nom est obligatoire',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+                v => /.+@.+\..+/.test(v) || 'Email doit être valide',
             
               ],
+              rules: {
+                required: v => !!v || 'this field is required',
+              },
               passwordRules: [
                 v => !!v || 'Le Champs Nom est obligatoire',
             
@@ -133,6 +136,18 @@ new Vue({
 
 
     methods: {
+
+
+        checkDuplicate(val) {
+ 
+           
+            if (val == 'mehdi@gmail.com') {
+              return `Name "${val}" already exist`;
+             } else {
+               return true;
+             }
+            
+          },
 
 
         resetValidation () {
@@ -258,7 +273,7 @@ new Vue({
                                 console.log(error);
                             })
 
-                        const index = this.users.indexOf(item.id);
+                        const index = this.users.indexOf(item);
 
 
                         this.users.splice(index, 1);
