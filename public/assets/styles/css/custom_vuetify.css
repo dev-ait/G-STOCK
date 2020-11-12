@@ -38,6 +38,14 @@
 .v-color-picker__dot {
     margin-right: 15px;
 }
+i.v-icon.notranslate.mdi.mdi-folder-open.theme--light {
+    color: #ff8f00!important;
+    caret-color: #ff8f00!important;
+}
+i.v-icon.notranslate.mdi.mdi-folder.theme--light {
+    color: #ffc107!important;
+    caret-color: #ffc107!important;
+}
 .v-messages__message {
     color: #ff5252 !important;
     caret-color: #ff5252 !important;

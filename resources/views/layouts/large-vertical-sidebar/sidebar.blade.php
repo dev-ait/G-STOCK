@@ -64,6 +64,13 @@
                @endif
     
             @endif
+            <li class="nav-item {{ request()->is('order')  ? 'active' : '' }}  {{ request()->is('order/create')  ? 'active' : '' }}" data-item="commandes">
+                <a class="nav-item-hold" href="#">
+                    <i class="nav-icon i-Data-Copy"></i>
+                    <span class="nav-text">Dossier</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
         </ul>
     </div>
 
