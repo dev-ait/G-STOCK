@@ -119,6 +119,7 @@ Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class
 Route::resource('order', App\Http\Controllers\OrderController::class);
 Route::post('/getphone',[App\Http\Controllers\OrderController::class, 'get_phone_client']);
 Route::get('/getorder',[App\Http\Controllers\OrderController::class, 'getorder']);
+Route::get('/create_order_s',[App\Http\Controllers\OrderController::class, 'create_superviseur']);
 Route::post('/validation_commande',[App\Http\Controllers\OrderController::class, 'validation_commande']);
 Route::post('update_order', [App\Http\Controllers\OrderController::class, 'update']);
 Route::delete('/deleteproduct/{id}',[App\Http\Controllers\OrderController::class, 'destroy']);

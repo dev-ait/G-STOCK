@@ -34,6 +34,7 @@ class OrderController extends Controller
         return view('order.indexOrder');
     }
 
+
     public function create()
     {
         $this->authorize('view_page_create_order');
@@ -64,19 +65,46 @@ class OrderController extends Controller
 
         }
        
-       
-
-
-        
-        
-
-
-        
-
          
 
         $data = array( 'products'=> $products , 'clients'=> $clients);
         return view('order.addOrder',$data);
+    }
+
+    public function create_superviseur()
+    {
+        $this->authorize('view_page_create_order');
+        $this->authorize('view_all_page_order');
+
+        $products= Product::all();
+
+        $id = Auth::id();
+        $user = User::find($id);
+
+        $clients= [];
+         
+
+        if(!empty($user->project[0]->clients_id)){
+            $project = $user->project[0]->clients_id;
+            
+            $arry_project = json_decode($project, true);
+
+            for ($i = 0;$i < count($arry_project);$i++)
+            {
+
+                $clients[] = array(
+                    'id'   =>   Client::find((int)$arry_project[$i]['id'])->id,
+                    'name' => Client::find((int)$arry_project[$i]['id'])->nom,
+
+                );
+            }
+
+        }
+       
+         
+
+        $data = array( 'products'=> $products , 'clients'=> $clients);
+        return view('order.addOrderSuperviseur',$data);
     }
 
     public function getorder(){
@@ -221,6 +249,56 @@ class OrderController extends Controller
 
     }
 
+
+
+    public function store_s(Request $request)
+    {
+        $id_user = Auth::id();
+
+        if($request->isMethod('post')){
+
+            $add_order= new Order();
+            $add_order->client_id= $request->input('idclient');
+            $add_order->subtotal= $request->input('subTotalvalue');
+            $add_order->tva= $request->input('tvavalue');
+            $add_order->date_create= $request->input('date_commande');
+            $add_order->total= $request->input('total');    
+            $add_order->typepaiement= $request->input('typepaiement');
+            $add_order->statutpaiement= $request->input('statutpaiement'); 
+            $add_order->user_id = $id_user;  
+            $add_order->status = '2';  
+
+            $add_order->save();
+
+            for($i=0;$i<count($request->totalp);$i++){
+                $products_item = new Product_order();
+                $id = $request->product[$i];
+                $nom_produit =  Product::find($id);
+                $products_item->nom_produit = $nom_produit->titre;
+                $products_item->id_product = $id ;
+                $products_item->total = $request->totalp[$i];
+                $products_item->prix = $request->rate[$i];
+                $products_item->quantite = $request->quantite[$i];
+                $products_item->order_id = $add_order->id;
+                $products_item->save();
+
+                $up_product =  Product::find($id);
+                $quantite_product = $up_product->quantite;
+                $up_product->quantite =  $quantite_product  - $request->quantite[$i];
+                $up_product->save();
+
+          
+
+            }
+
+            return redirect('order');
+        
+        }
+
+    
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -329,26 +407,45 @@ class OrderController extends Controller
     {
            
            $id = $request->id;
-           $validation_order =  Order::find($id);
-        //    if($request->action == 'valider') {
+           $order =  Order::find($id);
 
-        //     $validation_order->status = '2';
 
-        //    }
 
-        //    if($request->action == 'reject') {
+          $product_order = $order->orderproduct()->get();
 
-        //     $validation_order->status = '3';
 
-        //    }
-          
-        // $up_product =  Product::find($id);
-        // $quantite_product = $up_product->quantite;
-        // $up_product->quantite =  $quantite_product  - $request->quantite[$i];
-        // $up_product->save();
 
-        //     return Response()->json([ 'etat' => true , 'id' => $id   ]);
-        //     exit;
+
+           if($request->action == 'valider') {
+
+            $order->status = '2';
+
+           }
+
+           if($request->action == 'reject') {
+
+            $order->status = '3';
+
+           }
+
+
+             $order->save();
+
+
+           
+          for($i=0;$i<count($product_order);$i++){
+
+            $up_product =  Product::find($product_order[$i]->id_product);
+            $quantite_product = $up_product->quantite;
+            $up_product->quantite =  $quantite_product  - $product_order[$i]->quantite;
+            $up_product->save();
+        
+           }
+
+      
+           return Response()->json([ 'etat' => true , 'id' => $id   ]);
+           exit;
+
 
 
     }

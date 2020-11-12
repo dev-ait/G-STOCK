@@ -169,7 +169,13 @@ function getProductData(row = null) {
                 $("#price" + row).html(price);
                 $("#priceValue" + row).val(price);
                 $("#quantite" + row).val(quantite);
-           
+
+                
+                $("#quantite" + row).val();
+                $("#quantite" + row).attr({
+                    "max" : data.product.quantite,        
+                    "min" : 0         
+                 });
 
                 var total = Number(data.product.prix) * Number(data.product.quantite);
              
@@ -274,12 +280,7 @@ $(document).ready(function() {
     
 
  
-    $(document).on("change", "select.js-example-basic-single" , function() {
-        $("select.js-example-basic-single option[value='" + $(this).data('index') + "']").prop('disabled', false);
-        $(this).data('index', this.value);
-        $("select.js-example-basic-single option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
-        $(this).find("option[value='" + this.value + "']:not([value=''])").prop('disabled', false);
-     });
+ 
  
 
     $(".btn-add").click(function(e) {
@@ -348,12 +349,7 @@ $(document).ready(function() {
                     theme: "classic"
                 });
 
-                $(".js-example-basic-single").map(function() {
-                     if(this.value != null){
-                        $("select.js-example-basic-single option[value='" + this.value + "']:not([value=''])").prop('disabled', true);
-                     }
-                   
-                }).get();
+           
 
                
                 

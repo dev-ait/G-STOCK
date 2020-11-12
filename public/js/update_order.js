@@ -299,6 +299,7 @@ $(document).ready(function() {
         });
 
 
+
         $.ajax({
             url: ajax_url,
             type: 'post',
@@ -310,6 +311,8 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function(data) {
+
+           
 
                 if(data.etat == true){
 
