@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Folder;
+
 class FolderController extends Controller
 {
     /**
@@ -23,9 +25,36 @@ class FolderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+
+    public function test(){
+
+       echo $ttt='fff';
+
+    }
+
+
+
+    public function get_folders_items()
     {
-        //
+
+        $folder= Folder::whereNull('parentId')->get(); 
+
+
+
+    
+         
+        
+        
+        
+
+    
+       $data = array( 'all'=> $this->test() );
+   
+
+       echo json_encode($data);
+       exit;
+    
     }
 
     /**

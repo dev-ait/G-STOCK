@@ -438,7 +438,7 @@ class OrderController extends Controller
             $up_product =  Product::find($product_order[$i]->id_product);
             $quantite_product = $up_product->quantite;
             $up_product->quantite =  $quantite_product  - $product_order[$i]->quantite;
-            $up_product->save();
+            $up_product->save(); 
         
            }
 

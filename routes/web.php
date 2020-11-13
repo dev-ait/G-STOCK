@@ -173,7 +173,7 @@ Route::resource('folder', App\Http\Controllers\FolderController::class);
 
 Route::post('/postrole',[App\Http\Controllers\FolderController::class, 'store']);
 
-Route::get('/getroles',[App\Http\Controllers\FolderController::class, 'get_roles']);
+Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_items']);
 
 Route::put('/updaterole',[App\Http\Controllers\FolderController::class, 'update']);
 

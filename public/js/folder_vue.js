@@ -10,13 +10,21 @@ new Vue({
       nextId: 0,
       open: ['public'],
       files: {
+        html: 'mdi-language-html5',
+        js: 'mdi-nodejs',
+        json: 'mdi-json',
+        md: 'mdi-markdown',
         pdf: 'mdi-file-pdf',
+        png: 'mdi-file-image',
+        txt: 'mdi-file-document-outline',
+        xls: 'mdi-file-excel'
       },
       tree: [],
       items: [
-        { name: 'COMERCIALIZAÇÃO', 
-          children: [
-            { name: 'Cadeia_de_valor_UNC.pdf', file: 'pdf', },
+        { name: 'dosssier', 
+          children: [ 
+            
+            { name: '	01. Implementação dos projetos de transmissão de energia', name: 'Cadeia_de_valor_UNC.pdf', file: 'pdf', },
           ],
         },
         { name: 'DISTRIBUIÇÃO', 
@@ -29,36 +37,8 @@ new Vue({
             { name: 'Cadeia_de_valor_UNG.pdf', file: 'pdf', },
           ],
         },
-        { name: 'SERVIÇOS',
-          children: [
-            { name: 'Cadeia_de_valor_UNS.pdf', file: 'pdf', },
-          ],
-        },
-        { name: 'TRANSMISSÃO',
-          children: [
-            { name: '	01. Implementação dos projetos de transmissão de energia',
-              children: [
-                { name: 'logo.pdf', file: 'pdf',}
-              ],
-            },
-            { name: '	02. OeM da Transmissão de energia',
-              children: [
-                { name: 'logo.pdf', file: 'pdf',}
-              ],
-            },
-            { name: '	03. Gestão comercial da Transmissão',
-              children: [
-                { name: 'logo.pdf', file: 'pdf',}
-              ],
-            },
-            { name: '	04. Processos de suporte',
-              children: [
-                { name: 'logo.pdf', file: 'pdf',}
-              ],
-            },
-            { name: 'Cadeia de Valor_Transmissão.pdf', file: 'pdf', },
-          ],
-        },
+      
+        
       ],
       editedItem: {
         id: '',

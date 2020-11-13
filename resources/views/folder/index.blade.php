@@ -6,24 +6,32 @@
 <div class="breadcrumb">
    <h1>  Gestion des fichiers </h1>
 </div>
-<div class=" border-top"></div>
+
 <div id="app_folder" data-app>
    <div class="row">
       <div class="col-md-12">
-         <v-text-field v-model="search" label="Items Search" clearable clear-icon="mdi-close-circle-outline"></v-text-field>
+         <v-text-field v-model="search" label="Recherche de fichiers" clearable clear-icon="mdi-close-circle-outline"></v-text-field>
          <v-app id="inspire">
            
             <v-treeview v-model="tree" :open="open" :items="items" item-key="name">
+             
+
+
+
               <template v-slot:prepend="{ item, open }">
                 <v-icon v-if="!item.file">
                   @{{ open ? 'mdi-folder-open' : 'mdi-folder' }}          
                 </v-icon>
                 <v-icon v-else @click="buscaBlob(item)">
                   @{{ files[item.file] }}
-                </v-icon>       
-                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFile(item)">add file</v-btn>
-                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFolder(item)">add folder</v-btn>
+                </v-icon>
               </template>
+              
+              <template v-slot:append="{ item, open }">
+                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFile(item)">ajouter fichier</v-btn>
+                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFolder(item)">ajouter dossier</v-btn>
+              </template>
+
               
             </v-treeview>
             
@@ -81,7 +89,7 @@
                 </v-card-title>
                 <v-card-text>
                   <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="nomePasta" label="Nome da pasta"></v-text-field>
+                    <v-text-field v-model="nomePasta" label="Nom de dossier"></v-text-field>
                   </v-col>
                 </v-card-text>
                 <v-card-actions>

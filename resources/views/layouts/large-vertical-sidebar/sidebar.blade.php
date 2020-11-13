@@ -64,8 +64,8 @@
                @endif
     
             @endif
-            <li class="nav-item {{ request()->is('order')  ? 'active' : '' }}  {{ request()->is('order/create')  ? 'active' : '' }}" data-item="commandes">
-                <a class="nav-item-hold" href="#">
+            <li class="nav-item {{ request()->is('folder')  ? 'active' : '' }}  {{ request()->is('folder/create')  ? 'active' : '' }}" >
+                <a class="nav-item-hold" href=" {{ route('folder.index') }}" >
                     <i class="nav-icon i-Data-Copy"></i>
                     <span class="nav-text">Dossier</span>
                 </a>
