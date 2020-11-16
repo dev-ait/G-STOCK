@@ -171,13 +171,13 @@ Route::delete('/deleterole/{id}',[App\Http\Controllers\RoleController::class, 'd
 
 Route::resource('folder', App\Http\Controllers\FolderController::class);
 
-Route::post('/postrole',[App\Http\Controllers\FolderController::class, 'store']);
+Route::post('/add_folder',[App\Http\Controllers\FolderController::class, 'store_folder']);
+
+Route::post('/add_file',[App\Http\Controllers\FolderController::class, 'store_file']);
 
 Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_items']);
 
-Route::put('/updaterole',[App\Http\Controllers\FolderController::class, 'update']);
 
-Route::delete('/deleterole/{id}',[App\Http\Controllers\FolderController::class, 'destroy']);
 
 
 

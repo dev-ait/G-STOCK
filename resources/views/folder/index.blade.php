@@ -46,13 +46,13 @@
                                 v-model="selectedFile"
                                 color="ivory accent-4"
                                 counter
-                                label="Anexo de Propostas"
+                                label="Pièce jointe "
                                 multiple
                                 v-on:change="onFileSelected()"
                                 placeholder="Select your files"
                                 prepend-icon="mdi-paperclip"
                                 outlined
-                                hint="Na edição, caso um arquivo ja tenha sido enviado, ele será substituido."
+                                hint="En Modification, si un fichier a déjà été envoyé, il sera remplacé."
                                 persistent-hint
                                 :show-size="1000"
                                 requeired
@@ -89,7 +89,7 @@
                 </v-card-title>
                 <v-card-text>
                   <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="nomePasta" label="Nom de dossier"></v-text-field>
+                    <v-text-field v-model="name_folder" label="Nom de dossier"></v-text-field>
                   </v-col>
                 </v-card-text>
                 <v-card-actions>
@@ -110,6 +110,8 @@
 <script src="{{ asset('js/plugins/axios.min.js') }}"></script>
 <script src="{{ asset('js/plugins/sweetalert2@9.js') }}"></script>
 <script src="{{ asset('js/plugins/vuetify.js') }}"></script>
+
+
 <script>
    window.laravel ={!! json_encode([
      'token' => csrf_token(),

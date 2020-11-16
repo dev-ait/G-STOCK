@@ -27,29 +27,34 @@ class FolderController extends Controller
      */
 
 
-    public function test(){
-
-       echo $ttt='fff';
-
-    }
-
 
 
     public function get_folders_items()
     {
 
-        $folder= Folder::whereNull('parentId')->get(); 
-
+        $folder= Folder::all(); 
 
 
     
-         
+    
+
+         for($i=0;$i<count($folder);$i++)
+         {
+             $att[] =  [ 'id'=> $folder[$i]->id , 
+             'parentId'=> $folder[$i]->parentId ,
+              'name'=> $folder[$i]->name,
+              'file'=> $folder[$i]->file ,
+             ];
+         }
+
+
+
         
         
         
 
     
-       $data = array( 'all'=> $this->test() );
+       $data = array( 'item_folder'=> $folder );
    
 
        echo json_encode($data);
@@ -63,9 +68,27 @@ class FolderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store_folder(Request $request)
     {
-        //
+        if($request->isMethod('post')){
+            $folder = new Folder; 
+            $folder->parentId = $request->id_parent;
+            $folder->name = $request->name;
+            $folder->save();
+            return Response()->json(['etat' => true  ]);
+         }  
+    }
+
+
+    public function store_file(Request $request)
+    {
+        if($request->isMethod('post')){
+            $folder = new Folder; 
+            $folder->parentId = $request->id_parent;
+            $folder->name = $request->name;
+            $folder->save();
+            return Response()->json(['etat' => true  ]);
+         }  
     }
 
     /**
