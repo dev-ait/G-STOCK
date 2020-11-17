@@ -54,8 +54,29 @@ label.v-label.theme--light.error--text {
     color: #ff5252 !important;
     caret-color: #ff5252 !important;
 }
+.pa-4.primary.lighten-2.v-sheet.theme--light {
+    background-color: #1867c0 !important;
+    border-color: #1867c0 !important;
+}
 .color-icon-remove {
     color: rgb(255 255 255)!important;
+}
+
+.my-4.subtitle-1.white--text {
+    color: #fff;
+}
+/* Helper classes */
+.basil {
+    background-color: #FFFBE6 !important;
+  }
+  .basil--text {
+    color: #356859 !important;
+  }
+
+.v-item-group.theme--dark.v-slide-group.v-slide-group--has-affixes.v-slide-group--is-overflowing.v-tabs-bar.v-tabs-bar--show-arrows.white--text.cyan {
+
+    background-color: #3f51b5!important;
+    border-color: #3f51b5!important;
 }
 
 body {

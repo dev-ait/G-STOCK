@@ -21,6 +21,11 @@ new Vue({
     },
     tree: [],
     items: [],
+    tab: null,
+    text: 'Lorem ipsum doloraliquip ex ea commodo consequat.',
+    item_tabs :  [
+      'Assigner', 'tab2', 'tab3',
+    ],
     editedItem: {
       id: '',
       name: '',

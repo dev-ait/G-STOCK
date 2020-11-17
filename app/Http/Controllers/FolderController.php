@@ -13,6 +13,14 @@ class FolderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     public function index()
     {
      
@@ -20,6 +28,13 @@ class FolderController extends Controller
         return view('folder.index');
     }
 
+
+    public function add_parents()
+    {
+     
+        
+        return view('folder.add');
+    }
     /**
      * Show the form for creating a new resource.
      *

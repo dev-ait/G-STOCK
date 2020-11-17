@@ -173,6 +173,8 @@ Route::resource('folder', App\Http\Controllers\FolderController::class);
 
 Route::post('/add_folder',[App\Http\Controllers\FolderController::class, 'store_folder']);
 
+Route::get('/view_add_parent',[App\Http\Controllers\FolderController::class, 'add_parents']);
+
 Route::post('/add_file',[App\Http\Controllers\FolderController::class, 'store_file']);
 
 Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_items']);
