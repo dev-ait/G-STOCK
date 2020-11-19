@@ -58,6 +58,10 @@ label.v-label.theme--light.error--text {
     background-color: #1867c0 !important;
     border-color: #1867c0 !important;
 }
+.v-card>.v-card__progress+:not(.v-btn):not(.v-chip), .v-card>:first-child:not(.v-btn):not(.v-chip) {
+     border-top-left-radius: unset; 
+     border-top-right-radius: unset; 
+}
 .color-icon-remove {
     color: rgb(255 255 255)!important;
 }
@@ -88,6 +92,16 @@ body {
      height: 405px !important; 
 }
 
+.vue-treeselect__control {
+    height: 45px !important;
+}
+.vue-treeselect__placeholder, .vue-treeselect__single-value {
+    top: 3px !important;
+}
+header.v-sheet.theme--dark.v-toolbar.v-toolbar--extended.v-toolbar--flat.cyan {
+    background-color: #1867c0 !important;
+    border-color: #1867c0 !important;
+}
 .btn_search {
     position: relative;
     right: 50px;
@@ -96,3 +110,142 @@ body {
     font-size: 20px !important; ;
 }
 
+.v-menu__content.theme--light.menuable__content__active {
+
+    top: 330px !important;
+    left: 49px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************************/
+
+
+
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+  {
+	 margin: 0;
+	 display: flex;
+	 justify-content: center;
+	 margin: 0;
+	 padding: 0;
+	 font-family: "Lato", sans-serif;
+}
+  #app .view {
+	 width: 80vw;
+	 height: 80vh;
+	 display: flex;
+	 flex-flow: column nowrap;
+	 justify-content: center;
+	 align-items: center;
+	 margin: 0;
+	 box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+	 border-radius: 0 0 10px 10px;
+}
+  #app .view .title {
+	 font-family: "Lato", sans-serif;
+	 font-size: 1.8rem;
+	 font-weight: 400;
+	 color: rgba(128, 128, 128, 1);
+	 margin-bottom: 1vh;
+}
+  #app .view .message {
+	 font-family: "Lato", sans-serif;
+	 font-size: 1.2rem;
+	 font-weight: 400;
+	 color: rgba(128, 128, 128, 1);
+	 margin-bottom: 4vh;
+}
+  #app .view .picker {
+	 display: flex;
+	 justify-content: space-between;
+	 align-items: center;
+	 width: 80%;
+	 max-width: 150px;
+	 min-width: 150px;
+	 height: 20%;
+	 max-height: 50px;
+	 min-height: 50px;
+	 background-color: rgba(250, 250, 250, 1);
+	 box-shadow: 0 0 14px 2px rgba(0, 0, 0, 0.1) inset;
+	 border-radius: 50px/50px;
+	 z-index: 0;
+}
+  #app .view .picker .slider {
+	 width: 45px;
+	 height: 45px;
+	 position: absolute;
+	 background-color: rgba(230, 230, 230, 1);
+	 box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+	 border-radius: 50%;
+	 z-index: 1;
+}
+  .active {
+	 color: rgba(230, 230, 230, 1);
+}
+  .inactive {
+	 color: rgba(255, 255, 255, 1);
+}
+  #app .view .picker .left-holder,  #app .view .picker .right-holder {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 width: 45px;
+	 height: 45px;
+	 color: rgba(255, 255, 255, 1);
+	 background-color: transparent;
+	 z-index: 2;
+	 font-family: "Lato", sans-serif;
+	 font-size: 1.1rem;
+	 font-weight: 700;
+	 user-select: none;
+	 cursor: pointer;
+	 transition: color 400ms ease;
+}
+  #app .view .picker .left-holder.active,  #app .view .picker .right-holder.active {
+	 color: rgba(255, 255, 255, 1);
+}
+ t #app .view .picker .left-holder.inactive,  #app .view .picker .right-holder.inactive {
+	 color: rgba(230, 230, 230, 1);
+}
+ 
+
+
+
+.v-input--switch .v-input--selection-controls__input{
+	width: 45px;
+	
+	margin-right: 10px; }
+
+.v-input--switch__track{
+	width: 45px;
+	height: 26px;
+	top: calc(50% - 13px);
+	left: 0;
+	right: 0;
+	border-radius: 13px; }
+
+
+.v-input--switch__thumb{
+
+	box-shadow: none;
+	transform: translateX(4px); }
+
+
+.v-input--switch.v-input--is-dirty .v-input--selection-controls__ripple, .v-input--switch.v-input--is-dirty .v-input--switch__thumb{
+	transform: translateX(22px); }
+
+
+.v-input--switch .v-input--selection-controls__ripple{
+	left: -12px; }

@@ -1,12 +1,16 @@
+
+// register the component
+Vue.component('treeselect', VueTreeselect.Treeselect)
+
+
+
 new Vue({
   el: '#app_folder',
   vuetify: new Vuetify(),
+  
   data: () => ({
-    fd: [],
-    selectedFile: null,
-    dialog: false,
-    dialog2: false,
     name_folder: '',
+    id_item : '',
     nextId: 0,
     open: ['public'],
     files: {
@@ -19,13 +23,33 @@ new Vue({
       txt: 'mdi-file-document-outline',
       xls: 'mdi-file-excel'
     },
+    files: [],
     tree: [],
     items: [],
     tab: null,
+
     text: 'Lorem ipsum doloraliquip ex ea commodo consequat.',
     item_tabs :  [
       'Assigner', 'tab2', 'tab3',
     ],
+    select_item: null,
+    options: [ {
+      id: 'a',
+      label: 'a',
+      children: [ {
+        id: 'aa',
+        label: 'aa',
+      }, {
+        id: 'ab',
+        label: 'ab',
+      } ],
+    }, {
+      id: 'b',
+      label: 'b',
+    }, {
+      id: 'c',
+      label: 'c',
+    } ],
     editedItem: {
       id: '',
       name: '',
@@ -37,19 +61,14 @@ new Vue({
       file: ''
     },
     editedIndex: -1,
-    selectedFile: null,
+   
+  
   }),
-  
-  watch: {
-    dialog (val) {
-      val || this.close()
-    },
-    dialog2 (val) {
-      val || this.close()
-    },
-  },
-  
+
+
+
   methods: {
+
     buscaBlob (item) {      axios.get(`https://localhost:44392/api/Files/GetSpecific/5?blobName=PDF TESTE.pdf`)
         .then(response => {
           item.comCheckout = 1
@@ -66,7 +85,13 @@ new Vue({
           document.body.removeChild(link)
         })
     },
-    
+    add_item(){
+
+     this.add_folder(this.select_item,this.name_folder); 
+
+     alert(this.name_folder)
+
+    },
     close () {
       this.dialog = false
       this.dialog2 = false
@@ -149,6 +174,10 @@ new Vue({
                         icon: 'success',
                         title: 'Ajouté avec succes'
                     })
+
+
+                   this.select_item = null;
+                   this.name_folder = '';
               
 
                 }
@@ -157,7 +186,7 @@ new Vue({
             })
     },
     get_data: function() {
-      axios.get(window.laravel.url + '/get_folders_items')
+      axios.get(window.laravel.url + '/get_folders_items_v1')
           .then(response => {
 
             const treeify = (arr, pid) => {

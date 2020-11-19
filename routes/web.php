@@ -177,7 +177,8 @@ Route::get('/view_add_parent',[App\Http\Controllers\FolderController::class, 'ad
 
 Route::post('/add_file',[App\Http\Controllers\FolderController::class, 'store_file']);
 
-Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_items']);
+Route::get('/get_folders_items_v1',[App\Http\Controllers\FolderController::class, 'get_folders_items_v1']);
+Route::get('/get_folders_items_v2',[App\Http\Controllers\FolderController::class, 'get_folders_items_v2']);
 
 
 

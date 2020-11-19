@@ -44,31 +44,36 @@ class FolderController extends Controller
 
 
 
-    public function get_folders_items()
+    public function get_folders_items_v1()
     {
 
         $folder= Folder::all(); 
-
-
-    
-    
 
          for($i=0;$i<count($folder);$i++)
          {
              $att[] =  [ 'id'=> $folder[$i]->id , 
              'parentId'=> $folder[$i]->parentId ,
-              'name'=> $folder[$i]->name,
+              'label'=> $folder[$i]->name,
               'file'=> $folder[$i]->file ,
              ];
          }
 
-
-
-        
-        
-        
-
     
+       $data = array( 'item_folder'=> $att );
+   
+
+       echo json_encode($data);
+       exit;
+    
+    }
+
+
+    public function get_folders_items_v2()
+    {
+        $folder= Folder::all(); 
+
+      
+
        $data = array( 'item_folder'=> $folder );
    
 
@@ -76,6 +81,7 @@ class FolderController extends Controller
        exit;
     
     }
+
 
     /**
      * Store a newly created resource in storage.
