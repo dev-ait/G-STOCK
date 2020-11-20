@@ -115,10 +115,14 @@ new Vue({
     
       this.dialog2 = false
     },
-    add_folder: function(id,name) {
+    add_folder: function(id,name,file) {
         let jsonData = new FormData()
         jsonData.append('id_parent', id)
         jsonData.append('name', name)
+
+        if (file) {
+          formData.append("files", file);
+        }
 
 
 

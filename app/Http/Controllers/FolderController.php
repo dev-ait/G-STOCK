@@ -44,10 +44,10 @@ class FolderController extends Controller
 
 
 
-    public function get_folders_items_v1()
+    public function get_folders_items()
     {
 
-        $folder= Folder::all(); 
+        $folder = Folder::all(); 
 
          for($i=0;$i<count($folder);$i++)
          {
@@ -59,7 +59,7 @@ class FolderController extends Controller
          }
 
     
-       $data = array( 'item_folder'=> $att );
+       $data = array( 'item_folder_label' => $att ,'item_folder' => $folder );
    
 
        echo json_encode($data);
@@ -68,19 +68,6 @@ class FolderController extends Controller
     }
 
 
-    public function get_folders_items_v2()
-    {
-        $folder= Folder::all(); 
-
-      
-
-       $data = array( 'item_folder'=> $folder );
-   
-
-       echo json_encode($data);
-       exit;
-    
-    }
 
 
     /**
@@ -95,6 +82,21 @@ class FolderController extends Controller
             $folder = new Folder; 
             $folder->parentId = $request->id_parent;
             $folder->name = $request->name;
+
+            if($request->hasFile('file')){
+                $file = $request->file;
+                $fileName = $file->getClientOriginalName();
+                $file->move(public_path('files'), $fileName);
+                $type_file =explode('.',$fileName);
+                 $folder->file = $type_file[1];
+                 $folder->name = $type_file[0];
+            } else {
+                $folder->name = $request->name;
+            }
+
+     
+
+
             $folder->save();
             return Response()->json(['etat' => true  ]);
          }  
@@ -103,13 +105,28 @@ class FolderController extends Controller
 
     public function store_file(Request $request)
     {
-        if($request->isMethod('post')){
-            $folder = new Folder; 
-            $folder->parentId = $request->id_parent;
-            $folder->name = $request->name;
-            $folder->save();
-            return Response()->json(['etat' => true  ]);
-         }  
+        // if($request->isMethod('post')){
+        //     $folder = new Folder; 
+        //     $folder->parentId = $request->id_parent;
+          
+
+            
+            // if($request->hasFile('file')){
+            //     $file = $request->file;
+            //     $fileName = $file->getClientOriginalName();
+            //     $file->move(public_path('files'), $fileName);
+            //     $type_file =explode('.',$file);
+            //     // $folder->file = $type_file[1];
+            //     // $folder->name = $type_file[0];
+            // } else {
+            //    // $folder->name = $request->name;
+            // }
+
+            // return  $request->file;
+
+            // $folder->save();
+            // return Response()->json(['etat' => true  ]);
+         //}  
     }
 
     /**

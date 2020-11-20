@@ -1,6 +1,6 @@
-
 // register the component
 Vue.component('treeselect', VueTreeselect.Treeselect)
+
 
 
 
@@ -12,7 +12,9 @@ new Vue({
     name_folder: '',
     id_item : '',
     nextId: 0,
+   
     open: ['public'],
+   
     files: {
       html: 'mdi-language-html5',
       js: 'mdi-nodejs',
@@ -23,8 +25,16 @@ new Vue({
       txt: 'mdi-file-document-outline',
       xls: 'mdi-file-excel'
     },
-    files: [],
+    folder : {
+      name_item: '',
+      id_item : null,
+      file : [],   
+    },
+    array_item : [],
     tree: [],
+    switch2: false,
+    show_input_file :false,
+    items_label: [],
     items: [],
     tab: null,
 
@@ -87,10 +97,19 @@ new Vue({
     },
     add_item(){
 
-     this.add_folder(this.select_item,this.name_folder); 
+     this.add_folder(this.folder.id_item ,this.folder.name_item,this.folder.file[0])
 
-     alert(this.name_folder)
+    
 
+    },
+    changeState(){
+
+      if(this.switch2){
+        this.show_input_file = true;
+      }else{
+        this.show_input_file = false;
+      }
+      
     },
     close () {
       this.dialog = false
@@ -145,12 +164,14 @@ new Vue({
     
       this.dialog2 = false
     },
-    add_folder: function(id,name) {
+    add_folder: function(id,name,file) {
         let jsonData = new FormData()
         jsonData.append('id_parent', id)
         jsonData.append('name', name)
 
-
+        if (file) {
+          jsonData.append("file", file , file.name)
+        }
 
         axios.post(window.laravel.url + '/add_folder', jsonData)
             .then(response => {
@@ -176,8 +197,13 @@ new Vue({
                     })
 
 
-                   this.select_item = null;
-                   this.name_folder = '';
+
+                   this.array_item.unshift(this.folder);
+                   this.folder.id_item = null;
+                   this.folder.name_item = '';
+
+
+                   this.get_data();
               
 
                 }
@@ -186,7 +212,7 @@ new Vue({
             })
     },
     get_data: function() {
-      axios.get(window.laravel.url + '/get_folders_items_v1')
+      axios.get(window.laravel.url + '/get_folders_items')
           .then(response => {
 
             const treeify = (arr, pid) => {
@@ -212,10 +238,16 @@ new Vue({
               return tree;
             };
           
-            var reponse = response.data.item_folder;
+            this.array_item = response.data.item_folder_label;
            
-             var covert_hierarchie_items =  treeify(reponse);
+             var covert_hierarchie_items_label =  treeify(this.array_item);
+             this.items_label = covert_hierarchie_items_label ;
+
+             var reponse_items = response.data.item_folder;
+            
+             var covert_hierarchie_items =  treeify(reponse_items);
              this.items = covert_hierarchie_items ;
+
 
 
           })
