@@ -139,13 +139,37 @@ new Vue({
 
 
         checkDuplicate(val) {
+
+            var check = false ;
+
+      
+            for (i = 0; i < this.users.length; i++) {
+                var check_email =this.users[i].email
+
+                if (val == check_email ) {
+    
+                    check = true
+                    break;
+                  
+                   } else {
+                    check = false
+                   }
+    
+
+               }
+
+             
+
+
+               if (check ==  true) {
+                return `Email "${val}" existe déjà`;
+               } else {
+                 return true;
+               }
+
  
            
-            if (val == 'mehdi@gmail.com') {
-              return `Name "${val}" already exist`;
-             } else {
-               return true;
-             }
+          
             
           },
 
@@ -505,7 +529,9 @@ new Vue({
 
                     this.role_items = response.data.roles_all;
 
-                    console.log(this.users);
+
+                
+           
 
 
 

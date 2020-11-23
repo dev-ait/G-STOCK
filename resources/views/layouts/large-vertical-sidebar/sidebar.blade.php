@@ -66,7 +66,7 @@
             @endif
             <li class="nav-item {{ request()->is('folder')  ? 'active' : '' }}  {{ request()->is('folder/create')  ? 'active' : '' }}" >
                 <a class="nav-item-hold" href=" {{ route('view_add_parent') }}" >
-                    <i class="nav-icon i-Data-Copy"></i>
+                    <i class="nav-icon i-Folder"></i>
                     <span class="nav-text">Dossier</span>
                 </a>
                 <div class="triangle"></div>

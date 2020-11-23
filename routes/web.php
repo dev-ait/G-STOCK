@@ -177,7 +177,11 @@ Route::get('/view_add_parent',[App\Http\Controllers\FolderController::class, 'ad
 
 Route::post('/add_file',[App\Http\Controllers\FolderController::class, 'store_file']);
 
-Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_itemsDossier']);
+Route::get('/get_folders_items',[App\Http\Controllers\FolderController::class, 'get_folders_items']);
+
+Route::put('/update_folder',[App\Http\Controllers\FolderController::class, 'update']);
+
+Route::delete('/delete_folder/{id}',[App\Http\Controllers\FolderController::class, 'destroy']);
 
 
 

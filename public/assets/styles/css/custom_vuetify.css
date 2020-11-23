@@ -69,12 +69,6 @@ label.v-label.theme--light.error--text {
 .white--text {
     color: #fff;
 }
-
-.theme--light.v-card {
-	color: #1867c0 !important;
-}
-
-
 /* Helper classes */
 .basil {
     background-color: #FFFBE6 !important;
@@ -116,11 +110,6 @@ header.v-sheet.theme--dark.v-toolbar.v-toolbar--extended.v-toolbar--flat.cyan {
     font-size: 20px !important; ;
 }
 
-.v-menu__content.theme--light.menuable__content__active {
-
-    top: 330px !important;
-    left: 49px !important;
-}
 
 
 
@@ -139,15 +128,6 @@ header.v-sheet.theme--dark.v-toolbar.v-toolbar--extended.v-toolbar--flat.cyan {
 
 
 
-@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-  {
-	 margin: 0;
-	 display: flex;
-	 justify-content: center;
-	 margin: 0;
-	 padding: 0;
-	 font-family: "Lato", sans-serif;
-}
   #app .view {
 	 width: 80vw;
 	 height: 80vh;
@@ -226,31 +206,7 @@ header.v-sheet.theme--dark.v-toolbar.v-toolbar--extended.v-toolbar--flat.cyan {
 	 color: rgba(230, 230, 230, 1);
 }
  
-.v-input--switch__thumb.theme--light.primary--text {
-    color: #1867c0;
-}
 
-
-.theme--light.v-input--switch .v-input--switch__track {
-    color: #e0e0e0;
-}
-
-.v-input--switch__track.theme--light.primary--text {
-    color: #98b5d6;
-}
-
-
-.v-file-input__text.v-file-input__text--placeholder,label.v-label.theme--light,.v-counter.theme--light {
-	color: #ffffffa5 !important;	
-}
-
-.theme--light.v-text-field--outlined:not(.v-input--is-focused):not(.v-input--has-state)>.v-input__control>.v-input__slot fieldset {
-    color: #c9c9c9a5 !important;
-}
-
-button.v-icon.notranslate.v-icon--link.mdi.mdi-paperclip.theme--light {
-    color: #c9c9c9a5;
-}
 
 
 .v-input--switch .v-input--selection-controls__input{

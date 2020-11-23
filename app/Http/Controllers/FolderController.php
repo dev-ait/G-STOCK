@@ -49,13 +49,19 @@ class FolderController extends Controller
 
         $folder = Folder::all(); 
 
+        
+
          for($i=0;$i<count($folder);$i++)
          {
-             $att[] =  [ 'id'=> $folder[$i]->id , 
-             'parentId'=> $folder[$i]->parentId ,
-              'label'=> $folder[$i]->name,
-              'file'=> $folder[$i]->file ,
-             ];
+             if($folder[$i]->file == null){
+                $att[] =  [ 'id'=> $folder[$i]->id , 
+                'parentId'=> $folder[$i]->parentId ,
+                 'label'=> $folder[$i]->name,
+                 'file'=> $folder[$i]->file ,
+                ];
+
+             }
+            
          }
 
     
@@ -103,31 +109,6 @@ class FolderController extends Controller
     }
 
 
-    public function store_file(Request $request)
-    {
-        // if($request->isMethod('post')){
-        //     $folder = new Folder; 
-        //     $folder->parentId = $request->id_parent;
-          
-
-            
-            // if($request->hasFile('file')){
-            //     $file = $request->file;
-            //     $fileName = $file->getClientOriginalName();
-            //     $file->move(public_path('files'), $fileName);
-            //     $type_file =explode('.',$file);
-            //     // $folder->file = $type_file[1];
-            //     // $folder->name = $type_file[0];
-            // } else {
-            //    // $folder->name = $request->name;
-            // }
-
-            // return  $request->file;
-
-            // $folder->save();
-            // return Response()->json(['etat' => true  ]);
-         //}  
-    }
 
     /**
      * Display the specified resource.
@@ -158,9 +139,12 @@ class FolderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $folder = Folder::find($request->id);
+        $folder->name = $request->name;
+       
+        $folder->save();
     }
 
     /**
@@ -171,6 +155,8 @@ class FolderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete_folder = Folder::find($id);  
+
+        $delete_folder->delete();
     }
 }
