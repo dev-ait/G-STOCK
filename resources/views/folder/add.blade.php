@@ -16,6 +16,13 @@
          <v-card
             class="mx-auto"
             >
+            <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+     
+          </v-col>
          <v-sheet class="pa-4 p-3  addfolder">
             <div class="row">
                <div class="col-md-6">
@@ -23,29 +30,37 @@
                      Ajouter Fichiers ou Dossier
                   </div>
                   <div class="mt-3  ">Choisir le répertoire de votre  <strong>Fichier ou Dossier</strong></div>
-                  <treeselect 
-                     class="mt-1"
-                     v-model="folder.id_item"
-                     :multiple="false" 
-                     :options="items_label"
-                     :load-options="loadOptions" />
-                  </treeselect>
+                  <v-text-field  
+                  v-model="folder.name_item"
+               
+                  label="Nom de Dossier"
+                  dark
+                  flat
+                  solo-inverted
+                  hide-details
+                  clearable
+                  clear-icon="mdi-close-circle-outline"
+                  ></v-text-field>
+
+                  <v-text-field  
+                  v-model="folder.name_item"
+                  class="pt-3"
+                  label="Description"
+                  dark
+                  flat
+                  solo-inverted
+                  hide-details
+                  clearable
+                  clear-icon="mdi-close-circle-outline"
+                  ></v-text-field>
+         
+                  
                   <div class="mt-3  ">Choisir le type </div>
                   <div class="radio-btn-group mt-1 mb-2">
                      <div class="radio"><input    @change="changeState()"  type="radio" name="radio" value="folder" checked="checked" v-model="checked" id="folder"  /><label for="folder">Dossier</label></div>
                      <div class="radio"><input  @change="changeState()" type="radio" name="radio" value="file" v-model="checked" id="file" /><label for="file">Fichier</label></div>
                   </div>
-                  <v-text-field v-if="show_text_folder" 
-                     v-model="folder.name_item"
-                  
-                     label="Nom de Dossier"
-                     dark
-                     flat
-                     solo-inverted
-                     hide-details
-                     clearable
-                     clear-icon="mdi-close-circle-outline"
-                     ></v-text-field>
+               
                   <template v-if="show_input_file">
                      <v-file-input
                         v-model="folder.file"
@@ -89,21 +104,21 @@
                </div>
             </div>
          </v-sheet>
-         {{-- <template>
+         <template>
             <v-card>
-               <v-tabs vertical>
+               <v-tabs horizontal>
                   <v-tab>
                      <v-icon left>
                         mdi-table-large   
                      </v-icon>
-                  Table de donnes
+                  Champs
                   </v-tab>
-                  <v-tab>
+                  {{-- <v-tab>
                      <v-icon left>
                         mdi-folder-multiple-outline
                      </v-icon>
                      Répertoire &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  </v-tab>
+                  </v-tab> --}}
                   <v-tab>
                      <v-icon left>
                         mdi-access-point
@@ -111,60 +126,65 @@
                      Option 3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   </v-tab>
                   <v-tab-item>
-                     <v-card flat>
-                        <v-card-text>
-                           <v-data-table  @input="item($event)" :headers="headers" :items="reponse_items" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
-                           :sort-desc.sync="sortDesc"   item-key="id"
-                           :expanded.sync="expanded" @click:row="clicked">
-                           <template v-slot:item.roles="{ item }">
+                     <template >
+                        <v-form class="m-3 p-3"
+                          ref="form"
+                          v-model="valid"
+                          lazy-validation
+                        >
+                        <v-row>
+                           <v-col> 
+                              
+                          <v-select
+                          :items="item_fields"
+                          filled
+                          label="Choisir le champ"
+                          dense
+                        ></v-select>
+                           
+                           </v-col>
 
-                                  <div  v-if="check_role(item.roles[0])" v-html="get_color(  item.roles[0].name , item.roles[0].color )"> </div>         
-                        
+                           <v-col> 
 
-                           </template>
-                           <template v-slot:item.action="{ item }">
-                              <v-btn class="btn-primary"  fab small  @click="editItem(item)">
-                                 <i class="nav-icon f-15 i-Pen-2 font-weight-bold"></i>
-                              </v-btn>
-                              <v-btn class="btn-primary" fab small   @click="delete_single_Item(item)">
-                                 <i class="nav-icon  i-Close f-15 font-weight-bold"></i>
-                              </v-btn>
+                              <v-btn
+                              tile
+                              color="success"
+                            >
+                              <v-icon left>
+                                 mdi-plus
+                              </v-icon>
+                           
+                            </v-btn>
+
+                           </v-col>
 
 
-                              <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
-                                 <v-card>
-                                    <v-card-title>
-                                       <span class="headline">Modifier les informations</span>
-                                    </v-card-title>
-                                    <v-container>
-                                       <v-row class="pl-3 pr-3" >
-                                          <v-col cols="12" sm="6" md="12">
-                                             <v-text-field pl="5" v-model="editedItem.name"  label="nom"></v-text-field>
-                                          </v-col>
-                                          <v-col cols="12" sm="6" md="12">
-                                             <v-text-field  v-model="editedItem.file" label="extention" disabled></v-text-field>
-                                          </v-col>
-                                       </v-row>
-                                    </v-container>
-                                    </v-form>
-                                    </v-card-title>
-                                    <v-card-actions>
-                                       <v-spacer></v-spacer>
-                                       <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
-                                       <v-btn color="blue darken-1" text @click="save">Sauvegarder
-                                       </v-btn>
-                                    </v-card-actions>
-                                 </v-card>
-                              </v-dialog>
-                         
-                           </template>
-                          
+                        </v-row>
                        
-                        </v-data-table>
-                        </v-card-text>
-                     </v-card>
+          
+     
+
+
+                       
+                      
+                   
+                      
+                          <v-btn
+                            :disabled="!valid"
+                            color="success"
+                            class="mr-4"
+                            @click="validate"
+                          >
+                            Validate
+                          </v-btn>
+                      
+                    
+                      
+                      
+                        </v-form>
+                      </template>
                   </v-tab-item>
-                  <v-tab-item>
+                  {{-- <v-tab-item>
                      <v-card flat>
                         <h5 class="mt-3">  Répertoire des Fichiers</h5>
                         <v-app >
@@ -180,7 +200,7 @@
                            </v-treeview>
                         </v-app>
                      </v-card>
-                  </v-tab-item>
+                  </v-tab-item> --}}
                   <v-tab-item>
                      <v-card flat>
                         <v-card-text>
@@ -195,7 +215,7 @@
                   </v-tab-item>
                </v-tabs>
             </v-card>
-         </template> --}}
+         </template>
       </div>
    </div>
 </div>

@@ -1,5 +1,4 @@
-// register the component
-Vue.component('treeselect', VueTreeselect.Treeselect)
+
 
 
 
@@ -75,6 +74,9 @@ new Vue({
         tab: null,
         item_tabs: [
             'Assigner', 'tab2', 'tab3',
+        ],
+        item_fields: [
+            'Nom', 'Date', 'Anne',
         ],
         select_item: null,
         editedItem: {

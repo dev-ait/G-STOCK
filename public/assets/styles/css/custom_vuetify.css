@@ -220,10 +220,15 @@ header.v-sheet.theme--dark.v-toolbar.v-toolbar--extended.v-toolbar--flat.cyan {
   #app .view .picker .left-holder.active,  #app .view .picker .right-holder.active {
 	 color: rgba(255, 255, 255, 1);
 }
- t #app .view .picker .left-holder.inactive,  #app .view .picker .right-holder.inactive {
+  #app .view .picker .left-holder.inactive,  #app .view .picker .right-holder.inactive {
 	 color: rgba(230, 230, 230, 1);
 }
  
+
+#app_folder .v-menu__content.theme--light.menuable__content__active {
+    left: 65px !important ;
+    top: 575px !important;
+}
 
 
 
