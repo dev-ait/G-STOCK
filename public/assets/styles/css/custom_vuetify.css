@@ -4,7 +4,7 @@
 }
 
 .theme--light.v-size--default.success {
-    background-color: #4caf50 !important;
+    background-color: #ffc107 !important;
     border-color: #4caf50 !important;
 }
 
@@ -69,6 +69,24 @@ label.v-label.theme--light.error--text {
 .white--text {
     color: #fff;
 }
+
+.addfolder .v-input__slot {
+    outline: initial!important;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #47404f;
+}
+
+.addfolder .theme--dark.v-label {
+    color: hsl(17deg 32% 82%);
+}
+
+
+.addfolder .theme--dark.v-input input {
+    color: #443939;
+}
+
+
 /* Helper classes */
 .basil {
     background-color: #FFFBE6 !important;

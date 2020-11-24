@@ -16,13 +16,13 @@
          <v-card
             class="mx-auto"
             >
-         <v-sheet class="pa-4 p-3 primary lighten-2">
+         <v-sheet class="pa-4 p-3  addfolder">
             <div class="row">
                <div class="col-md-6">
-                  <div class="my-4 subtitle-1 white--text h5">
+                  <div class="my-4 subtitle-1  h5">
                      Ajouter Fichiers ou Dossier
                   </div>
-                  <div class="mt-3 white--text ">Choisir le répertoire de votre  <strong>Fichier ou Dossier</strong></div>
+                  <div class="mt-3  ">Choisir le répertoire de votre  <strong>Fichier ou Dossier</strong></div>
                   <treeselect 
                      class="mt-1"
                      v-model="folder.id_item"
@@ -30,13 +30,14 @@
                      :options="items_label"
                      :load-options="loadOptions" />
                   </treeselect>
-                  <div class="mt-3 white--text ">Choisir le type </div>
+                  <div class="mt-3  ">Choisir le type </div>
                   <div class="radio-btn-group mt-1 mb-2">
                      <div class="radio"><input    @change="changeState()"  type="radio" name="radio" value="folder" checked="checked" v-model="checked" id="folder"  /><label for="folder">Dossier</label></div>
                      <div class="radio"><input  @change="changeState()" type="radio" name="radio" value="file" v-model="checked" id="file" /><label for="file">Fichier</label></div>
                   </div>
                   <v-text-field v-if="show_text_folder" 
                      v-model="folder.name_item"
+                  
                      label="Nom de Dossier"
                      dark
                      flat
@@ -88,7 +89,7 @@
                </div>
             </div>
          </v-sheet>
-         <template>
+         {{-- <template>
             <v-card>
                <v-tabs vertical>
                   <v-tab>
@@ -194,7 +195,7 @@
                   </v-tab-item>
                </v-tabs>
             </v-card>
-         </template>
+         </template> --}}
       </div>
    </div>
 </div>

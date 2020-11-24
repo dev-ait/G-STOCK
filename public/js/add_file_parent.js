@@ -162,6 +162,7 @@ new Vue({
                     const index = this.reponse_items.indexOf(item);
 
                     this.reponse_items.splice(index, 1);
+                    
 
                     Swal.fire({
 
@@ -293,8 +294,9 @@ new Vue({
                         })
 
 
-
+                      
                         this.array_item.unshift(this.folder);
+                        this.reponse_items.unshift(this.folder);
                         this.folder.id_item = null;
                         this.folder.name_item = '';
 

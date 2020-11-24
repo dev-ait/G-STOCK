@@ -8,100 +8,98 @@
 </div>
 
 <div id="app_folder" data-app>
-   <div class="row">
-      <div class="col-md-12">
-         <v-text-field v-model="search" label="Recherche de fichiers" clearable clear-icon="mdi-close-circle-outline"></v-text-field>
-         <v-app id="inspire">
-           
-            <v-treeview v-model="tree" :open="open" :items="items" item-key="name">
-             
+  <div class="card">
+    <v-card>
+
+
+     
 
 
 
-              <template v-slot:prepend="{ item, open }">
-                <v-icon v-if="!item.file">
-                  @{{ open ? 'mdi-folder-open' : 'mdi-folder' }}          
-                </v-icon>
-                <v-icon v-else @click="buscaBlob(item)">
-                  @{{ files[item.file] }}
-                </v-icon>
-              </template>
-              
-              <template v-slot:append="{ item, open }">
-                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFile(item)">ajouter fichier</v-btn>
-                <v-btn v-if="!item.file" color="primary" class="ma-2" dark @click="addFolder(item)">ajouter dossier</v-btn>
-              </template>
 
-              
-            </v-treeview>
-            
-            <v-dialog v-model="dialog" max-width="500px">
-              <v-card>
-                <v-card-title>
-                  New document
-                </v-card-title>
-                <v-card-text>
-                  <v-file-input
-                                type="file"
-                                v-model="selectedFile"
-                                color="ivory accent-4"
-                                counter
-                                label="Pièce jointe "
-                                multiple
-                                v-on:change="onFileSelected()"
-                                placeholder="Select your files"
-                                prepend-icon="mdi-paperclip"
-                                outlined
-                                hint="En Modification, si un fichier a déjà été envoyé, il sera remplacé."
-                                persistent-hint
-                                :show-size="1000"
-                                requeired
-                                >
-                    <template v-slot:fd="{ index, text }">
-                      <v-chip
-                              v-for="file in fd" :slot="file.name" :key="file.name"
-                              color="slategray accent-4"
-                              dark
-                              label
-                              small
-                              id = "uploadedFile"
-                              >
-                              @{{ text }}
-                      </v-chip>
-                      <span
-                            class="overline grey--text text--darken-3 mx-2"
-                            >
-                        +@{{ files.length - 2 }} File(s)
-                      </span>
-                    </template>
-                  </v-file-input>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn color="primary" text @click="dialog = false" > Close </v-btn>
-                  <v-btn color="primary" text @click="addChildFile()" > Save </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <v-dialog v-model="dialog2" max-width="500px">
-              <v-card>
-                <v-card-title>
-                  Nova pasta
-                </v-card-title>
-                <v-card-text>
-                  <v-col cols="12" sm="12" md="12">
-                    <v-text-field v-model="name_folder" label="Nom de dossier"></v-text-field>
-                  </v-col>
-                </v-card-text>
-                <v-card-actions>
-                  <v-btn color="primary" text @click="dialog2 = false" > Close </v-btn>
-                  <v-btn color="primary" text @click="addChildFolder()" > Save </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            
-          </v-app>
-      </div>
-   </div>
+       
+       <v-card-title>
+          Fichiers
+       <v-spacer></v-spacer>
+
+       <v-text-field
+       v-model="search"
+       append-icon="mdi-magnify"
+       label="Rechercher"
+       single-line
+       hide-details ></v-text-field>
+
+     
+       
+       </v-card-title>
+
+       <v-card-title class="text-right">
+
+          <v-spacer></v-spacer>
+
+       
+       <button  @click="add_item" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary btn-md m-1 text-white "><i class="i-Files text-white mr-2"></i>    Ajouter Dossier ou Fichiers </button>
+     
+       <button   @click="remove_item" type="button" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-primary btn-md m-1 text-white"><i class="i-Close mr-2"></i>   Supprimer utilisateur</button>
+       
+        </v-card-title>
+
+       <v-data-table  @input="item($event)" :headers="headers" :items="reponse_items" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
+          :sort-desc.sync="sortDesc" show-select  item-key="id"
+          :expanded.sync="expanded" @click:row="clicked">
+         
+          <template v-slot:item.action="{ item }">
+             <v-btn class="btn-primary"  fab small  @click="editItem(item)">
+                <i class="nav-icon f-15 i-Pen-2 font-weight-bold"></i>
+             </v-btn>
+             <v-btn class="btn-primary" fab small   @click="delete_single_Item(item)">
+                <i class="nav-icon  i-Close f-15 font-weight-bold"></i>
+             </v-btn>
+             <v-dialog v-model="dialog" max-width="500px" :retain-focus="false">
+                <v-card>
+                   <v-card-title>
+                      <span class="headline"> Modifier l 'utilisateur   </span>
+                   </v-card-title>
+                   <v-container>
+                      <v-row class="pl-3 pr-3" >
+                         <v-col cols="12" sm="6" md="12">
+                            <v-text-field
+                            label="Nom*"
+                            v-model="editedItem.name"
+                            required
+                            ></v-text-field>
+                         </v-col>
+                         <v-col cols="12" sm="6" md="12">
+                            <v-text-field
+                            label="Email*"
+                            v-model="editedItem.file"
+                            required
+                            ></v-text-field>
+                         </v-col>
+                      
+                    
+                      </v-row>
+                   </v-container>
+                   </v-form>
+                   </v-card-title>
+                   <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="blue darken-1" text @click="close">Annuler</v-btn>
+                      <v-btn color="blue darken-1" text @click="save">Sauvegarder
+                      </v-btn>
+                   </v-card-actions>
+                </v-card>
+             </v-dialog>
+          </template>
+          <div class="pt-2 pb-2 pl-2">
+             <v-btn class="ma-2" color="purple" dark @click="editItem(item)">
+                <v-icon dark>mdi-wrench</v-icon>
+             </v-btn>
+          </div>
+       </v-data-table>
+    </v-card>
+ </div>
+ 
 </div>
 @endsection
 @section('page-js')
