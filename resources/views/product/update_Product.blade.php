@@ -39,32 +39,16 @@
                <div class="form-row">
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input value='{{  $product['titre'] }}' id="titre" type="text"  name="titre" class="form-control input-product control_input"  >
+                     <input value="{{  $product['designation'] }}" id="titre" type="text"  name="titre" class="form-control input-product control_input"  >
                      <small  class="ul-form__text form-text ">
                      Please enter your full name
                      </small>
                   </div>
              
                 
-                  @if (!empty($product['modele_id'])) 
-                  <div id="modele" class="form-group col-md-12 ">
-                     <label for="inputtext11" class="ul-form__label">Modele de produit</label>
-                     <select id="modele_id" class="form-control "  id="type_modele">
-      
-                        @foreach($modeles as $modele)   
-                        <option value="{{$modele->id}} " {{ $product['modele_id']  == $modele->id ? 'non_disponible' : '' }}>{{$modele->nom}} </option>
-                        @endforeach 
-                     </select>
-                  </div>
-                  @endif
+                 
                   
-                  <div class="form-group col-md-12 pb-5">
-                     <label for="inputtext11" class="ul-form__label">Description</label>
-                     <div id="full-editor">
-            
-                     </div>
-          
-                  </div>
+               
                   <div class="col-md-12 mt-5">
                      <div class="half-form pr-3">
                         <label for="quantite" class="label-p">Quantite* </label>
@@ -89,38 +73,14 @@
                         </small>
                      </div>
                   </div>
-                  <div class="col-md-12 pt-3">
-                     <label for="statut" class="label-p">Statut* </label>
-                     <select id="statut" class="form-control input-product">
-                        <option value="Disponible" {{ $product['statut'] == 'Disponible' ? 'selected' : '' }} >Disponible</option>
-                  <option value="Non Disponible" {{ $product['statut'] == 'Non Disponible' ? 'non_disponible' : '' }}>Non Disponible</option>
-                     </select>
-                  </div>
+             
                </div>
             </div>
          </div>
       </div>
       <!-- end::form 3-->
    </div>
-   <div class="card mt-3">
-      <!--begin::form-->
-      <div class="card-body row">
-         <div class="col-md-2">  <label for="name" class="product-label text-dark">Gategorie de produit</label> </div>
-         <div class="col-md-10">
-            <div class="form-row">
-               <div class="form-group col-md-12">
-                  <label for="title" class="label-p">Gategorie* </label>
-                  <select id="gategorie" class=" form-control input-product">
-                     @foreach($gategories as $gategorie)   
-                     <option value="{{$gategorie->id}} " {{ $product['gategorie_id']  == $gategorie->id ? 'non_disponible' : '' }}>{{$gategorie->nom}} </option>
-                     @endforeach 
-                  </select>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end::form 3-->
-   </div>
+
    <div class="card mt-3">
       <!--begin::form-->
       <div class="card-body row">

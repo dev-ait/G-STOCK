@@ -63,7 +63,7 @@ $(document).ready(function() {
 
 });
 
-  $("#type_modele").change(function() {
+  $("#type").change(function() {
       var value_modele = $(this).val();
       if (value_modele == 1) {
           $("#modele").removeClass("d-none");
@@ -83,19 +83,19 @@ $(document).ready(function() {
       $(".form-control").addClass("control_input");
 
       var dropzone1 = dropzone.files.length;
-      var titre = $("#titre").val();
-      var description = quill.root.innerHTML;
+      var designation = $("#designation").val();
+      var type = $("#type").val();
       var quantite = $("#quantite").val();
       var prix = $("#prix").val();
       var statut = $("#statut").val();
-      var gategorie = $("#gategorie").val();
+      var site = $("#site").val();
       var marque = $("#marque").val();
-      var modele_id = $("#modele_id").val();
+     
 
 
-      if (titre == "") {
-          $("#titre").next().addClass("display_input");
-          $("#titre").addClass("invalid");
+      if (designation == "") {
+          $("#designation").next().addClass("display_input");
+          $("#designation").addClass("invalid");
 
 
       }
@@ -120,18 +120,8 @@ $(document).ready(function() {
           $("#prix").addClass("invalid");
 
       }
-      if (statut == "") {
-
-          $("#statut").next().addClass("display_input");
-          $("#statut").addClass("invalid");
-
-      }
-      if (gategorie == "") {
-
-          $("#gategorie").next().addClass("display_input");
-          $("#gategorie").addClass("invalid");
-
-      }
+  
+    
       if (marque == "") {
 
           $("#marque").next().addClass("display_input");
@@ -139,25 +129,27 @@ $(document).ready(function() {
 
       }
       if (dropzone1 > 0) {
+    
+      
           var photo_ = dropzone.files[0].previewElement.id;
           var photo = photo_;
           var ajaxurl = '/product/store';
           $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-              }
-          });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+           });
           $.ajax({
+              
               url: ajaxurl,
               data: {
-                  titre: titre,
-                  description: description,
+                designation: designation,
+                  type: type,
                   quantite: quantite,
                   prix: prix,
                   statut: statut,
-                  gategorie: gategorie,
+                  site: site,
                   marque: marque,
-                  modele_id: modele_id,
                   photo: photo
               },
               type: 'post',
@@ -168,6 +160,7 @@ $(document).ready(function() {
                       $("html, body").animate({
                           scrollTop: 0
                       }, "slow");
+                     
                   }
                   if (data.etat == true) {
                       window.location.href = '/product';

@@ -13,14 +13,10 @@ class Product extends Model
         return $this->belongsTo('App\Models\Marque');
    
     }
-    public function gategorie() {
+   
+     public function site() {
 
-      return $this->belongsTo('App\Models\Gategorie');
-       
-     }
-     public function modele() {
-
-        return $this->belongsTo('App\Models\Modele','modele_id');
+        return $this->belongsTo('App\Models\Site');
          
        }
      public function image() {

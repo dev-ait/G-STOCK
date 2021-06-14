@@ -26,7 +26,7 @@ span.spinner.spinner-primary {
 @endsection
 @section('main-content')
 <div class="breadcrumb">
-   <h1>  Ajouter un produit</h1>
+   <h1>  Ajouter un produit </h1>
 </div>
 <div id="msg"></div>
 <div class=" border-top"></div>
@@ -43,38 +43,25 @@ span.spinner.spinner-primary {
             <div class="col-md-10">
                <div class="form-row">
                   <div class="form-group col-md-12">
-                     <label for="inputtext11" class="ul-form__label">Titre*</label>
-                     <input id="titre" type="text"  name="titre" class="form-control  "  >
+                     <label for="inputtext11" class="ul-form__label">Designation*</label>
+                     <input id="designation" type="text"  name="titre" class="form-control  "  >
                      <div class="invalid-feedback"> Veuillez choisir le Titre de produit.</div>
                      
 
                   </div>
                   <div class="form-group col-md-12">
                      <label for="inputtext11" class="ul-form__label">Type de produit</label>
-                    <select class="form-control "  id="type_modele">
+                    <select class="form-control "  id="type">
                        <option value="">Selectionner</option>
                        <option value="1">Material informatique</option>
-                       <option value="2">Autre</option>
+                       <option value="2">fourniture</option>
                        
                     </select>
                     
 
                   </div>
-                  <div id="modele" class="form-group col-md-12 d-none">
-                     <label for="inputtext11" class="ul-form__label">Modele de produit*</label>
-                     <select id="modele_id" class="form-control "  id="type_modele">
-                        <option value="">Selectionner</option>
-                        @foreach($modeles as $modele)   
-                        <option value="{{$modele->id}} ">{{$modele->nom}} </option>
-                        @endforeach 
-                     </select>
-                  </div>
-                  <div class="form-group col-md-12 pb-5">
-                     <label for="inputtext11" class="ul-form__label">Description</label>
-                     <div id="full-editor">
-            
-                     </div>
-                  </div>
+           
+             
                   <div class="col-md-12 mt-5">
                      <div class="half-form pr-3">
                         <label for="quantite" class="label-p">Quantite* </label>
@@ -101,33 +88,28 @@ span.spinner.spinner-primary {
                   
                      </div>
                   </div>
-                  <div class="col-md-12 pt-3">
-                     <label for="statut" class="label-p">Statut* </label>
-                     <select id="statut" class="form-control ">
-                        <option value="">Selectionner</option>
-                        <option value="Disponible">Disponible</option>
-                        <option value="Non Disponible">Non Disponible</option>
-                     </select>
-                     <div class="invalid-feedback"> Veuillez choisir Statut  </div>
-                  </div>
+            
                </div>
             </div>
          </div>
       </div>
       <!-- end::form 3-->
    </div>
+   <meta name="csrf-token" content="{{ csrf_token() }}">
    <div class="card mt-3">
       <!--begin::form-->
       <div class="card-body row">
-         <div class="col-md-2">  <label for="name" class="product-label text-dark">Gategorie de produit</label> </div>
+         <div class="col-md-2">  <label for="name" class="product-label text-dark">Site</label> </div>
          <div class="col-md-10">
             <div class="form-row">
                <div class="form-group col-md-12">
-                  <label for="title" class="label-p">Gategorie* </label>
-                  <select id="gategorie" class=" form-control">
+                  <label for="title" class="label-p">site* </label>
+                  <select id="site" class=" form-control">
                      <option value="">Selectionner</option>
-                     @foreach($gategories as $gategorie)   
-                     <option value="{{$gategorie->id}} ">{{$gategorie->nom}} </option>
+                   
+                     @foreach($sites as $site)   
+                     <option value="{{$site->id}} ">{{$site->nom}} </option>
+                     
                      @endforeach 
                   </select>
                   <div class="invalid-feedback"> Veuillez choisir Gategories  </div>
@@ -207,7 +189,6 @@ span.spinner.spinner-primary {
 @endsection
 @section('page-js')
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script src="<?php echo e(asset('assets/js/vendor/quill.min.js')); ?>"></script>
 <script src="<?php echo e(asset('assets/js/vendor/dropzone.min.js')); ?>"></script>
 <script src="{{asset('assets/js/dropzone.script.js')}}"></script>
 <script src="{{ asset('js/product_add.js') }}"></script>
@@ -215,9 +196,3 @@ span.spinner.spinner-primary {
 
 @endsection
 
-@section('bottom-js')
-
-<script src="{{asset('assets/js/quill.script.js')}}"></script>
-
-
-@endsection

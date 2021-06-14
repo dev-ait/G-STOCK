@@ -1,5 +1,5 @@
 new Vue({
-    el: '#app_marque',
+    el: '#app_site',
     vuetify: new Vuetify(),
 
     data() {
@@ -18,10 +18,10 @@ new Vue({
                 rowsPerPage: 5,
 
             },
-            modele_a: {
+            site_a: {
                 id: 0,
                 nom: '',
-                date_create: new Date().toISOString().slice(0, 10),
+                date_create : new Date().toISOString().slice(0, 10),
                 total : 0
             },
             btn_control: false,
@@ -62,7 +62,7 @@ new Vue({
 
             ],
 
-            modele: [
+            site: [
 
             ],
             editedIndex: -1,
@@ -85,7 +85,7 @@ new Vue({
 
         resetValidation () {
             this.$refs.form.resetValidation()
-            this.modele_a.nom = ""
+            this.site_a.nom = ""
    
           },
           
@@ -115,7 +115,7 @@ new Vue({
 
         editItem(item) {
    
-            this.editedIndex = this.modele.indexOf(item)
+            this.editedIndex = this.site.indexOf(item)
             this.editedItem = Object.assign({}, item)
             this.dialog = true
 
@@ -126,11 +126,11 @@ new Vue({
         save() {
 
             if (this.editedIndex > -1) {
-                Object.assign(this.modele[this.editedIndex], this.editedItem)
-                this.update_modele(this.editedItem)
+                Object.assign(this.site[this.editedIndex], this.editedItem)
+                this.update_site(this.editedItem)
 
             } else {
-                this.modele.push(this.editedItem)
+                this.site.push(this.editedItem)
             }
 
             this.close()
@@ -179,18 +179,20 @@ new Vue({
 
                     for (var i = 0; i < this.selected.length; i++) {
 
-                        axios.delete(window.laravel.url + '/deletemodele/' + this.selected[i].id)
-                            .then(response => {
+                        axios.delete(window.laravel.url + '/product/deletesite/' + this.selected[i].id ,  {
+                            _token: '{{ csrf_token() }}',
+                            _method: 'DELETE'
+                        }).then(response => {
 
                             })
                             .catch(error => {
                                 console.log(error);
                             })
 
-                        const index = this.modele.indexOf(this.selected[i]);
+                        const index = this.site.indexOf(this.selected[i]);
 
 
-                        this.modele.splice(index, 1);
+                        this.site.splice(index, 1);
                     }
                     this.selected = [];
 
@@ -234,11 +236,11 @@ new Vue({
 
 
         },
-        update_modele: function(item_object) {
+        update_site: function(item_object) {
 
 
 
-            axios.put(window.laravel.url + '/product/updatemodele', item_object)
+            axios.put(window.laravel.url + '/product/updatesite', item_object)
                 .then(response => {
                     console.log(response.data);
 
@@ -251,10 +253,10 @@ new Vue({
 
         add: function() {
             let jsonData = new FormData()
-            jsonData.append('nom', this.modele_a.nom)
-            jsonData.append('date_create', this.modele_a.date_create)
+            jsonData.append('nom', this.site_a.nom)
+            jsonData.append('date_create', this.site_a.date_create)
 
-            axios.post(window.laravel.url + '/product/postmodele', jsonData)
+            axios.post(window.laravel.url + '/product/postsite', jsonData)
                 .then(response => {
                     console.log(response.data);
 
@@ -276,10 +278,10 @@ new Vue({
                             icon: 'success',
                             title: 'Ajouté avec succes'
                         })
-                        this.modele_a.id = response.data.id_mode;
-                        this.modele.unshift(this.modele_a);
+                        this.site_a.id = response.data.id_site;
+                        this.site.unshift(this.site_a);
 
-                        this.modele_a = {
+                        this.site_a = {
                             id: 0,
                             nom: '',
                             date_create: new Date().toISOString().slice(0, 10),
@@ -312,10 +314,10 @@ new Vue({
 
         get_data: function() {
            
-            axios.get(window.laravel.url + '/product/getmodele/')
+            axios.get(window.laravel.url + '/product/getsite/')
                 .then(response => {
-                console.log(response.data.modeles);
-                    this.modele = response.data.modeles;
+                console.log(response.data.sites);
+                    this.site    = response.data.sites;
 
              
 

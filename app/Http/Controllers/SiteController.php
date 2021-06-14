@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Modele;
-
 use Illuminate\Http\Request;
 
-class ModeleController extends Controller
+use App\Models\Site;
+
+class SiteController extends Controller
 {
-    /**
+       /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,27 +20,29 @@ class ModeleController extends Controller
     
     public function index()
     {  
-        $this->authorize('view_all_page_product');
+
+
+        //$this->authorize('view_all_page_product');
         
-        return view('modele.indexModele');
+        return view('site.indexSite');
 
     }
     
 
-    public function get_modele()
+    public function get_site()
     {
-        $modeles= Modele::all();
+        $sites = Site::all();
 
    
         $att=[];
     
 
-        for($i=0;$i<count($modeles);$i++)
+        for($i=0;$i<count($sites);$i++)
         {
-            $att[] =  [ 'id'=> $modeles[$i]->id , 
-            'nom'=> $modeles[$i]->nom , 
-             'date_create'=> $modeles[$i]->date_create , 
-             'total'=> $modeles[$i]->product()->count() ,
+            $att[] =  [ 'id'=> $sites[$i]->id , 
+            'nom'=> $sites[$i]->nom , 
+             'date_create'=> $sites[$i]->date_create , 
+             'total'=> $sites[$i]->product()->count() ,
             
             ];
         
@@ -51,7 +52,7 @@ class ModeleController extends Controller
         }
         
     
-       $data = array( 'modeles'=> $att);
+       $data = array( 'sites'=> $att);
        return $data;
 
        echo json_encode($data);
@@ -77,12 +78,12 @@ class ModeleController extends Controller
     public function store(Request $request)
     {
         if($request->isMethod('post')){
-            $modele = new Modele; 
-            $modele->nom = $request->nom;
-            $modele->date_create = $request->date_create;
-            $modele->save();
+            $site = new Site; 
+            $site->nom = $request->nom;
+            $site->date_create = $request->date_create;
+            $site->save();
         
-            return Response()->json(['etat' => true  , 'id_mode' => $modele->id ]);
+            return Response()->json(['etat' => true  , 'id_site' => $site->id ]);
          }   
     }
 
@@ -117,10 +118,10 @@ class ModeleController extends Controller
      */
     public function update(Request $request)
     {
-            $modele = Modele::find($request->id);
-            $modele->nom = $request->nom;
+            $site = Site::find($request->id);
+            $site->nom = $request->nom;
            
-            $modele->save();
+            $site->save();
     }
 
     /**
@@ -131,8 +132,9 @@ class ModeleController extends Controller
      */
     public function destroy($id)
     {
-        $delete_modele= Modele::find($id);  
+        $delete_site= Site::find($id);  
 
-        $delete_modele->delete();
+        $delete_site->delete();
+       
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\File; 
 
-use App\Models\Gategorie;
+use App\Models\Site;
 use App\Models\Marque;
 use App\Models\Modele;
 use App\Models\Product;
@@ -52,10 +52,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $gategories= Gategorie::all(); 
+        $sites= Site::all(); 
         $marques = Marque::all();
          $Modeles= Modele::all();
-        $data = array( 'gategories'=> $gategories , 'marques'=> $marques ,'modeles'=> $Modeles );
+        $data = array( 'sites'=> $sites , 'marques'=> $marques ,'modeles'=> $Modeles );
        
         return view('product.add_Product',$data); 
     }
@@ -74,10 +74,12 @@ class ProductController extends Controller
         {
             $att[] =  [ 'titre'=> $products[$i]->titre , 
             'id'=> $products[$i]->id ,
-             'gategorie_id'=> $products[$i]->gategorie->nom,
+
+             'designation'=> $products[$i]->designation,
+             'type'=> $products[$i]->type,
              'quantite'=> $products[$i]->quantite ,
-             'statut'=> $products[$i]->statut ,
-             'marque_id'=> $products[$i]->marque->nom ,
+             'site'=> $products[$i]->site->nom ,
+             'marque'=> $products[$i]->marque->nom ,
              'photo'=> $products[$i]->image->nom ,   
              'prix'=> $products[$i]->prix , 
             ];
@@ -189,10 +191,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        if($request->titre == ''){
-            return Response()->json([ 'etat' => false , 'text' => 'text' ]);
-            exit;
-        }
+       
         
         if( $request->quantite == '' ){
             return Response()->json([ 'etat' => false , 'text' => 'quantite' ]);
@@ -204,15 +203,8 @@ class ProductController extends Controller
             exit;
         }
         
-        if( $request->statut == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'statut' ]);
-            exit;
-        }
+    
         
-        if( $request->gategorie == '' ){
-            return Response()->json([ 'etat' => false , 'text' => 'gategorie' ]);
-            exit;
-        }
         if( $request->marque == '' ){
             return Response()->json([ 'etat' => false , 'text' => 'marque' ]);
             exit;
@@ -220,28 +212,29 @@ class ProductController extends Controller
 
         if($request->isMethod('post')){
             $add_Product= new Product();
-            $add_Product->titre = $request->input('titre');
-            $add_Product->description = $request->input('description');
+            $add_Product->designation = $request->input('designation');
+            $add_Product->type = $request->input('type');
             $add_Product->quantite = $request->input('quantite');
             $add_Product->prix = $request->input('prix');
-            $add_Product->statut = $request->input('statut');
-            $add_Product->gategorie_id = $request->input('gategorie');
+            $add_Product->site_id = $request->input('site');
             $add_Product->marque_id = $request->input('marque');
             $add_Product->photo_id =  $request->input('photo');
-            $add_Product->modele_id =  $request->input('modele_id');
             $add_Product->save(); 
-            session()->flash('succes','le produit '.$add_Product->titre.' a été bien enregistré');
+            session()->flash('succes','le produit '.$add_Product->designation.' a été bien enregistré');
            return Response()->json(['etat' => true ]); 
          
              
             
         }
-        
 
+      
         
  
 
     }
+
+ 
+    
 
     /**
      * Display the specified resource.
@@ -305,16 +298,15 @@ class ProductController extends Controller
 
         $product =  array( 
         'id'=> $products->id ,
-        'titre'=> $products->titre , 
-        'description'=> $products->description , 
-         'gategorie_id'=> $products->gategorie->nom,
-         'quantite'=> $products->quantite ,
-         'statut'=> $products->statut ,
-         'marque_id'=> $products->marque->nom ,
-         'modele_id'=>  $modele ,
-         'photo_nom'=> $products->image->nom ,
-         'photo_id'=> $products->photo_id ,      
-         'prix'=> $products->prix ,) 
+ 
+        'designation'=> $products[$i]->designation,
+        'type'=> $products[$i]->type,
+        'quantite'=> $products[$i]->quantite ,
+        'site'=> $products[$i]->site->nom ,
+        'marque'=> $products[$i]->marque->nom ,
+        'photo'=> $products[$i]->image->nom ,   
+        'prix'=> $products[$i]->prix , 
+        
         ;
         
         

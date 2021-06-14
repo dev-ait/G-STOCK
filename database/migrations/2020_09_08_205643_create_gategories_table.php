@@ -13,7 +13,7 @@ class CreateGategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('gategories', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
             $table->date('date_create');

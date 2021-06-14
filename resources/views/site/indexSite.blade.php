@@ -4,10 +4,10 @@
 <link rel="stylesheet" type="text/css" href={{ asset('css_vuetify/vuetify.min.css') }}>
 <link rel="stylesheet" type="text/css" href={{ asset('assets/styles/css/custom_vuetify.css') }}>
 <div class="breadcrumb">
-   <h1>  La liste des Modeles</h1>
+   <h1>  La liste des Sites</h1>
 </div>
 <div class=" border-top"></div>
-<div id="app_marque" data-app>
+<div id="app_site" data-app>
    <div class="row">
       <div class="col-md-12">
          <div class="card">
@@ -46,7 +46,7 @@
                                              v-model="valid"
                                              lazy-validation>
                                                 <v-card-title>
-                                                   <span class="headline">Ajouter un Marque</span>
+                                                   <span class="headline">Ajouter un Site</span>
                                                 </v-card-title>
                                                 <v-card-text>
                                                    <v-container>
@@ -54,7 +54,7 @@
                                                          <v-col cols="12" sm="6" md="12"  >
                                                             <v-text-field
                                                                label="Nom*"
-                                                               v-model="modele_a.nom"
+                                                               v-model="site_a.nom"
                                                                :rules="nameRules"
                                                                required
                                                                ></v-text-field>
@@ -62,7 +62,7 @@
                                                          <v-col cols="12" sm="6" md="12" >
                                                             <v-text-field
                                                                label="date creation*"
-                                                               v-model="modele_a.date_create"
+                                                               v-model="site_a.date_create"
                                                                required
                                                                disabled
                                                                ></v-text-field>
@@ -123,7 +123,7 @@
                               <v-card-title>
                                  la liste des Modeles                                 <v-spacer></v-spacer>
                               </v-card-title>
-                              <v-data-table  @input="item($event)" :headers="headers" :items="modele" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
+                              <v-data-table  @input="item($event)" :headers="headers" :items="site" :search="search" :value="selectedRows" v-model="selected" :items-per-page="5"  :sort-by.sync="sortBy"
                                  :sort-desc.sync="sortDesc" show-select  item-key="id"
                                  :expanded.sync="expanded" @click:row="clicked">
                                  <template v-slot:item.action="{ item }">
@@ -188,7 +188,7 @@
    
    ]) !!}
 </script>
-<script src="{{ asset('js/modeles_vue.js') }}"></script>
+<script src="{{ asset('js/site_vue.js') }}"></script>
 @endsection
 
 

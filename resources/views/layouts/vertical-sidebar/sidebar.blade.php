@@ -1,4 +1,4 @@
-<!-- start sidebar -->
+    <!-- start sidebar -->
 <div class="sidebar-panel">
     <div class="gull-brand pr-3 text-center mt-4 mb-2 d-flex justify-content-center align-items-center">
         <img class="pl-3" src="{{ asset('assets/images/logo.png') }}" alt="">

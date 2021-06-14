@@ -65,6 +65,8 @@ Route::post('/getproduct_data',[App\Http\Controllers\ProductController::class, '
 Route::get('/search_product',[App\Http\Controllers\ProductController::class, 'search_product']);
 
 
+
+
 /*** Model gategorie   * */
 
 Route::resource('gategorie', App\Http\Controllers\GategorieController::class);
@@ -91,18 +93,18 @@ Route::put('/updatemarque',[App\Http\Controllers\MarqueController::class, 'updat
 Route::delete('/deletemarque/{id}',[App\Http\Controllers\MarqueController::class, 'destroy']);
 
 
-/*** Model Modeles  * */
+/*** Model sites  * */
 
 
-Route::resource('modele', App\Http\Controllers\ModeleController::class);
+Route::resource('site', App\Http\Controllers\SiteController::class);
 
-Route::post('/postmodele',[App\Http\Controllers\ModeleController::class, 'store']);
+Route::post('/postsite',[App\Http\Controllers\SiteController::class, 'store']);
 
-Route::get('/getmodele',[App\Http\Controllers\ModeleController::class, 'get_modele']);
+Route::get('/getsite',[App\Http\Controllers\SiteController::class, 'get_site']);
 
-Route::put('/updatemodele',[App\Http\Controllers\ModeleController::class, 'update']);
+Route::put('/updatesite',[App\Http\Controllers\SiteController::class, 'update']);
 
-Route::delete('/deletemodele/{id}',[App\Http\Controllers\ModeleController::class, 'destroy']);
+Route::delete('/deletesite/{id}',[App\Http\Controllers\SiteController::class, 'destroy']);
 
 
 });

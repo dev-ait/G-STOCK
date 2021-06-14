@@ -30,28 +30,28 @@ new Vue({
                 },
 
                 {
-                    text: 'Titre',
-                    value: 'titre'
+                    text: 'Designation',
+                    value: 'designation'
+                },
+                {
+                    text: ' Type',
+                    value: 'type'
                 },
                 {
                     text: 'Quantite',
                     value: 'quantite'
                 },
                 {
-                    text: 'Prix',
-                    value: 'prix'
-                },
-                {
-                    text: 'Statut',
-                    value: 'status'
-                },
-                {
-                    text: 'Gategorie',
-                    value: 'gategorie_id'
+                    text: 'Site',
+                    value: 'site'
                 },
                 {
                     text: 'Marque',
-                    value: 'marque_id'
+                    value: 'marque'
+                },
+                {
+                    text: 'Prix',
+                    value: 'prix'
                 },
                 {
                     text: "Action",
@@ -265,7 +265,7 @@ new Vue({
                 .then(response => {
 
                     this.products = response.data.products;
-                    
+                    console.log(this.products );
 
 
                 })

@@ -92,7 +92,7 @@
                 <a href="{{ route('order.index') }}"
                     class="{{ Route::currentRouteName()=='order' ? 'open' : '' }}">
                     <i class="nav-icon i-Checkout"></i>
-                    <span class="item-name">liste des commande</span>
+                    <span class="item-name">liste des commandes</span>
                 </a>
             </li>
            
@@ -123,10 +123,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('modele.index') }}"
+                <a href="{{ route('site.index') }}"
                     class="{{ Route::currentRouteName()=='modele' ? 'open' : '' }}">
                     <i class="nav-icon i-This-Side-Up"></i>
-                    <span class="nav-text">Modele</span>
+                    <span class="nav-text">Site</span>
                 </a>
             </li>
       
