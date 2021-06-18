@@ -98,25 +98,7 @@ span.spinner.spinner-primary {
    <meta name="csrf-token" content="{{ csrf_token() }}">
    <div class="card mt-3">
       <!--begin::form-->
-      <div class="card-body row">
-         <div class="col-md-2">  <label for="name" class="product-label text-dark">Site</label> </div>
-         <div class="col-md-10">
-            <div class="form-row">
-               <div class="form-group col-md-12">
-                  <label for="title" class="label-p">site* </label>
-                  <select id="site" class=" form-control">
-                     <option value="">Selectionner</option>
-                   
-                     @foreach($sites as $site)   
-                     <option value="{{$site->id}} ">{{$site->nom}} </option>
-                     
-                     @endforeach 
-                  </select>
-                  <div class="invalid-feedback"> Veuillez choisir Gategories  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+
       <!-- end::form 3-->
    </div>
    <div class="card mt-3">
@@ -150,7 +132,7 @@ span.spinner.spinner-primary {
                      <form action="{{ url('product/store_img')}}" method="POST" enctype="multipart/form-data" id="mydropzone" class="dropzone" >
                         {{ csrf_field() }}
                         <div class="dz-default dz-message">
-                           <h3 class="sbold">Déposer des fichiers ici pour télécharger</h3>
+                           <h3 class="sbold">Déposer des images ici pour télécharger</h3>
                            <span>Vous pouvez également cliquer pour ouvrir le navigateur de fichiers</span>
                           
                         </div>

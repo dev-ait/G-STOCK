@@ -42,10 +42,6 @@ new Vue({
                     value: 'quantite'
                 },
                 {
-                    text: 'Site',
-                    value: 'site'
-                },
-                {
                     text: 'Marque',
                     value: 'marque'
                 },

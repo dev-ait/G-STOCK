@@ -19,8 +19,6 @@ class CreateProductsTable extends Migration
             $table->string('designation');
             $table->string('type');
             $table->integer('quantite');
-            $table->unsignedBigInteger('site_id');
-            $table->foreign('site_id')->references('id')->on('sites');
             $table->unsignedBigInteger('marque_id');
             $table->foreign('marque_id')->references('id')->on('marques');
             $table->unsignedBigInteger('photo_id');

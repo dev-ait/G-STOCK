@@ -78,7 +78,7 @@ class ProductController extends Controller
              'designation'=> $products[$i]->designation,
              'type'=> $products[$i]->type,
              'quantite'=> $products[$i]->quantite ,
-             'site'=> $products[$i]->site->nom ,
+             
              'marque'=> $products[$i]->marque->nom ,
              'photo'=> $products[$i]->image->nom ,   
              'prix'=> $products[$i]->prix , 
@@ -216,7 +216,7 @@ class ProductController extends Controller
             $add_Product->type = $request->input('type');
             $add_Product->quantite = $request->input('quantite');
             $add_Product->prix = $request->input('prix');
-            $add_Product->site_id = $request->input('site');
+           
             $add_Product->marque_id = $request->input('marque');
             $add_Product->photo_id =  $request->input('photo');
             $add_Product->save(); 
@@ -307,7 +307,7 @@ class ProductController extends Controller
         'photo'=> $products[$i]->image->nom ,   
         'prix'=> $products[$i]->prix , 
         
-        ;
+        );
         
         
         $gategorie   = Gategorie::all();

@@ -88,7 +88,7 @@ $(document).ready(function() {
       var quantite = $("#quantite").val();
       var prix = $("#prix").val();
       var statut = $("#statut").val();
-      var site = $("#site").val();
+
       var marque = $("#marque").val();
      
 
@@ -148,7 +148,7 @@ $(document).ready(function() {
                   quantite: quantite,
                   prix: prix,
                   statut: statut,
-                  site: site,
+        
                   marque: marque,
                   photo: photo
               },

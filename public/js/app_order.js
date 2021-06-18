@@ -1,4 +1,4 @@
-new Vue({
+        new Vue({
     el: '#app_order',
     vuetify: new Vuetify(),
 
@@ -47,38 +47,13 @@ new Vue({
             headers: [
 
                 {
-                    text: "Nom client",
+                    text: "Site",
                     align: "left",
                     sortable: false,
-                    value: "nom_client"
+                    value: "site"
                 },
                
-                {
-                    text: 'Telephone de client',
-                    value: 'client_telephone'
-                },
-
-                {
-                    text: 'Sous Total',
-                    value: 'subtotal'
-                },
-                {
-                    text: 'Tva',
-                    value: 'tva'
-                },
-                {
-                    text: 'Total',
-                    value: 'total'
-                },
-                {
-                    text: 'Type Paiement',
-                    value: 'typepaiement'
-                },
-                {
-                    text: 'Statut Paiement',
-                    value: 'statutpaiement'
-                }
-                ,
+                
            
                 {
                     text: 'Status',

@@ -57,9 +57,9 @@
                 <thead>
                   <tr>
                     <th scope="col">Product</th>
-                    <th scope="col">Price</th>
+                    
                     <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">Site</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -69,19 +69,23 @@
                       <select  id="productName1" onchange="getProductData(1)" class="js-example-basic-single form-control input-product" style="width: 100%" name="product[]" required>
                         <option   value="">Selectionner le produit</option>
                         @foreach ($products as $product)
-                        <option  value="{{$product->id}}">{{$product->titre}}</option>
+                        <option  value="{{$product->id}}">{{$product->designation}}</option>
                         @endforeach
                      </select>
                     </td>
-                    <td> <div class="d-flex "> <div id="price1"> 0  </div>  <span class="text-muted pl-1">DH</span>  </div> 
-                      <input type="hidden" id="priceValue1" name="rate[]" class="form-control input_or" >
-                    </td>
+                  
                     <td>
                        <input type="number" onclick="calcul_total(1)" value="0" id="quantite1" name="quantite[]" class="form-control input_or" required>
                       
                     </td>
-                    <td><div class="d-flex "> <div id="total_product1"> 0.00  </div>  <span class="text-muted pl-1">DH</span>
-                      <input type="hidden" id="total_productValue1" name="totalp[]" class="form-control input_or">
+                    <td>
+                    <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
+                     <option class="select2-results__group"  value="">Selectionner le Site</option>
+                     @foreach ($clients as $client)
+                      <option  value="{{$client['id']}}">{{$client['name']}}</option>
+                     @endforeach
+                  </select>
+                 
                      </td>
                     <td>
                       <a href="" onClick="removeRow(event,1)" ><i class="i-Close-Window text-19 text-danger font-weight-700 prevent-default"></i></a>
@@ -92,47 +96,6 @@
               </table>
             </div>
 
-            <div class="row ">
-              <div class="col-lg-12 mt-5">
-                <div class="ul-product-cart__invoice">
-                  <div class="card-title">
-                    <h4 class="heading text-primary">Total Payment</h4>
-                  </div>
-                  <table class="table">
-                    <tbody>
-                      <tr>
-                        <th scope="row" class="text-16">Sous Total</th>
-                        <td class="text-16 text-success font-weight-700">
-                          <div class="d-flex "> <div id="subTotal"> 0.00  </div>  <span class=" pl-1">DH</span>  </div>
-                          <input type="hidden" id="subTotalValue" name="subTotalvalue" class="form-control input-product" required>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="text-16">Tva</th>
-                        <td>
-                           <span>
-                           <div class="d-flex "> <div id="tva"> 0.00  </div>  <span class="text-muted pl-1">DH</span> 
-                           </div>
-                          </span>
-                          <input type="hidden" id="tvaValue" name="tvavalue">
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="text-primary text-16">
-                          Total:
-                        </th>
-                        <td class="font-weight-700 text-16">
-                          <div class="d-flex "> <div id="total"> 0.00  </div>  <span class="text-muted pl-1">DH</span> 
-                          <input type="hidden" id="totalValue" name="total" >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                
-              </div>
-              
-            </div>
           </div>
           <div class="card-footer">
             <div class="row text-right">
@@ -150,7 +113,7 @@
           <div class="card-body">
          
               <div class="card-body">
-                <div class="card-title">Les informations Supplémentaire de Commandes</div>
+                <div class="card-title">Les informations Supplémentaire de Commandes </div>
 
                 <div class="form-row">
                   <div class="form-group col-md-12">
@@ -176,54 +139,13 @@
 
               
 
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputtext14" class="ul-form__label">Nom de client:</label>
-                    <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
-                     <option class="select2-results__group"  value="">Selectionner le Client</option>
-                     @foreach ($clients as $client)
-               <option  value="{{$client['id']}}">{{$client['name']}}</option>
-                     @endforeach
-                  </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputEmail15" class="ul-form__label">Numero Telephone de client :</label>
-                    <input type="text" id="phone_client"  class="form-control" disabled required>
-                  </div>
-
-                 
-                </div>
+     
               </div>
             
           </div>
         </div>
 
-        <div class="card mt-4">
-          <div class="card-body">
-            <div class="card-title">Mode de Paiment</div>
-            
-            <div class="half-form pl-3 pb-3">
-               <label for="typepaiement" class="label-p">Type de paiement </label>
-               <select  class="form-control input-product" style="width: 100%" name="typepaiement" required>
-                  <option  value="">Selectionner </option>
-                  <option value="Cheque">Cheque</option>
-                  <option value="Cash">Cash</option>
-                  <option value="Credit Card">Credit Card</option>
-                  <option  value="Cash">Cash</option>
-               </select>
-               <label for="statutpaiement" class="label-p ">Statut de paiement </label>
-               <select  class="form-control input-product" style="width: 100%" name="statutpaiement" required>
-                  <option  value="">Selectionner</option>
-                  <option value="Règlement de la totalité">Règlement de la totalité</option>
-                  <option value="paiement anticipét">paiement anticipét</option>
-                  <option value="aucun paiement">aucun paiement</option>
-               </select>
-            </div>
-            
-           
-          </div>
-        
-        </div>
+     
       </div>
     </div>
   </section>
