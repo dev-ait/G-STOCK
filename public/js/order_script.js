@@ -204,36 +204,7 @@ function getProductData(row = null) {
 
 }
 
-function getphone() {
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    var clientId = $("#valueclient").val();
-
-    $.ajax({
-        url: '/getphone',
-        data: {
-            clientId: clientId
-        },
-        type: 'post',
-        dataType: 'json',
-        success: function(data) {
-            
-            $("#phone_client").val(data.client.telephone);
-     
-
-        },
-        error: function(data) {
-
-
-        }
-    });
-
-}
 
 function removeRow(e,row) {
 

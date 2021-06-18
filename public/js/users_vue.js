@@ -546,10 +546,10 @@ new Vue({
                     console.log(error);
                 })
 
-            axios.get(window.laravel.url + '/getclient/')
+            axios.get(window.laravel.url + '/product/getsite/')
                 .then(response => {
 
-                    this.items_project = response.data.clients;
+                    this.items_project = response.data.sites;
 
 
                 })

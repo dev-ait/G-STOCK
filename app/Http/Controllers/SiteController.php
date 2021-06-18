@@ -39,11 +39,10 @@ class SiteController extends Controller
 
         for($i=0;$i<count($sites);$i++)
         {
-            $att[] =  [ 'id'=> $sites[$i]->id , 
+            $att[] =  [ 
+            'id'=> $sites[$i]->id , 
             'nom'=> $sites[$i]->nom , 
-             'date_create'=> $sites[$i]->date_create , 
-             'total'=> $sites[$i]->product()->count() ,
-            
+            'date_create'=> $sites[$i]->date_create , 
             ];
         
          
@@ -66,7 +65,7 @@ class SiteController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**

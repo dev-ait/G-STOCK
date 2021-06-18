@@ -59,7 +59,7 @@
                     <th scope="col">Product</th>
                     
                     <th scope="col">Quantity</th>
-                    <th scope="col">Site</th>
+               
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -79,12 +79,7 @@
                       
                     </td>
                     <td>
-                    <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
-                     <option class="select2-results__group"  value="">Selectionner le Site</option>
-                     @foreach ($clients as $client)
-                      <option  value="{{$client['id']}}">{{$client['name']}}</option>
-                     @endforeach
-                  </select>
+                  
                  
                      </td>
                     <td>
@@ -113,7 +108,7 @@
           <div class="card-body">
          
               <div class="card-body">
-                <div class="card-title">Les informations Supplémentaire de Commandes </div>
+                <div class="card-title">Les informations Supplémentaire de Commandes</div>
 
                 <div class="form-row">
                   <div class="form-group col-md-12">
@@ -139,14 +134,24 @@
 
               
 
-     
+                <div class=" form-row ">
+                  <div class="form-group col-md-6">
+                    <label for="inputtext14" class="ul-form__label">Site :</label>
+                    <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="site_id" required>
+                     <option class="select2-results__group"  value="">Selectionner le site</option>
+                     @foreach ($clients as $client)
+               <option  value="{{$client['id']}}">{{$client['name']}}</option>
+                     @endforeach
+                  </select>
+                  </div>
+       
+
+                 
+                </div>
               </div>
             
           </div>
         </div>
-
-     
-      </div>
     </div>
   </section>
 

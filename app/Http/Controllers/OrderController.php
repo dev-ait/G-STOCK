@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Client;
+use App\Models\Site;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Product_order;
@@ -57,8 +57,8 @@ class OrderController extends Controller
             {
 
                 $clients[] = array(
-                    'id'   =>   Client::find((int)$arry_project[$i]['id'])->id,
-                    'name' => Client::find((int)$arry_project[$i]['id'])->nom,
+                    'id'   =>   Site::find((int)$arry_project[$i]['id'])->id,
+                    'name' => Site::find((int)$arry_project[$i]['id'])->nom,
 
                 );
             }
@@ -154,16 +154,12 @@ class OrderController extends Controller
         for($i=0;$i<count($orders);$i++)
         {
             $order= Order::find($orders[$i]->id);
-            $client= Client::find($orders[$i]->client_id);
+            $site= Site::find($orders[$i]->site_id);
             
-            $att[] =  [ 'id'=>  $orders[$i]->id , 'nom_client'=> $client->nom , 
-            'client_telephone'=> $client->telephone
+            $att[] =  [ 'id'=>  $orders[$i]->id , 'site'=> $site->nom  
+        
              ,'product_order'=> $order->orderproduct()->get()  ,
-             'subtotal'=>  $orders[$i]->subtotal,
-             'tva'=>  $orders[$i]->tva,
-             'total'=> $orders[$i]->total,
-             'typepaiement'=> $orders[$i]->typepaiement,
-             'statutpaiement'=> $orders[$i]->statutpaiement,
+          
              'status'=> $orders[$i]->status,
   
             ];
@@ -216,26 +212,19 @@ class OrderController extends Controller
         if($request->isMethod('post')){
 
             $add_order= new Order();
-            $add_order->client_id= $request->input('idclient');
-            $add_order->subtotal= $request->input('subTotalvalue');
-            $add_order->tva= $request->input('tvavalue');
-            $add_order->date_create= $request->input('date_commande');
-            $add_order->total= $request->input('total');    
-            $add_order->typepaiement= $request->input('typepaiement');
-            $add_order->statutpaiement= $request->input('statutpaiement'); 
+            $add_order->site_id= $request->input('site_id');
             $add_order->user_id = $id_user;  
             $add_order->status = '1';  
 
             $add_order->save();
 
-            for($i=0;$i<count($request->totalp);$i++){
+            for($i=0;$i<count($request->product);$i++){
                 $products_item = new Product_order();
                 $id = $request->product[$i];
                 $nom_produit =  Product::find($id);
-                $products_item->nom_produit = $nom_produit->titre;
+                $products_item->nom_produit = $nom_produit->designation;
                 $products_item->id_product = $id ;
-                $products_item->total = $request->totalp[$i];
-                $products_item->prix = $request->rate[$i];
+                $products_item->prix = $nom_produit->prix;
                 $products_item->quantite = $request->quantite[$i];
                 $products_item->order_id = $add_order->id;
                 $products_item->save();
@@ -258,13 +247,7 @@ class OrderController extends Controller
         if($request->isMethod('post')){
 
             $add_order= new Order();
-            $add_order->client_id= $request->input('idclient');
-            $add_order->subtotal= $request->input('subTotalvalue');
-            $add_order->tva= $request->input('tvavalue');
-            $add_order->date_create= $request->input('date_commande');
-            $add_order->total= $request->input('total');    
-            $add_order->typepaiement= $request->input('typepaiement');
-            $add_order->statutpaiement= $request->input('statutpaiement'); 
+            $add_order->site_id= $request->input('site_id');
             $add_order->user_id = $id_user;  
             $add_order->status = '2';  
 
@@ -319,28 +302,23 @@ class OrderController extends Controller
     public function edit($id)
     {
 
-        $clients = Client::all();
+        $sites = Site::all();
         $products = Product::all();
 
         $order= Order::find($id);
-        $client= Client::find($order->client_id);
+        $site= Site::find($order->site_id);
         
         $att[] =  [ 'id'=>  $order->id ,
-         'id_client'=> $client->id , 
-         'nom_client'=> $client->nom , 
-         'client_telephone'=> $client->telephone,
+         'id_site'=> $site->id , 
+         'nom_site'=> $site->nom , 
+         'created_at'=> $order->created_at , 
          'product_order'=> $order->orderproduct()->get()  ,
-         'subtotal'=>  $order->subtotal,
-         'tva'=>  $order->tva,
-         'date_create'=>  $order->date_create,
-         'total'=> $order->total,
-         'typepaiement'=> $order->typepaiement,
-         'statutpaiement'=> $order->statutpaiement,
+     
          'status'=> $order->status,
 
         ];
 
-        $data = array( 'orders'=> $att , 'clients' =>  $clients  , 'products' =>  $products);
+        $data = array( 'orders'=> $att , 'sites' =>  $sites  , 'products' =>  $products);
   
 
 
@@ -406,7 +384,7 @@ class OrderController extends Controller
     public function validation_commande(Request $request)
     {
            
-           $id = $request->id;
+           $id    = $request->id;
            $order =  Order::find($id);
 
 

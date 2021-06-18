@@ -400,7 +400,7 @@ $(document).ready(function() {
                     }
                 }
                 add_row += '</select></td>';
-                add_row += '<td>  <div class="d-flex "> <div id="price'+count_tr+'"> 0 </div>  <span class="text-muted pl-1">DH</span>  </div> </td>';
+                    add_row += '<td>  <div class="d-flex "> <div id="price'+count_tr+'"> 0 </div>  <span class="text-muted pl-1">DH</span>  </div> </td>';
                 add_row += ' <input type="hidden" id="priceValue'+count_tr+'" name="rate[]" class="form-control input_or" required>';
                 add_row += '<td><input type="number" onclick="calcul_total('+count_tr+')" name="quantite[]" id="quantite' + count_tr + '" name="" class="form-control input_or" required></td>';
                 add_row += '<td> <div class="d-flex "> <div id="total_product'+count_tr+'"> 0.00  </div>  <span class="text-muted pl-1">DH</span></div></div></td>';
@@ -430,6 +430,9 @@ $(document).ready(function() {
                      }
                    
                 }).get();
+
+
+
 
                
                 

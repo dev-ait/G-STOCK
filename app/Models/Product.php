@@ -16,7 +16,7 @@ class Product extends Model
    
      public function site() {
 
-        return $this->belongsTo('App\Models\Site');
+        return $this->belongsTo('App\Models\Site' );
          
        }
      public function image() {

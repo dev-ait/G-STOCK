@@ -314,13 +314,13 @@ new Vue({
 
         get_data: function() {
            
-            axios.get(window.laravel.url + '/product/getsite/')
+            axios.get(window.laravel.url + 'product/getsite/')
                 .then(response => {
                 console.log(response.data.sites);
                     this.site    = response.data.sites;
 
              
-
+            
 
                 })
                 .catch(error => {

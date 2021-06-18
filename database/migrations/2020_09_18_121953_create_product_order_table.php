@@ -21,7 +21,7 @@ class CreateProductOrderTable extends Migration
             $table->string('nom_produit');
             $table->float('prix');
             $table->integer('quantite');
-            $table->float('total');
+  
             $table->timestamps();
         });
     }

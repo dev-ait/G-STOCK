@@ -45,24 +45,18 @@
                                           <p>#{{$orders[0]['id']}}</p>
                                        </div>
                                        <div class="col-md-6 text-sm-right">
-                                          <p><strong>Statut de la commande: </strong>{{$orders[0]['statutpaiement']}}</p>
-                                          <p><strong>Date de commande: </strong> {{$orders[0]['date_create']}} </p>
+                                         
+                                          <p><strong>Date de commande: </strong> </p>
+                                          <p>{{$orders[0]['created_at']}}</p>
                                        </div>
                                     </div>
                                     <div class="mt-3 mb-4 border-top"></div>
                                     <div class="row mb-5">
                                        <div class="col-md-6 mb-3 mb-sm-0">
-                                          <h5 class="font-weight-bold">Nom de Client</h5>
-                                          <p>{{$orders[0]['nom_client']}}</p>
+                                          <h5 class="font-weight-bold">site D'affectation</h5>
+                                          <p>{{$orders[0]['nom_site']}}</p>
                                        </div>
-                                        <div class="col-md-6 text-sm-right">
-                                          <h5 class="font-weight-bold">Telephone de client </h5>
-                                          <p>{{$orders[0]['client_telephone']}}</p>
-                                          <span style="white-space: pre-line">
-                                             <h5 class="font-weight-bold">Type de paiement </h5>
-                                             <p>{{$orders[0]['typepaiement']}}</p>
-                                          </span>
-                                       </div>
+                                   
                                     </div>
                                     <div class="row">
                                        <?php $count =1 ;?>
@@ -93,11 +87,7 @@
                                              </table>
                                           </div>
                                           <div class="col-md-12">
-                                             <div class="invoice-summary">
-                                                <p>Sous total: <span>{{$orders[0]['subtotal']}} DH</span></p>
-                                                <p>Tva: <span>{{$orders[0]['tva']}} DH</span></p>
-                                                <h5 class="font-weight-bold"> Total: <span>{{$orders[0]['total']}} DH</span></h5>
-                                             </div>
+                                     
                                           </div>
                                      
                                     </div>
@@ -123,20 +113,7 @@
                                           <input id='id_order' type="hidden" name="id_order"  value="{{$orders[0]['id']}}">
                                     </div>
                                  </div>
-                                 <div class="col-md-3 offset-md-3 text-right">
-                                    <label class="d-block text-12 text-muted">Order Status</label>
-                                    <select class="form-control input-product" style="width: 100%" name="typepaiement" required="">
-                                       <option value=""  >Selectionner </option>
-                                       <option value="Règlement de la totalité" @if ($orders[0]['statutpaiement'] =='Règlement de la totalité') selected  @endif>Règlement de la totalité</option>
-                                       <option value="paiement anticipét" @if ($orders[0]['statutpaiement'] =='paiement anticipét') selected  @endif>paiement anticipét</option>
-                                       <option value="aucun paiement" @if ($orders[0]['statutpaiement'] =='aucun paiement') selected  @endif>aucun paiement</option>
-                                    </select>
-                                    <div class="form-group mb-3">
-                                       <label for="order-datepicker">Date de commande</label>
-                                       <input id="order-datepicker" class="form-control text-right"
-                                          placeholder="yyyy-mm-dd" name="date_commande" value="{{$orders[0]['date_create']}}">
-                                    </div>
-                                 </div>
+                         
                               </div>
                               <div class="mt-3 mb-4 border-top"></div>
                               <div class="row mb-5">
@@ -145,18 +122,13 @@
                                     <div class="col-md-10 form-group mb-3 pl-0">
                                        <select id="valueclient" onchange="getphone()" class="select-js-client form-control input-product" style="width: 100%" name="idclient" required>
                                           <option class="select2-results__group"  value="">Selectionner le Client</option>
-                                          @foreach ($clients as $client)
-                                          <option  value="{{$client->id}}"  @isset($orders[0]['id_client']) {{ $client->id == $orders[0]['id_client'] ? 'selected' : '' }} @endisset  >{{$client->nom}}</option>
+                                          @foreach ($sites as $site)
+                                          <option  value="{{$site->id}}"  @isset($orders[0]['site']) {{ $site->id == $orders[0]['site_id'] ? 'selected' : '' }} @endisset  >{{$site->nom}}</option>
                                           @endforeach
                                        </select>
                                     </div>
                                  </div>
-                                 <div class="col-md-6 text-right" >
-                                    <h5 class="font-weight-bold">Numero Telephone de client :</h5>
-                                    <div class="col-md-10 offset-md-2 form-group mb-3 pr-0">
-                                       <input type="text" id="phone_client" value="{{ $orders[0]['client_telephone'] }}"  class="form-control" disabled required>
-                                    </div>
-                                 </div>
+                       
                               </div>
                               <div class="row">
                                  <div class="col-md-12 table-responsive">
@@ -203,19 +175,7 @@
                                     </table>
                                     <button class="btn btn-primary float-right mb-4 btn-add">Ajouter un produit</button>
                                  </div>
-                                 <div class="col-md-12">
-                                    <div class="invoice-summary invoice-summary-input">
-                                       <p >Sous total: <span > <span id="subTotal"> {{$orders[0]['subtotal']}} </span> DH  </span>
-                                          <input type="hidden" id="subTotalValue" name="subTotalvalue"  value="{{$orders[0]['subtotal']}}">
-                                       </p>
-                                       <p>Tva: <span> <span id="tva"> {{$orders[0]['tva']}} </span>  DH</span>
-                                          <input type="hidden" id="tvaValue" name="tvavalue" value="{{$orders[0]['tva']}}">
-                                       </p>
-                                       <h5 class="font-weight-bold"> Total: <span> <span id="total"> {{$orders[0]['total']}}  </span> DH</span>
-                                          <input type="hidden" id="totalValue" name="total" value="{{$orders[0]['total']}}" >
-                                       </h5>
-                                    </div>
-                                 </div>
+                          
                               </div>
                              </form>
                               <!--==== / Edit Area =====-->
